@@ -14,7 +14,6 @@
     "monorepos/flowise/packages/components"
   ],
   "scripts": {
-    "preinstall": "./scripts/setup",
     "build": "turbo run build",
     "dev": "turbo run dev --filter @proomter/demo-next --filter @proompter/react",
     "lint": "turbo run lint",
