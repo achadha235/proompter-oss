@@ -1,0 +1,14 @@
+{
+  "name": "@proompter/adapter-prisma",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build ./index.ts --splitting --target node --external react --external react-dom --sourcemap=external --outdir ./build"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
