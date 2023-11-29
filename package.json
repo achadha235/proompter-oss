@@ -8,7 +8,16 @@
     "dependencies/*",
     "demos/*"
   ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --filter @proompter/demo --filter @proompter/ui",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky install",
+    "test": "echo 'Skip'"
+  },
   "devDependencies": {
+    "husky": "^8.0.3",
     "turbo": "latest"
   }
 }
