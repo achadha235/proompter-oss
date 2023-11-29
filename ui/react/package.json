@@ -40,9 +40,9 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "build": "bunx rimraf build/* && bun build:js && bun build:css",
+    "build": "bunx rimraf build/* && NODE_ENV=production bun run build:js && bun run build:css",
     "build:css": "postcss styles/globals.css styles/**/*.css --dir build/styles",
-    "build:js": "bun build ./index.ts --splitting --target browser --external react --external react-dom --sourcemap=external --outdir ./build",
+    "build:js": "bun build ./index.ts --splitting  --target browser --external react --external react-dom --sourcemap=external --outdir ./build",
     "dev": "bunx concurrently 'bun run build:js --watch' 'bun run build:css --watch' 'bun run storybook'",
     "test": "bun test",
     "storybook": "storybook dev -p 6006",

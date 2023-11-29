@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
 
-module.exports = nextConfig
+const nextConfig = {
+  transpilePackages: ["@proompter/runner-flowise"],
+};
+
+module.exports = nextConfig;

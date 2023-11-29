@@ -1,5 +1,5 @@
 {
-  "name": "next",
+  "name": "@proomter/demo-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,8 @@
     "react": "^18",
     "react-dom": "^18",
     "next": "14.0.3",
-    "@proompter/react": "workspace:*"
+    "@proompter/react": "workspace:*",
+    "@proompter/runner-flowise": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5",

@@ -1,16 +1,22 @@
 {
   "name": "proompter",
+  "packageManager": "bun@1.0.14",
   "private": true,
   "workspaces": [
     "ui/*",
+    "runners/*",
     "adapters/*",
     "server/*",
-    "dependencies/*",
-    "demos/*"
+    "demos/*",
+    "monorepos/ai/packages/core",
+    "monorepos/ai/tools/*",
+    "monorepos/flowise/packages/server",
+    "monorepos/flowise/packages/components"
   ],
   "scripts": {
+    "preinstall": "./scripts/setup",
     "build": "turbo run build",
-    "dev": "turbo run dev --filter @proompter/demo --filter @proompter/ui",
+    "dev": "turbo run dev --filter @proomter/demo-next --filter @proompter/react",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install",
@@ -18,6 +24,9 @@
   },
   "devDependencies": {
     "husky": "^8.0.3",
-    "turbo": "latest"
+    "turbo": "latest",
+    "canvas": "file:./shims",
+    "react-native-sqlite-storage": "file:./shims",
+    "jsdom": "file:./shims"
   }
 }

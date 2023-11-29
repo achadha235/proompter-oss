@@ -1,0 +1,6 @@
+[submodule "monorepos/flowise"]
+	path = monorepos/flowise
+	url = git@github.com:achadha235/flowise.git
+[submodule "monorepos/ai"]
+	path = monorepos/ai
+	url = git@github.com:achadha235/ai.git

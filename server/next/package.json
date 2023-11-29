@@ -1,0 +1,18 @@
+{
+  "name": "@proompter/server-next",
+  "module": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "ai": "link:ai"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "dev": "bun run build --watch",
+    "build": "bun build ./index.ts --splitting --target node --external react --external react-dom --sourcemap=external --outdir ./build"
+  }
+}
