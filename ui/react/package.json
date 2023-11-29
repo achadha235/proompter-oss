@@ -3,17 +3,24 @@
   "module": "index.ts",
   "type": "module",
   "sideEffects": false,
+  "exports": {
+    ".": {
+      "require": "./build/index.js",
+      "import": "./build/index.js",
+      "default": "./build/index.js",
+      "types": "./index.ts"
+    },
+    "./styles/global": "./build/styles/globals.css"
+  },
   "devDependencies": {
     "@happy-dom/global-registrator": "^12.10.3",
     "@storybook/addon-essentials": "^7.6.0",
     "@storybook/addon-interactions": "^7.6.0",
     "@storybook/addon-links": "^7.6.0",
     "@storybook/addon-onboarding": "^1.0.8",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addon-styling-webpack": "^0.0.5",
     "@storybook/blocks": "^7.6.0",
     "@storybook/react": "^7.6.0",
-    "@storybook/react-webpack5": "^7.6.0",
+    "@storybook/react-vite": "^7.6.0",
     "@storybook/test": "^7.6.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.7",
@@ -33,10 +40,10 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "build": "bun build:js && bun build:css",
+    "build": "bunx rimraf build/* && bun build:js && bun build:css",
     "build:css": "postcss styles/globals.css styles/**/*.css --dir build/styles",
-    "build:js": "bun run build.ts",
-    "dev": "bun dev",
+    "build:js": "bun build ./index.ts --splitting --target browser --external react --external react-dom --sourcemap=external --outdir ./build",
+    "dev": "bunx concurrently 'bun run build:js --watch' 'bun run build:css --watch' 'bun run storybook'",
     "test": "bun test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

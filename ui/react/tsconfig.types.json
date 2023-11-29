@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "jsx": "react-jsx",
+        "esModuleInterop": true,
+        "emitDeclarationOnly": true,
+        "outFile": "./build/index.d.ts",
+        "allowJs": true
+    },
+    "include": [
+        "./build/index.js"
+    ]
+}
