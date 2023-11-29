@@ -1,0 +1,14 @@
+{
+  "name": "proompter",
+  "private": true,
+  "workspaces": [
+    "ui/*",
+    "adapters/*",
+    "server/*",
+    "dependencies/*",
+    "demos/*"
+  ],
+  "devDependencies": {
+    "turbo": "latest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "extends": [
+        "//"
+    ],
+    "globalEnv": [
+        "DATABASE_TYPE",
+        "DATABASE_PATH",
+        "NODE_ENV",
+        "NEXTAUTH_SECRET",
+        "GITHUB_AUTH_CLIENT_ID",
+        "GITHUB_AUTH_CLIENT_SECRET"
+    ],
+    "globalDependencies": [
+        "**/.env.*local"
+    ],
+    "pipeline": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                ".next/**",
+                "!.next/cache/**"
+            ]
+        },
+        "lint": {},
+        "dev": {
+            "cache": false,
+            "persistent": true
+        }
+    }
+}

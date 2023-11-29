@@ -1,0 +1,44 @@
+{
+  "name": "@proompter/react",
+  "module": "index.ts",
+  "type": "module",
+  "sideEffects": false,
+  "devDependencies": {
+    "@happy-dom/global-registrator": "^12.10.3",
+    "@storybook/addon-essentials": "^7.6.0",
+    "@storybook/addon-interactions": "^7.6.0",
+    "@storybook/addon-links": "^7.6.0",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addon-styling-webpack": "^0.0.5",
+    "@storybook/blocks": "^7.6.0",
+    "@storybook/react": "^7.6.0",
+    "@storybook/react-webpack5": "^7.6.0",
+    "@storybook/test": "^7.6.0",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@testing-library/react": "^14.1.2",
+    "autoprefixer": "^10.4.16",
+    "bun-types": "latest",
+    "daisyui": "^4.4.14",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.6.0",
+    "tailwindcss": "^3.3.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "build": "bun build:js && bun build:css",
+    "build:css": "postcss styles/globals.css styles/**/*.css --dir build/styles",
+    "build:js": "bun run build.ts",
+    "dev": "bun dev",
+    "test": "bun test",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  }
+}
