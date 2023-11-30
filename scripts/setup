@@ -4,4 +4,4 @@ echo "Installing flowise..."
 echo "Installing vercel/ai..."
 (cd ./monorepos/ai && pnpm install)
 echo "Installing sqlite3"
-(cd ./runners/flowise && pnpm install sqlite3@5.1.6)
+pnpm install sqlite3@5.1.6
