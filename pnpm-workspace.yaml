@@ -8,7 +8,7 @@ packages:
 
   # flowise - for now, we don't need components and ui
   - "monorepos/flowise/packages/server"
-  # - "monorepos/flowise/packages/components"
+  - "monorepos/flowise/packages/components"
   # - "monorepos/flowise/packages/ui"
 
   # @vercel/ai
