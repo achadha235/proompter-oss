@@ -24,6 +24,6 @@
     }
   },
   "scripts": {
-    "build": "NODE_ENV=production bun build --external flowise --external langchain --external typeorm ./index.ts --target node --outdir ./build"
+    "build": "NODE_ENV=production bun build --external langchain --external typeorm ./index.ts --target node --outdir ./build"
   }
 }
