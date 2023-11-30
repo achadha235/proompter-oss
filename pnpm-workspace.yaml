@@ -1,5 +1,6 @@
 packages:
   # UI, runners, adapters, server, demos
+  - "packages/*"
   - "ui/*"
   - "runners/*"
   - "adapters/*"

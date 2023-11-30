@@ -1,0 +1,12 @@
+{
+  "name": "@proompter/core",
+  "module": "index.ts",
+  "main": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

@@ -6,6 +6,12 @@
     "build": "bun build ./index.ts --splitting --target node --external react --external react-dom --sourcemap=external --outdir ./build",
     "dev": "pnpm run build --watch"
   },
+  "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "@proompter/adapter-prisma": "link:",
+    "@proompter/core": "workspace:*",
+    "prisma": "^5.5.2"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },
