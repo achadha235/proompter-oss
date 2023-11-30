@@ -2,14 +2,28 @@
   "name": "@proompter/runner-flowise",
   "type": "module",
   "main": "./build/index.js",
-  "types": "./index.ts",
   "devDependencies": {
     "bun-types": "latest",
     "flowise": "workspace:*",
     "mock-aws-s3": "^4.0.2",
-    "nock": "^13.4.0"
+    "nock": "^13.4.0",
+    "canvas": "file:../../shims",
+    "react-native-sqlite-storage": "file:../../shims",
+    "jsdom": "file:../../shims"
+  },
+  "peerDependencies": {
+    "sqlite3": "^5.1.6",
+    "typeorm": "^0.3.17"
+  },
+  "peerDependenciesMeta": {
+    "typeorm": {
+      "optional": false
+    },
+    "flowise": {
+      "optional": false
+    }
   },
   "scripts": {
-    "build": "NODE_ENV=production bun build ./index.ts --external canvas --target node --outdir ./build"
+    "build": "NODE_ENV=production bun build --external flowise --external langchain --external typeorm ./index.ts --target node --outdir ./build"
   }
 }

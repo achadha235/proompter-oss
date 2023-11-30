@@ -1,6 +1,5 @@
 {
   "name": "proompter",
-  "packageManager": "pnpm@8.10.2",
   "private": true,
   "scripts": {
     "prepare": "./scripts/setup && husky install",

@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
-    "module": "esnext",
-    "target": "esnext",
-    "moduleResolution": "bundler",
+    "outDir": "build",
+    "lib": [
+      "ESNext"
+    ],
+    "module": "commonjs",
+    "target": "ES2015",
+    "moduleResolution": "node",
     "moduleDetection": "force",
     "allowImportingTsExtensions": true,
     "noEmit": true,
