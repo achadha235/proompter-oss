@@ -5,12 +5,9 @@
   "types": "./index.ts",
   "devDependencies": {
     "bun-types": "latest",
-    "flowise": "link:flowise",
+    "flowise": "workspace:*",
     "mock-aws-s3": "^4.0.2",
-    "nock": "^13.4.0",
-    "canvas": "file:./shims/index.js",
-    "react-native-sqlite-storage": "file:./shims/index.js",
-    "jsdom": "file:./shims/index.js"
+    "nock": "^13.4.0"
   },
   "scripts": {
     "build": "NODE_ENV=production bun build ./index.ts --external canvas --target node --outdir ./build"

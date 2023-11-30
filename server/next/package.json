@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "dependencies": {
-    "ai": "link:ai"
+    "ai": "workspace:*"
   },
   "devDependencies": {
     "bun-types": "latest"
@@ -12,7 +12,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "dev": "bun run build --watch",
+    "dev": "pnpm run build --watch",
     "build": "bun build ./index.ts --splitting --target node --external react --external react-dom --sourcemap=external --outdir ./build"
   }
 }

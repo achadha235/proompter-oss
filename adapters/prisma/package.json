@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build ./index.ts --splitting --target node --external react --external react-dom --sourcemap=external --outdir ./build"
+    "build": "bun build ./index.ts --splitting --target node --external react --external react-dom --sourcemap=external --outdir ./build",
+    "dev": "pnpm run build --watch"
   },
   "devDependencies": {
     "bun-types": "latest"

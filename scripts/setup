@@ -1,7 +1,5 @@
 git submodule update --init --recursive
 echo "Installing flowise..."
 (cd ./monorepos/flowise && yarn install)
-(cd ./monorepos/flowise/packages/server && bun link)
 echo "Installing vercel/ai..."
 (cd ./monorepos/ai && pnpm install)
-(cd ./monorepos/ai/packages/core && bun link)

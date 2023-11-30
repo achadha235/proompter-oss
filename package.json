@@ -1,34 +1,21 @@
 {
   "name": "proompter",
-  "packageManager": "bun@1.0.14",
+  "packageManager": "pnpm@8.10.2",
   "private": true,
-  "workspaces": [
-    "ui/*",
-    "runners/*",
-    "adapters/*",
-    "server/*",
-    "demos/*",
-    "monorepos/ai/packages/core",
-    "monorepos/ai/tools/*",
-    "monorepos/flowise/packages/server",
-    "monorepos/flowise/packages/components"
-  ],
   "scripts": {
+    "prepare": "./scripts/setup && husky install",
     "build": "turbo run build",
-    "dev": "turbo run dev --filter @proomter/demo-next --filter @proompter/react",
+    "dev": "pnpm run dev:next",
+    "dev:next": "turbo run dev --filter @proomter/demo-next --filter @proompter/react --filter @proompter/adapter-prisma --filter @proompter/server-next --filter @proompter/runner-flowise",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky install",
-    "reset-packages": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + ",
+    "clear-packages": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + ",
     "test": "echo 'Skip'"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
-    "canvas": "file:./shims",
     "husky": "^8.0.3",
-    "jsdom": "file:./shims",
-    "react-native-sqlite-storage": "file:./shims",
     "turbo": "latest"
   }
 }
