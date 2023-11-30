@@ -16,6 +16,9 @@ const nextConfig = {
     };
 
     config.resolve.alias.jsdom = false;
+    config.resolve.alias["mock-aws-s3"] = false;
+    config.resolve.alias["nock"] = false;
+    config.resolve.alias["react-native-sqlite-storage"] = false;
 
     config.optimization = {
       ...config.optimization,
