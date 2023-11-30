@@ -4,26 +4,21 @@
   "main": "./build/index.js",
   "devDependencies": {
     "bun-types": "latest",
-    "flowise": "workspace:*",
-    "mock-aws-s3": "^4.0.2",
-    "nock": "^13.4.0",
-    "canvas": "file:../../shims",
-    "react-native-sqlite-storage": "file:../../shims",
-    "jsdom": "file:../../shims"
+    "flowise": "workspace:*"
   },
   "peerDependencies": {
     "sqlite3": "^5.1.6",
-    "typeorm": "^0.3.17"
+    "flowise": "^1.4.2"
   },
   "peerDependenciesMeta": {
-    "typeorm": {
-      "optional": false
+    "sqlite3": {
+      "optional": true
     },
     "flowise": {
       "optional": false
     }
   },
   "scripts": {
-    "build": "NODE_ENV=production bun build --external flowise --external langchain --external typeorm ./index.ts --target node --outdir ./build"
+    "build": "NODE_ENV=production bun build --external flowise ./index.ts --target node --outdir ./build"
   }
 }

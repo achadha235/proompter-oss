@@ -1,35 +1,35 @@
 /** @type {import('next').NextConfig} */
 
 const TerserPlugin = require("terser-webpack-plugin");
+const { entities } = require("flowise/dist/database/entities");
+const entityNames = Object.values(entities).map((entity) => entity.name);
 
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  transpilePackages: [],
   webpack: (
     config,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
   ) => {
-    // This supresses the annoying Critical dependency: the request of a dependency is an expression
-    // error
+    // This supresses the Critical dependency: the request of a dependency is an expression error
     config.module = {
       ...config.module,
       exprContextCritical: false,
     };
 
+    config.resolve.alias.jsdom = false;
+
     config.optimization = {
       ...config.optimization,
       minimize: true,
       minimizer: [
+        config.optimization.minimizer[1],
         new TerserPlugin({
           terserOptions: {
+            // mangle
             // Regex to match your TypeORM classes so Terser does not change these
             // since TypeORM relies on the actual classname to implement its features
-            keep_classnames: /^(ChatFlow|ChatMessage|Credential|Tool)$/,
+            mangle: {
+              reserved: entityNames,
+            },
           },
         }),
       ],
