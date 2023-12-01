@@ -3,6 +3,10 @@
   "module": "index.ts",
   "main": "index.ts",
   "type": "module",
+  "scripts": {
+    "build": "bun build ./index.ts --splitting --target node --sourcemap=external --outdir ./build",
+    "dev": "pnpm run build --watch"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },

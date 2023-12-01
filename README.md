@@ -1,4 +1,8 @@
-Proompter - Open Usable AI Frameworks
+Proompter - Framework for AI apps
+
+-- Usable - contains all the important features necessary for production-grade apps
+-- Performant - has the features necessary to support high performance, high throughput
+-- Extensible - has the features necessary to support a wide variety of use cases
 
 1. `git clone https://achadha235@github.com/achadha235/proompter-oss.git --recurse-submodules`
 2. `cd proompter-oss`
