@@ -1,7 +1,7 @@
 {
   "name": "@proompter/core",
-  "module": "index.ts",
-  "main": "index.ts",
+  "main": "./build/index.js",
+  "types": "./index.ts",
   "type": "module",
   "scripts": {
     "build": "bun build ./index.ts --splitting --target node --sourcemap=external --outdir ./build",

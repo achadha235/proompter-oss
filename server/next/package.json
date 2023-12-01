@@ -1,6 +1,7 @@
 {
   "name": "@proompter/server-next",
-  "module": "index.ts",
+  "main": "./build/index.js",
+  "types": "./index.ts",
   "type": "module",
   "dependencies": {
     "ai": "workspace:*"
