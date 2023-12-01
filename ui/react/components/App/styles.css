@@ -1,0 +1,25 @@
+/* layout styles */
+
+.ai-chat-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+.ai-chat-content::-webkit-scrollbar-track {
+  @apply ai-bg-base-100  ai-p-2;
+
+  border-radius: 40px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+/* Handle */
+.ai-chat-content::-webkit-scrollbar-thumb {
+  border-radius: 6px; /* Rounded corners (optional) */
+  @apply ai-bg-base-300;
+}
+
+/* Handle on hover */
+.ai-chat-content::-webkit-scrollbar-thumb:hover {
+  @apply ai-bg-base-content ai-cursor-pointer;
+}

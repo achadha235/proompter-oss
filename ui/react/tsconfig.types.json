@@ -1,13 +1,23 @@
 {
     "compilerOptions": {
+        "lib": [
+            "ESNext"
+        ],
         "declaration": true,
         "jsx": "react-jsx",
         "esModuleInterop": true,
         "emitDeclarationOnly": true,
         "outFile": "./build/index.d.ts",
-        "allowJs": true
+        "allowJs": true,
+        "paths": {
+            "@/*": [
+                "./src/*",
+                "./*"
+            ]
+        }
     },
     "include": [
-        "./build/index.js"
+        "./build/index.js",
+        "./node_modules/typescript/lib/lib.dom.d.ts"
     ]
 }

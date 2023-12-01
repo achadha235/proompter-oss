@@ -5,7 +5,7 @@
 }
 
 .arrow-segment {
-  @apply ai-bg-base-300;
+  @apply ai-bg-base-300 ai-shadow-sm;
   @apply ai-min-h-[1rem] ai-min-w-[0.3rem] ai-w-[2px];
   transition: 0.2s;
 }

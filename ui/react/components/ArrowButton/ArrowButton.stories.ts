@@ -14,4 +14,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+/** Default state when the menu is open */
+export const Open: Story = {};
+
+/** State when the menu is closed. */
+export const Closed: Story = {
+  args: {
+    className: "closed",
+  },
+};

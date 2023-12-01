@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import { EventHandler } from "react";
+import { MouseEventHandler } from "react";
 
 interface ArrowButtonProps {
-  onClick?: EventHandler<any>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
   className?: string;
 }
 

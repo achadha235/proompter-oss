@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "lib": [
-      "ESNext",
-      "dom"
+      "ESNext"
     ],
     "module": "esnext",
     "target": "esnext",
@@ -20,6 +19,12 @@
     "allowJs": true,
     "types": [
       "bun-types" // add Bun global
-    ]
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*",
+        "./*"
+      ]
+    }
   }
 }

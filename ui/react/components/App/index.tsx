@@ -8,5 +8,14 @@ export interface AppProps {
 }
 
 export function App({ hello = "Yo" }: AppProps): React.JSX.Element {
-  return <Layout footer={<div>Yo</div>} />;
+  return (
+    <Layout
+      drawer={
+        <div className=" ai-h-full ai-w-full ai-flex ai-justify-center ai-items-center">
+          Drawer
+        </div>
+      }
+      footer={<div>Yo</div>}
+    />
+  );
 }
