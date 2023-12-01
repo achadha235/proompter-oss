@@ -3,6 +3,16 @@
     "version": 1.1,
     "atDirectives": [
         {
+            "name": "@import-glob",
+            "description": "Extend postcss-import path resolver to allow glob usage as a path",
+            "references": [
+                {
+                    "name": "Github",
+                    "url": "https://github.com/dimitrinicolas/postcss-import-ext-glob"
+                }
+            ]
+        },
+        {
             "name": "@tailwind",
             "description": "Use the `@tailwind` directive to insert Tailwind's `base`, `components`, `utilities` and `screens` styles into your CSS.",
             "references": [

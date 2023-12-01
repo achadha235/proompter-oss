@@ -1,0 +1,46 @@
+/* Arrow Button */
+.arrow-button {
+  @apply ai-cursor-pointer ai-flex ai-flex-col;
+  @apply ai-justify-center ai-items-end;
+}
+
+.arrow-segment {
+  @apply ai-bg-base-300;
+  @apply ai-min-h-[1rem] ai-min-w-[0.3rem] ai-w-[2px];
+  transition: 0.2s;
+}
+
+.arrow-top {
+  @apply arrow-segment;
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+.arrow-bottom {
+  @apply arrow-segment;
+  transform: rotate(0deg) translateY(-0.15rem);
+}
+
+.arrow-button.closed > .arrow-segment {
+  @apply ai-bg-base-300;
+}
+
+.arrow-button:hover > .arrow-segment {
+  @apply ai-bg-base-content;
+}
+
+.arrow-button:hover > .arrow-top {
+  transform: rotate(20deg) translateY(0.15rem);
+}
+
+.arrow-button:hover > .arrow-bottom {
+  transform: rotate(-20deg) translateY(-0.15rem);
+}
+
+.arrow-button.closed > .arrow-top {
+  transform: rotate(-20deg) translateY(0.15rem);
+}
+
+.arrow-button.closed > .arrow-bottom {
+  transform: rotate(20deg) translateY(-0.15rem);
+}
+/* End Arrow Button */

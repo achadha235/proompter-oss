@@ -13,6 +13,7 @@
     "./styles/global": "./build/styles/globals.css"
   },
   "devDependencies": {
+    "@emotion/react": "^11.11.1",
     "@happy-dom/global-registrator": "^12.10.3",
     "@storybook/addon-essentials": "^7.6.0",
     "@storybook/addon-interactions": "^7.6.0",
@@ -26,11 +27,15 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "@testing-library/react": "^14.1.2",
+    "@types/react": "^18.2.39",
+    "@types/react-dom": "^18.2.17",
     "autoprefixer": "^10.4.16",
     "bun-types": "latest",
     "daisyui": "^4.4.14",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-import-ext-glob": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.6.0",
@@ -47,5 +52,10 @@
     "test": "bun test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "clsx": "^2.0.0",
+    "framer-motion": "^10.16.9",
+    "lodash": "^4.17.21"
   }
 }
