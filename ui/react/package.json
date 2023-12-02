@@ -27,6 +27,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "@testing-library/react": "^14.1.2",
+    "@types/lodash": "^4.14.202",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
     "autoprefixer": "^10.4.16",
@@ -55,11 +56,13 @@
   },
   "dependencies": {
     "@proompter/core": "workspace:*",
+    "ai": "workspace:*",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.9",
     "lodash": "^4.17.21",
     "react-markdown": "^9.0.1",
     "react-textarea-autosize": "^8.5.3",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "usehooks-ts": "^2.9.1"
   }
 }

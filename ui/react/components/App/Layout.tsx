@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 import { ArrowButton } from "../ArrowButton";
-
+import { useLocalStorage } from "usehooks-ts";
 export interface LayoutProps {
   className?: string;
   drawer?: React.ReactNode;
@@ -28,7 +28,8 @@ export function Layout({
   enableScroll = true,
 }: LayoutProps): React.JSX.Element {
   const drawerWidth = 250;
-  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [drawerOpen, setDrawerOpen] = useLocalStorage("drawerOpen", false);
   const [showScrollDownButton, setShowScrollDownButton] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);

@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="cyberpunk">
+    <html lang="en" data-theme="wireframe">
       <body>{children}</body>
     </html>
   );
