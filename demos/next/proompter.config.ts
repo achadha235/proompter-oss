@@ -33,12 +33,16 @@ const config: Config = {
     "I'm C-3PO, fluent in over six million languages. Join me to master languages from Earth and across the galaxy!",
   imageURL: "/c3po.png",
   adapter: new ProompterPrismaAdapter(prisma),
+
+  conversationStarter: {
+    examples,
+  },
+
   chatflows: [
     {
       id: "translate",
       name: "Simple Translation",
       icon: "bolt",
-      examples,
       description: ["Basic translations and transliterations"],
       runner: "flowise",
       options: {
@@ -49,7 +53,6 @@ const config: Config = {
       id: "tutor",
       name: "Language Tutor",
       icon: "school",
-      examples,
       description: [
         "Translations & transliterations",
         "with Grammar, vocabulary & Q&A",

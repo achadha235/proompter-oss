@@ -16,9 +16,11 @@ export function App({ proompterConfig }: AppProps): React.JSX.Element {
   const { chatflow, setChatflow, config } = useProompter(proompterConfig);
   const messages = [];
   const enableScroll = messages.length === 0;
+  const conversationStarter =
+    chatflow?.conversationStarter || proompterConfig.conversationStarter!;
   return (
     <Layout
-      enableScroll={true}
+      enableScroll={enableScroll}
       header={
         <Header
           selectChatflowProps={{
@@ -31,7 +33,16 @@ export function App({ proompterConfig }: AppProps): React.JSX.Element {
         />
       }
       footer={<Footer />}
-      main={<Conversation messages={[]} examples={chatflow.examples!} />}
+      main={
+        <Conversation
+          conversationHeaderProps={{
+            title: conversationStarter.title || "How can I help you today?",
+            imageURL: conversationStarter.imageURL || proompterConfig.imageURL,
+          }}
+          messages={[]}
+          examples={conversationStarter.examples}
+        />
+      }
       drawer={
         <div className=" ai-h-full ai-w-full ai-flex ai-justify-center ai-items-center">
           Drawer

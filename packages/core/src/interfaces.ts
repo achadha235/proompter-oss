@@ -13,6 +13,12 @@ export namespace Chat {
     subtitle?: string;
     chatMessage: string;
   }
+
+  export interface ConversationStarter {
+    imageURL?: string;
+    title?: string;
+    examples: Example[];
+  }
   export interface Chatflow {
     /** Unique ID for this chatflow */
     id: string;
@@ -30,7 +36,7 @@ export namespace Chat {
     plans?: string[];
 
     /** The examples to display for this chatflow */
-    examples?: Example[];
+    conversationStarter?: ConversationStarter;
   }
 
   /** An example that can be used to trigger a chat conversation */
@@ -50,6 +56,8 @@ export interface Config {
   chatflows: Chat.Chatflow[];
 
   chatOptions?: UseChatOptions;
+
+  conversationStarter?: Chat.ConversationStarter;
 }
 
 export interface User {
