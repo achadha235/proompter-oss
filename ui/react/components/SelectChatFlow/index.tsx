@@ -1,6 +1,13 @@
 import { Chat } from "@proompter/core";
+import { useRef } from "react";
 import { ChatflowOption } from "./Option";
-import { MouseEvent, useEffect, useRef } from "react";
+import { useOnClickOutside } from "usehooks-ts";
+
+export interface SelectChatFlowProps {
+  chatflow: Chat.Chatflow;
+  chatflows: Chat.Chatflow[];
+  onChatflowClicked: (chatflow: Chat.Chatflow) => void;
+}
 
 export function SelectChatFlow({
   chatflows,
@@ -12,16 +19,9 @@ export function SelectChatFlow({
   onChatflowClicked: (chatflow: Chat.Chatflow) => void;
 }) {
   const dropdown = useRef<HTMLDetailsElement>(null);
-  const handleClick = (_e: globalThis.MouseEvent) => {
-    dropdown.current?.removeAttribute("open");
-  };
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
-
+  useOnClickOutside(dropdown, () => {
+    dropdown?.current?.removeAttribute("open");
+  });
   return (
     <details ref={dropdown} className="ai-dropdown ai-dropdown-bottom">
       <summary className="ai-bg-base-100 ai-text-base-content hover:ai-bg-base-200 ai-transition-all ai-p-3 ai-rounded-box ai-flex ai-items-center ai-justify-between ai-gap-1 ai-cursor-pointer ai-border-none ai-outline-none">
@@ -36,9 +36,8 @@ export function SelectChatFlow({
           const showDivider =
             chatflows.length > 1 && i !== chatflows.length - 1;
           return (
-            <>
+            <div key={cf.id}>
               <ChatflowOption
-                key={cf.name}
                 chatflow={cf}
                 selected={cf.id === chatflow.id}
                 onClick={(e) => {
@@ -50,9 +49,12 @@ export function SelectChatFlow({
                 }}
               />
               {showDivider && (
-                <div className="ai-divider ai-my-0 ai-py-0 ai-h-0" />
+                <div
+                  key={cf.id + "--divider"}
+                  className="ai-divider ai-my-0 ai-py-0 ai-h-0"
+                />
               )}
-            </>
+            </div>
           );
         })}
 

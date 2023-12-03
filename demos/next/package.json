@@ -15,6 +15,7 @@
     "@proompter/adapter-prisma": "workspace:*",
     "@proompter/react": "workspace:*",
     "@proompter/runner-flowise": "workspace:*",
+    "ai": "workspace:*",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",

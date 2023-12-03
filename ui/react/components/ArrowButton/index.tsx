@@ -9,7 +9,7 @@ interface ArrowButtonProps {
 /** A cool little animated arrow toggle, just like the one OpenAI made */
 export function ArrowButton({ onClick, className = "" }: ArrowButtonProps) {
   return (
-    <div className={clsx("arrow-button", className)} onClick={onClick}>
+    <div className={clsx("arrow-button ai-px-3", className)} onClick={onClick}>
       <div className="arrow-top ai-rounded-full" />
       <div className="arrow-bottom ai-rounded-full" />
     </div>

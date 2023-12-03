@@ -1,20 +1,32 @@
-import { useProompter } from "@/hooks/useProompter";
 import { Layout } from "./Layout";
 import { Header } from "..";
 import { Footer } from "../Footer";
+import { Config } from "@proompter/core";
+import { useProompter } from "../../hooks/useProompter";
 
 export interface AppProps {
-  /**
-   * A greeting for the user
-   */
-  hello?: string;
+  proompterConfig: Config;
 }
 
-export function App({ hello = "Yo" }: AppProps): React.JSX.Element {
-  const { user, config } = useProompter();
+export function App({ proompterConfig }: AppProps): React.JSX.Element {
+  if (!proompterConfig) {
+    throw new Error("Please provide a configuration");
+  }
+  const { chatflow, setChatflow, config } = useProompter(proompterConfig);
+
   return (
     <Layout
-      header={<Header />}
+      header={
+        <Header
+          selectChatflowProps={{
+            chatflows: config.chatflows,
+            chatflow,
+            onChatflowClicked: (newChatflow) => {
+              setChatflow(newChatflow);
+            },
+          }}
+        />
+      }
       footer={<Footer />}
       main={<div>Yo main</div>}
       drawer={

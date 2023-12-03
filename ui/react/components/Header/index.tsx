@@ -1,21 +1,13 @@
-import { useProompter } from "@/hooks/useProompter";
-import { SelectChatFlow } from "../SelectChatFlow";
+import { SelectChatFlow, SelectChatFlowProps } from "../SelectChatFlow";
 
-export function Header() {
-  const {
-    config: { chatflows },
-    chatflow,
-    setChatflow,
-  } = useProompter();
+export function Header({
+  selectChatflowProps,
+}: {
+  selectChatflowProps: SelectChatFlowProps;
+}) {
   return (
     <div className=" ai-p-2">
-      <SelectChatFlow
-        onChatflowClicked={(chatflow) => {
-          setChatflow(chatflow);
-        }}
-        chatflow={chatflow}
-        chatflows={chatflows!}
-      />
+      <SelectChatFlow {...selectChatflowProps} />
     </div>
   );
 }

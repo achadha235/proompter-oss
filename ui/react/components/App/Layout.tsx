@@ -92,7 +92,7 @@ export function Layout({
   // Container for the drawer toggle button
   const drawerToggleButton = (
     <div
-      className="ai-tooltip ai-tooltip-right ai-w-fit ai-rounded-md ai-px-1 ai-py-2 ai-z-[100] ai-absolute ai-top-[calc(50%_-_23px)] -ai-right-4"
+      className="ai-tooltip ai-tooltip-right ai-w-fit ai-rounded-md ai-px-1 ai-py-2 ai-z-[100] ai-absolute ai-top-[calc(50%_-_23px)] -ai-right-8"
       data-tip={drawerOpen ? "Close sidebar" : "Open sidebar"}
     >
       <ArrowButton

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+// import {} from "@storybook/preview-api";
 import type { Preview } from "@storybook/react";
 import "../styles/globals.css";
 import themes from "../themes";
-
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -46,6 +46,45 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+
+    // appContext: {
+    //   description: "App context",
+    //   defaultValue: {
+    //     user: {
+    //       name: "Al",
+    //       imageURL: "/lol",
+    //     },
+    //     config,
+    //   },
+    //   toolbar: {
+    //     title: "App Context",
+    //     icon: "circlehollow",
+    //     items: [
+    //       {
+    //         value: {
+    //           user: {
+    //             name: "Al",
+    //             imageURL: "/lol",
+    //           },
+    //           config,
+    //         },
+    //         title: "Al",
+    //       },
+    //       {
+    //         value: {
+    //           user: {
+    //             name: "Bob",
+    //             imageURL: "/lol",
+    //           },
+    //           config,
+    //         },
+    //         title: "Bob",
+    //       },
+    //     ],
+    //     showName: true,
+    //     dynamicTitle: true,
+    //   },
+    // },
   },
 };
 
