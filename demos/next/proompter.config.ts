@@ -2,6 +2,31 @@ import prisma from "./src/database";
 import { type Config } from "@proompter/core";
 import ProompterPrismaAdapter from "@proompter/adapter-prisma";
 
+const examples = [
+  {
+    title: "Recommend a dish",
+    subtitle: "to bring to a potluck",
+    chatMessage: "I want to make a dish for a potluck. What should I make?",
+  },
+  {
+    title: "Brainstorm incentives",
+    subtitle: "for a customer loyalty program in a small bookstore",
+    chatMessage:
+      "Can you help me brainstorm 7 ideas for a customer loyalty program? I work at a small bookstore.",
+  },
+  {
+    title: "Write an email",
+    subtitle: "requesting a deadline extension for my project",
+    chatMessage:
+      "Write a short email to my professor requesting a deadline extension for my project. I don't really have a good excuse, and I'm fine owning up to that – so please keep it real!",
+  },
+  {
+    title: "Design a database schema",
+    subtitle: "for an online merch store",
+    chatMessage: "Design a database schema for an online merch store.",
+  },
+];
+
 const config: Config = {
   name: "C-3PO",
   description:
@@ -13,6 +38,7 @@ const config: Config = {
       id: "translate",
       name: "Simple Translation",
       icon: "bolt",
+      examples,
       description: ["Basic translations and transliterations"],
       runner: "flowise",
       options: {
@@ -23,6 +49,7 @@ const config: Config = {
       id: "tutor",
       name: "Language Tutor",
       icon: "school",
+      examples,
       description: [
         "Translations & transliterations",
         "with Grammar, vocabulary & Q&A",

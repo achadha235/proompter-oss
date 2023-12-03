@@ -7,6 +7,12 @@ export namespace Chat {
   export interface FlowiseRunnerOptions {
     chatflowId: string;
   }
+
+  export interface Example {
+    title: string;
+    subtitle?: string;
+    chatMessage: string;
+  }
   export interface Chatflow {
     /** Unique ID for this chatflow */
     id: string;
@@ -22,14 +28,12 @@ export namespace Chat {
     options: FlowiseRunnerOptions;
     /** The plans under which this chatflow is avaliable */
     plans?: string[];
+
+    /** The examples to display for this chatflow */
+    examples?: Example[];
   }
 
   /** An example that can be used to trigger a chat conversation */
-  export interface Example {
-    title: string;
-    subtitle?: string;
-    chatMessage: string;
-  }
 }
 
 export interface Config {

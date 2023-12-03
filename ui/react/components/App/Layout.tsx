@@ -128,12 +128,12 @@ export function Layout({
         onScroll={handleScroll}
         ref={scrollContainerRef}
         className={clsx(
-          "ai-chat-content ai-w-full main ai-bg-base-100 ai-h-screen ai-bottom-0 ai-relative",
+          "ai-chat-content ai-w-full main ai-bg-base-100 ai-h-full ai-bottom-0 ai-relative ai-flex ai-flex-col ",
           enableScroll ? "ai-overflow-y-auto" : "ai-overflow-y-hidden"
         )}
       >
         <div className="ai-sticky ai-top-0 ai-z-50">{header}</div>
-        {main}
+        <div className="ai-flex-grow ai-w-full">{main}</div>
         {children}
       </div>
       <div
