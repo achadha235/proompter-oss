@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-// import {} from "@storybook/preview-api";
 import type { Preview } from "@storybook/react";
 import "../styles/globals.css";
+import "../styles/material-icons.css";
 import themes from "../themes";
+
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
