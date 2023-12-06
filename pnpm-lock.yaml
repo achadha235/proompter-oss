@@ -656,8 +656,8 @@ importers:
         specifier: ^10.4.16
         version: 10.4.16(postcss@8.4.31)
       bun-types:
-        specifier: latest
-        version: 1.0.14
+        specifier: ^1.0.14
+        version: 1.0.15
       daisyui:
         specifier: ^4.4.14
         version: 4.4.14(postcss@8.4.31)
@@ -9961,6 +9961,10 @@ packages:
 
   /bun-types@1.0.14:
     resolution: {integrity: sha512-hLVfM2fk8xSJeobfuPGilfvxM5gLtEy1bn7RJhrtw3u4OaC0kieXKYFFTVHU8jZ3hj8YyPLIFClIUodkFSrMBQ==}
+    dev: true
+
+  /bun-types@1.0.15:
+    resolution: {integrity: sha512-XkEvWLV1JIhcVIpf2Lu6FXnZUxRUkQVJmgY+VT7os6Tk5X1nkXx11q4Rtu6txsqpDJZfUeZXblnnD59K+6wsVA==}
     dev: true
 
   /bundle-name@3.0.0:

@@ -19,7 +19,7 @@ export function Example({
   return (
     <div
       data-message={chatMessage}
-      className="ai-bg-base-100 hover:ai-bg-base-200 ai-shadow-sm hover:ai-shadow-md ai-text-base-content ai-border-base-content ai-border-opacity-25 ai-border ai-p-3 ai-transition-colors ai-rounded-md ai-cursor-pointer ai-aspect-[12/1]"
+      className="ai-bg-base-100 hover:ai-bg-base-200 ai-shadow-sm hover:ai-shadow-md ai-text-base-content ai-border-base-content ai-border-opacity-25 ai-border ai-p-3 ai-transition-colors ai-rounded-box ai-cursor-pointer ai-aspect-[12/1]"
       onClick={onClick}
     >
       <div className="ai-text-base ai-font-bold">{title}</div>

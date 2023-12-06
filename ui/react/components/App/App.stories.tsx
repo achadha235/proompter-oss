@@ -14,5 +14,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: { proompterConfig: config },
+  args: {
+    proompterConfig: config,
+    user: {
+      email: "johnnyappleseed@apple.com",
+      imageURL: "http://robohash.org/johnny",
+      name: "Johnny Appleseed",
+    },
+  },
 };

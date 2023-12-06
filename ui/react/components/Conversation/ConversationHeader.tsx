@@ -23,7 +23,7 @@ export function ConversationHeader({
     >
       {imageURL && (
         <div className="ai-avatar">
-          <div className="ai-w-24 ai-rounded">
+          <div className="ai-w-24 ai-rounded-full ai-bg-primary">
             <img className="ai-w-24 ai-h-24" src={imageURL} alt="logo" />
           </div>
         </div>

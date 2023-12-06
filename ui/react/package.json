@@ -31,7 +31,7 @@
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
     "autoprefixer": "^10.4.16",
-    "bun-types": "latest",
+    "bun-types": "^1.0.15",
     "daisyui": "^4.4.14",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
@@ -48,7 +48,7 @@
   "scripts": {
     "build": "bunx rimraf build/* && NODE_ENV=production bun run build:js && bun run build:css",
     "build:css": "postcss styles/globals.css styles/**/*.css --dir build/styles",
-    "build:js": "bun build ./index.ts --splitting  --target browser --external react --external react-dom --sourcemap=external --outdir ./build",
+    "build:js": "tsc",
     "dev": "bunx concurrently 'bun run build:js --watch' 'bun run build:css --watch' 'bun run storybook'",
     "test": "bun test",
     "storybook": "storybook dev -p 6006",

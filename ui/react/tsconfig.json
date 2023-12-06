@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
+    "outDir": "./build",
+    "rootDir": "./",
     "lib": [
-      "ESNext"
+      "ESNext",
+      "DOM",
+      "dom"
     ],
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
     "composite": true,
     "strict": true,
     "downlevelIteration": true,
@@ -25,6 +27,11 @@
         "./src/*",
         "./*"
       ]
-    }
-  }
+    },
+  },
+  "exclude": [
+    "./build",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+  ]
 }
