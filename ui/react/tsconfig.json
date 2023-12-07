@@ -4,8 +4,7 @@
     "rootDir": "./",
     "lib": [
       "ESNext",
-      "DOM",
-      "dom"
+      "DOM"
     ],
     "module": "esnext",
     "target": "esnext",

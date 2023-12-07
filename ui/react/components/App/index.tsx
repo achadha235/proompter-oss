@@ -32,6 +32,13 @@ export function App({ proompterConfig, user }: AppProps): React.JSX.Element {
       enableScroll={enableScroll}
       header={
         <Header
+          className=" ai-relative"
+          startConversationButtonProps={{
+            buttonOnly: true,
+            className: "md:ai-hidden ai-ml-auto  ai-absolute ai-right-1",
+            imageURL: proompterConfig.imageURL,
+            title: proompterConfig.name,
+          }}
           selectChatflowProps={{
             chatflows: config.chatflows,
             chatflow,

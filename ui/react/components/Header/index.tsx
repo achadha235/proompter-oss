@@ -1,13 +1,23 @@
+import clsx from "clsx";
+import {
+  StartConversationButton,
+  StartConversationButtonProps,
+} from "../App/StartConversationButton";
 import { SelectChatFlow, SelectChatFlowProps } from "../SelectChatFlow";
 
 export function Header({
+  className,
   selectChatflowProps,
+  startConversationButtonProps,
 }: {
+  className?: string;
   selectChatflowProps: SelectChatFlowProps;
+  startConversationButtonProps: StartConversationButtonProps;
 }) {
   return (
-    <div className=" ai-p-2">
+    <div className={clsx("ai-p-2 ai-flex", className)}>
       <SelectChatFlow {...selectChatflowProps} />
+      <StartConversationButton {...startConversationButtonProps} />
     </div>
   );
 }

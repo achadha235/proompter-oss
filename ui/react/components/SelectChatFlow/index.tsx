@@ -2,28 +2,33 @@ import { Chat } from "@proompter/core";
 import { useRef } from "react";
 import { ChatflowOption } from "./Option";
 import { useOnClickOutside } from "usehooks-ts";
+import clsx from "clsx";
 
 export interface SelectChatFlowProps {
+  className?: string;
   chatflow: Chat.Chatflow;
   chatflows: Chat.Chatflow[];
   onChatflowClicked: (chatflow: Chat.Chatflow) => void;
 }
 
 export function SelectChatFlow({
+  className,
   chatflows,
   chatflow,
   onChatflowClicked,
-}: {
-  chatflow: Chat.Chatflow;
-  chatflows: Chat.Chatflow[];
-  onChatflowClicked: (chatflow: Chat.Chatflow) => void;
-}) {
+}: SelectChatFlowProps) {
   const dropdown = useRef<HTMLDetailsElement>(null);
   useOnClickOutside(dropdown, () => {
     dropdown?.current?.removeAttribute("open");
   });
   return (
-    <details ref={dropdown} className="ai-dropdown ai-dropdown-bottom">
+    <details
+      ref={dropdown}
+      className={clsx(
+        "ai-dropdown ai-dropdown-bottom ai-dropdown-center",
+        className
+      )}
+    >
       <summary className="ai-bg-base-100 ai-text-base-content hover:ai-bg-base-200 ai-transition-all ai-p-3 ai-rounded-box ai-flex ai-items-center ai-justify-between ai-gap-1 ai-cursor-pointer ai-border-none ai-outline-none">
         <span className="ai-text-lg">{chatflow.name}</span>
         <span className="material-symbols-outlined ai-opacity-50">

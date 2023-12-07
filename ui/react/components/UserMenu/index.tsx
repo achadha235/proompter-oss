@@ -27,14 +27,14 @@ export function UserMenu({
             />
           </div>
         </div>
-        <div className=" ai-text-base-content ai-text-sm ai-font-bold">
+        <div className=" ai-text-base-content ai-text-sm ai-font-bold ai-line-clamp-1 ai-overflow-hidden">
           {user?.name || user?.email}
         </div>
       </div>
 
       <ul
         tabIndex={0}
-        className="ai-dropdown-content ai-z-[1] ai-menu ai-p-2 ai-shadow ai-bg-base-100 ai-rounded-box ai-w-full ai-w-[230px]"
+        className="ai-dropdown-content ai-z-[1] ai-menu ai-p-2 ai-shadow ai-bg-base-100 ai-rounded-box ai-w-[230px]"
       >
         <li>
           <a>
