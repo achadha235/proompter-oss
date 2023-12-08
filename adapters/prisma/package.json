@@ -5,6 +5,7 @@
   "main": "./build/index.js",
   "types": "./index.ts",
   "scripts": {
+    "generate": "npx prisma generate",
     "build": "bun build ./index.ts --splitting --target node --sourcemap=external --outdir ./build",
     "dev": "pnpm run build --watch"
   },

@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
@@ -41,6 +43,7 @@ export function Layout({
 
   const handleScroll = () => {
     const scrollDiv = scrollContainerRef.current;
+
     const hasVerticalScroll =
       scrollDiv && scrollDiv.scrollHeight > scrollDiv.clientHeight;
 
@@ -149,11 +152,11 @@ export function Layout({
     </>
   );
 
-  return (
+  const desktopLayout = (
     <div
       className={clsx(
         className,
-        "ai-w-full ai-flex ai-h-full ai-min-h-[100dvh] ai-z-40 ai-text-base-content ai-text-xs ai-bg-base-100"
+        "ai-hidden lg:ai-flex ai-w-full ai-h-full ai-min-h-[100dvh] ai-z-40 ai-text-base-content ai-text-xs ai-bg-base-100"
       )}
     >
       <div id="sidebar" className="ai-relative ai-flex-shrink-0 ai-h-[100dvh]">
@@ -164,10 +167,74 @@ export function Layout({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="ai-relative ai-flex ai-flex-col ai-max-w-full ai-flex-1 ai-overflow-hidden ai-h-screen"
+        className="ai-relative ai-flex ai-flex-col ai-max-w-full ai-flex-1 ai-overflow-hidden ai-h-screen ai-p-2"
       >
         {mainContentArea}
       </motion.div>
     </div>
+  );
+
+  const mobileSidebarToggleBtn = (
+    <label htmlFor="my-drawer" className="ai-btn ai-btn-ghost ai-drawer-button">
+      <span className="material-symbols-outlined">menu</span>
+    </label>
+  );
+
+  const mobileMainContentArea = (
+    <>
+      {/* Main content */}
+      <div
+        onScroll={handleScroll}
+        ref={scrollContainerRef}
+        className={clsx(
+          "ai-chat-content ai-w-full main ai-h-full ai-bg-base-100ai-bottom-0 ai-relative ai-flex ai-flex-col ",
+          enableScroll ? "ai-overflow-y-auto" : "ai-overflow-y-hidden"
+        )}
+      >
+        <div className="ai-sticky ai-top-0 ai-z-50 ai-flex  ai-border-b ai-border-opacity-10 ai-border-base-content ai-p-1">
+          {mobileSidebarToggleBtn}
+          <div className=" ai-flex-grow">{header}</div>
+        </div>
+        <div className="ai-flex-grow ai-w-full ai-p-2">{main}</div>
+        {children}
+        <div
+          className={
+            "ai-z-50 ai-w-full ai-flex ai-flex-col ai-shadow-md ai-bg-base-100 pt-0"
+          }
+        >
+          {/* Scroll down button */}
+          {scrollDownButton}
+          {footer}
+        </div>
+      </div>
+    </>
+  );
+
+  const mobileLayout = (
+    <div className="ai-drawer lg:ai-hidden">
+      <input id="my-drawer" type="checkbox" className="ai-drawer-toggle" />
+      <div className="ai-drawer-content ai-h-[100vh]  ai-overflow-hidden">
+        {mobileMainContentArea}
+      </div>
+      <div className="ai-drawer-side  ai-h-full ai-z-[1000]">
+        <label
+          htmlFor="my-drawer"
+          aria-label="close sidebar"
+          className="ai-drawer-overlay ai-overscroll-none"
+        />
+        <ul className="ai-bg-base-200 ai-text-base-conten">
+          <div className=" ai-flex-shrink-0 ai-w-[230px] ai-h-[100dvh] ai-overflow-hidden ai-border-r ai-border-x-base-200 ai-bg-base-300 ">
+            {drawer}
+          </div>
+        </ul>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {desktopLayout}
+      {mobileLayout}
+    </>
   );
 }

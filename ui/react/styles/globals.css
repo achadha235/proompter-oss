@@ -31,3 +31,23 @@
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
 }
+
+html {
+  font-size: 12px;
+
+  @media (min-width: theme("screens.sm")) {
+    font-size: 14px;
+  }
+
+  @media (min-width: theme("screens.md")) {
+    font-size: 16px;
+  }
+
+  @media (min-width: theme("screens.lg")) {
+    font-size: 16px;
+  }
+
+  @media (min-width: theme("screens.xl")) {
+    font-size: 16px;
+  }
+}

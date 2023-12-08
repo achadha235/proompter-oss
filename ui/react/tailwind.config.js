@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+/* eslint-disable */
 import themes from "./themes";
 
 export default {

@@ -32,7 +32,7 @@ const config: Config = {
   description:
     "I'm C-3PO, fluent in over six million languages. Join me to master languages from Earth and across the galaxy!",
   imageURL: "/c3po.png",
-  adapter: new ProompterPrismaAdapter(prisma),
+  adapter: new ProompterPrismaAdapter(prisma as any),
 
   conversationStarter: {
     examples,

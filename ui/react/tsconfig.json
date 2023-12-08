@@ -3,8 +3,8 @@
     "outDir": "./build",
     "rootDir": "./",
     "lib": [
-      "ESNext",
-      "DOM"
+      "dom",
+      "esnext"
     ],
     "module": "esnext",
     "target": "esnext",

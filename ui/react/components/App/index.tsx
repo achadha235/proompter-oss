@@ -35,7 +35,7 @@ export function App({ proompterConfig, user }: AppProps): React.JSX.Element {
           className=" ai-relative"
           startConversationButtonProps={{
             buttonOnly: true,
-            className: "md:ai-hidden ai-ml-auto  ai-absolute ai-right-1",
+            className: "md:ai-hidden ai-ml-auto",
             imageURL: proompterConfig.imageURL,
             title: proompterConfig.name,
           }}
