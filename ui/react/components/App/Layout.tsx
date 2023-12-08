@@ -213,10 +213,10 @@ export function Layout({
   const mobileLayout = (
     <div className="ai-drawer lg:ai-hidden">
       <input id="my-drawer" type="checkbox" className="ai-drawer-toggle" />
-      <div className="ai-drawer-content ai-h-[100vh]  ai-overflow-hidden">
+      <div className="ai-drawer-content ai-h-[100vh] ai-overflow-hidden ai-bg-base-100">
         {mobileMainContentArea}
       </div>
-      <div className="ai-drawer-side  ai-h-full ai-z-[1000]">
+      <div className="ai-drawer-side ai-h-full ai-z-[1000]">
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"

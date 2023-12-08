@@ -1,7 +1,9 @@
 import { UseChatOptions } from "ai";
 import { UseChatHelpers } from "ai/react";
 
-export interface Adapter {}
+export interface Adapter {
+  test(): Promise<string>;
+}
 
 export namespace Chat {
   export interface FlowiseRunnerOptions {

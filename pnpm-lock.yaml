@@ -63,6 +63,9 @@ importers:
       '@proompter/runner-flowise':
         specifier: workspace:*
         version: link:../../runners/flowise
+      '@proompter/server-next':
+        specifier: workspace:*
+        version: link:../../server/next
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.3.5)
@@ -557,9 +560,24 @@ importers:
 
   server/next:
     dependencies:
+      '@proompter/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@proompter/runner-flowise':
+        specifier: workspace:*
+        version: link:../../runners/flowise
       ai:
         specifier: workspace:*
         version: link:../../monorepos/ai/packages/core
+      next:
+        specifier: 14.0.3
+        version: 14.0.3(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
       typescript:
         specifier: ^5.0.0
         version: 5.1.3

@@ -5,6 +5,7 @@ const { entities } = require("flowise/dist/database/entities");
 const entityNames = Object.values(entities).map((entity) => entity.name);
 
 const nextConfig = {
+  transpilePackages: ["@proompter/server-next"],
   webpack: (
     config,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
@@ -37,7 +38,7 @@ const nextConfig = {
         }),
       ],
     };
-    
+
     return config;
   },
 };

@@ -7,7 +7,10 @@ export async function getChatflows() {
   if (!dataSource.isInitialized) {
     await dataSource.initialize();
   }
-
   const chatflows = await dataSource.getRepository(ChatFlow).find();
   return chatflows;
+}
+
+export async function runChatflow(chatflow: ChatFlow) {
+  return;
 }
