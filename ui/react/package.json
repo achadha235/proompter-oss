@@ -46,10 +46,12 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
+    "dev": "turbo run dev:css --parallel",
     "build": "bunx rimraf build/* && NODE_ENV=production bun run build:js && bun run build:css",
     "build:css": "postcss styles/globals.css styles/**/*.css --dir build/styles",
     "build:js": "tsc",
-    "dev": "bunx concurrently 'bun run build:js --watch' 'bun run build:css --watch' 'bun run storybook'",
+    "dev:css": "bun run build:css --watch",
+    "dev:js": "bun run build:js --watch",
     "test": "bun test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

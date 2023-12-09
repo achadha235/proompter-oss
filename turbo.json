@@ -29,6 +29,15 @@
         "dev": {
             "cache": false,
             "persistent": true
+        },
+        "storybook": {
+            "outputs": []
+        },
+        "dev:js": {
+            "outputs": []
+        },
+        "dev:css": {
+            "outputs": []
         }
     }
 }
