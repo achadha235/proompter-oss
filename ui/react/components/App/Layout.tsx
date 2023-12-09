@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 import { ArrowButton } from "../ArrowButton";
 import { useLocalStorage } from "usehooks-ts";
+import { MobileLayout } from "./MobileLayout";
 export interface LayoutProps {
   className?: string;
   drawer?: React.ReactNode;
@@ -15,12 +16,21 @@ export interface LayoutProps {
   enableScroll?: boolean;
 }
 
+export function Layout(props: LayoutProps): React.JSX.Element {
+  return (
+    <>
+      <DesktopLayout {...props} />
+      <MobileLayout {...props} />
+    </>
+  );
+}
+
 /**
  * A layout for a chat app with a drawer, header, main content and footer.
  * @param props: LayoutProps
  * @returns
  */
-export function Layout({
+export function DesktopLayout({
   className,
   header,
   footer,
@@ -42,6 +52,7 @@ export function Layout({
   });
 
   const handleScroll = () => {
+    debugger;
     const scrollDiv = scrollContainerRef.current;
 
     const hasVerticalScroll =
@@ -55,7 +66,7 @@ export function Layout({
   };
 
   const scrollToBottom = (behavior: ScrollBehavior) => {
-    const div = scrollContainerRef.current;
+    let div = scrollContainerRef.current;
     div?.scrollTo({
       top: div.scrollHeight,
       behavior,
@@ -108,12 +119,12 @@ export function Layout({
   );
 
   const scrollDownButton = (
-    <div className="ai-relative ai-h-0 ai-w-full">
+    <div className="ai-relative ai-h-0 ai-w-full " id="scrollDownButton">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: showScrollDownButton ? 1 : 0 }}
         style={{ pointerEvents: showScrollDownButton ? "auto" : "none" }}
-        className="ai-w-10 -ai-translate-y-14 ai-h-10 ai-mx-auto ai-border ai-border-base-content   ai-cursor-pointer ai-rounded-full ai-flex ai-items-center ai-justify-center ai-z-50 ai-bg-base-200 ai-bg-opacity-30 ai-shadow-lg ai-select-none"
+        className="ai-w-10 -ai-translate-y-14 ai-h-10 ai-mx-auto ai-border ai-border-base-content   ai-cursor-pointer ai-rounded-full ai-flex ai-items-center ai-justify-center ai-bg-base-200 ai-bg-opacity-30 ai-shadow-lg ai-select-none"
         onClick={() => {
           scrollToBottom("smooth");
         }}
@@ -152,7 +163,7 @@ export function Layout({
     </>
   );
 
-  const desktopLayout = (
+  return (
     <div
       className={clsx(
         className,
@@ -172,69 +183,5 @@ export function Layout({
         {mainContentArea}
       </motion.div>
     </div>
-  );
-
-  const mobileSidebarToggleBtn = (
-    <label htmlFor="my-drawer" className="ai-btn ai-btn-ghost ai-drawer-button">
-      <span className="material-symbols-outlined">menu</span>
-    </label>
-  );
-
-  const mobileMainContentArea = (
-    <>
-      {/* Main content */}
-      <div
-        onScroll={handleScroll}
-        ref={scrollContainerRef}
-        className={clsx(
-          "ai-chat-content ai-w-full main ai-h-full ai-bg-base-100ai-bottom-0 ai-relative ai-flex ai-flex-col ",
-          enableScroll ? "ai-overflow-y-auto" : "ai-overflow-y-hidden"
-        )}
-      >
-        <div className="ai-sticky ai-top-0 ai-z-50 ai-flex  ai-border-b ai-border-opacity-10 ai-border-base-content ai-p-1">
-          {mobileSidebarToggleBtn}
-          <div className=" ai-flex-grow">{header}</div>
-        </div>
-        <div className="ai-flex-grow ai-w-full ai-p-2">{main}</div>
-        {children}
-        <div
-          className={
-            "ai-z-50 ai-w-full ai-flex ai-flex-col ai-shadow-md ai-bg-base-100 pt-0"
-          }
-        >
-          {/* Scroll down button */}
-          {scrollDownButton}
-          {footer}
-        </div>
-      </div>
-    </>
-  );
-
-  const mobileLayout = (
-    <div className="ai-drawer lg:ai-hidden">
-      <input id="my-drawer" type="checkbox" className="ai-drawer-toggle" />
-      <div className="ai-drawer-content ai-h-[100vh] ai-overflow-hidden ai-bg-base-100">
-        {mobileMainContentArea}
-      </div>
-      <div className="ai-drawer-side ai-h-full ai-z-[1000]">
-        <label
-          htmlFor="my-drawer"
-          aria-label="close sidebar"
-          className="ai-drawer-overlay ai-overscroll-none"
-        />
-        <ul className="ai-bg-base-200 ai-text-base-conten">
-          <div className=" ai-flex-shrink-0 ai-w-[230px] ai-h-[100dvh] ai-overflow-hidden ai-border-r ai-border-x-base-200 ai-bg-base-300 ">
-            {drawer}
-          </div>
-        </ul>
-      </div>
-    </div>
-  );
-
-  return (
-    <>
-      {desktopLayout}
-      {mobileLayout}
-    </>
   );
 }
