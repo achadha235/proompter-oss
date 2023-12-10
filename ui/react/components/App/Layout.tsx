@@ -123,7 +123,7 @@ export function DesktopLayout({
         initial={{ opacity: 0 }}
         animate={{ opacity: showScrollDownButton ? 1 : 0 }}
         style={{ pointerEvents: showScrollDownButton ? "auto" : "none" }}
-        className="ai-w-10 -ai-translate-y-14 ai-h-10 ai-mx-auto ai-border ai-border-base-content   ai-cursor-pointer ai-rounded-full ai-flex ai-items-center ai-justify-center ai-bg-base-200 ai-bg-opacity-30 ai-shadow-lg ai-select-none"
+        className="ai-w-10 -ai-translate-y-14 ai-h-10 ai-mx-auto ai-border ai-border-base-content   ai-cursor-pointer ai-rounded-full ai-flex ai-items-center ai-justify-center ai-bg-base-200 ai-bg-opacity-80 ai-shadow-lg ai-select-none"
         onClick={() => {
           scrollToBottom("smooth");
         }}
@@ -177,7 +177,7 @@ export function DesktopLayout({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="ai-relative ai-flex ai-flex-col ai-max-w-full ai-flex-1 ai-overflow-hidden ai-h-screen ai-p-2"
+        className="ai-relative ai-flex ai-flex-col ai-max-w-full ai-flex-1 ai-overflow-hidden ai-h-screen ai-p-0"
       >
         {mainContentArea}
       </motion.div>

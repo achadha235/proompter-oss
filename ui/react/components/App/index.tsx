@@ -32,7 +32,7 @@ export function App({
   );
 
   const messages = chat.messages;
-  const enableScroll = messages.length === 0;
+  const enableScroll = messages && messages.length > 0;
   const conversationStarter =
     chatflow?.conversationStarter || proompterConfig.conversationStarter!;
 
@@ -75,7 +75,12 @@ export function App({
             title: conversationStarter.title || "How can I help you today?",
             imageURL: conversationStarter.imageURL || proompterConfig.imageURL,
           }}
-          messages={[]}
+          user={user}
+          appUser={{
+            name: proompterConfig.name,
+            imageURL: proompterConfig.imageURL,
+          }}
+          messages={chat.messages}
           examples={conversationStarter.examples}
         />
       }

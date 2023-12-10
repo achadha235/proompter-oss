@@ -1,11 +1,14 @@
 import clsx from "clsx";
-import ReactTextareaAutosize from "react-textarea-autosize";
+import ReactTextareaAutosize, {
+  TextareaAutosizeProps,
+} from "react-textarea-autosize";
 import { UseChatHelpers } from "ai/react";
 import { KeyboardEvent, SyntheticEvent } from "react";
 export interface ComposerProps {
   className?: string;
   placeholder?: string;
   chat?: UseChatHelpers;
+  textAreaProps?: TextareaAutosizeProps;
 }
 
 export function Composer({

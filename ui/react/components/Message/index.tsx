@@ -14,7 +14,7 @@ export function Message({
   children?: ReactNode;
 }) {
   return (
-    <div className="ai-max-w-2xl ai-flex ai-flex-col ai-mx-auto ai-w-full ai-justify-start ai-items-start ai-overflow-hidden ai-text-base-content ai-bg-base-100 ai-p-4">
+    <div className="ai-max-w-3xl ai-flex ai-flex-col ai-mx-auto ai-w-full ai-justify-start ai-items-start ai-overflow-hidden ai-text-base-content ai-bg-base-100 ai-p-4">
       <div className="ai-flex ai-items-center ai-gap-2">
         <div className="ai-avatar">
           <div
@@ -28,12 +28,14 @@ export function Message({
       </div>
 
       <div className="ai-w-full ai-pl-10 ai-text-sm ai-whitespace-pre-wrap">
-        <Markdown
+        {text}
+        {/* Fix the reflow problem for markdown */}
+        {/* <Markdown
           remarkPlugins={[remarkGfm]}
           className="ai-flex ai-flex-col ai-gap-0 ai-prose prose-headings:ai-mb-1 prose-headings:ai-mt-0 ai-leading-relaxed prose-ol:ai-leading-none prose-ul:ai-leading-none"
         >
           {text}
-        </Markdown>
+        </Markdown> */}
       </div>
       {children}
     </div>

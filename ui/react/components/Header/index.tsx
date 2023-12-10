@@ -15,7 +15,12 @@ export function Header({
   startConversationButtonProps: StartConversationButtonProps;
 }) {
   return (
-    <div className={clsx("ai-flex", className)}>
+    <div
+      className={clsx(
+        "ai-flex ai-bg-base-100 ai-bg-opacity-90 ai-p-1",
+        className
+      )}
+    >
       <SelectChatFlow {...selectChatflowProps} />
       <StartConversationButton {...startConversationButtonProps} />
     </div>

@@ -1,8 +1,9 @@
-import { Message } from "ai";
+import { Message as VercelAIMessage } from "ai";
 import { isNil } from "lodash";
 import { ReactNode } from "react";
 import { Examples } from "..";
-import { Chat } from "@proompter/core";
+import { Message } from "..";
+import { Chat, User } from "@proompter/core";
 import {
   ConversationHeader,
   ConversationHeaderProps,
@@ -11,10 +12,14 @@ import {
 export function Conversation({
   conversationHeaderProps,
   messages,
+  user,
+  appUser,
   examples,
 }: {
   conversationHeaderProps: ConversationHeaderProps;
-  messages: Message[];
+  messages: VercelAIMessage[];
+  user?: User;
+  appUser?: User;
   examples: Chat.Example[];
 }) {
   let content: ReactNode = null;
@@ -33,5 +38,22 @@ export function Conversation({
       </div>
     );
   }
-  return <div className="ai-w-full ai-bg-green-200">{content}</div>;
+
+  content = (
+    <>
+      {messages.map((message) => {
+        const msgUser = message.role === "user" ? user : appUser;
+        return (
+          <Message
+            imageURL={msgUser?.imageURL}
+            name={msgUser?.name}
+            key={message.id}
+            text={message.content}
+          />
+        );
+      })}
+    </>
+  );
+
+  return <div className="ai-w-full">{content}</div>;
 }
