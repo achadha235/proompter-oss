@@ -84,6 +84,9 @@ importers:
       flowise:
         specifier: workspace:*
         version: link:../../monorepos/flowise/packages/server
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       next:
         specifier: 14.0.3
         version: 14.0.3(react-dom@18.2.0)(react@18.2.0)

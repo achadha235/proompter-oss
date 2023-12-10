@@ -39,8 +39,6 @@ export function SelectChatFlow({
       <ul className="ai-dropdown-content ai-z-[1] ai-mt-2 ai-shadow-sm ai-bg-base-100 ai-rounded-box ai-text-base-content ai-border ai-border-base-content ai-border-opacity-10 ai-join-vertical">
         {chatflows.map((cf, i) => {
           const showDivider = i > 0;
-
-          debugger;
           return (
             <div key={cf.id}>
               {showDivider && (

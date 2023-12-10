@@ -1,18 +1,21 @@
 "use client";
 
 import config from "@/proompter.config";
-
-import dynamic from "next/dynamic";
-const App = dynamic(() => import("@proompter/react").then((mod) => mod.App), {
-  ssr: false,
-});
-// import { App } from "@proompter/react";
-
+import { App } from "@proompter/react";
+import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-export default function ChatGPT({ session }) {
+
+export default function ChatGPT({ session }: { session: Session }) {
   return (
     <SessionProvider session={session}>
-      <App proompterConfig={config} />
+      <App
+        user={{
+          name: session.user?.name!,
+          email: session.user?.email!,
+          imageURL: session.user?.image!,
+        }}
+        proompterConfig={config}
+      />
     </SessionProvider>
   );
 }

@@ -52,7 +52,6 @@ export function DesktopLayout({
   });
 
   const handleScroll = () => {
-    debugger;
     const scrollDiv = scrollContainerRef.current;
 
     const hasVerticalScroll =

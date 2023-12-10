@@ -2,7 +2,7 @@
 import { Layout } from "./Layout";
 import { Header } from "..";
 import { Footer } from "../Footer";
-import { Config, User } from "@proompter/core";
+import { Config, User, Chat } from "@proompter/core";
 import { useProompter } from "../../hooks/useProompter";
 import { Conversation } from "../Conversation";
 import { Sidebar } from "../Sidebar";
@@ -12,15 +12,24 @@ import { StartConversationButton } from "./StartConversationButton";
 export interface AppProps {
   proompterConfig: Config;
   user?: User;
+  onChatflowSelected?: (chatflowId: Chat.Chatflow) => void;
 }
 
-export function App({ proompterConfig, user }: AppProps): React.JSX.Element {
+export function App({
+  proompterConfig,
+  user,
+  onChatflowSelected,
+}: AppProps): React.JSX.Element {
   if (!proompterConfig) {
     throw new Error("Please provide a configuration");
   }
 
-  const { chatflow, setChatflow, config, chat, conversations } =
-    useProompter(proompterConfig);
+  const { chatflow, setChatflow, config, chat, conversations } = useProompter(
+    proompterConfig,
+    {
+      onChatflowSelected,
+    }
+  );
 
   const messages = chat.messages;
   const enableScroll = messages.length === 0;
@@ -70,7 +79,7 @@ export function App({ proompterConfig, user }: AppProps): React.JSX.Element {
           examples={conversationStarter.examples}
         />
       }
-      footer={<Footer />}
+      footer={<Footer composerProps={{ chat }} />}
     />
   );
 }

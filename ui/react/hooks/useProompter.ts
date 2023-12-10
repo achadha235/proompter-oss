@@ -1,13 +1,28 @@
-import { Config } from "@proompter/core";
-import { useState } from "react";
+import { Config, Chat } from "@proompter/core";
+import { useEffect, useState } from "react";
 import { first } from "lodash";
 import { useChat } from "ai/react";
 
-export function useProompter(intialConfig: Config) {
+export function useProompter(
+  intialConfig: Config,
+  {
+    onChatflowSelected,
+  }: {
+    onChatflowSelected?: (chatflow: Chat.Chatflow) => void;
+  }
+) {
   const [config, setConfig] = useState(intialConfig);
   const [chatflow, setChatflow] = useState(first(config.chatflows)!);
   const [conversations, setConversations] = useState([]);
-  const chat = useChat(config.chatOptions);
+
+  const chat = useChat({
+    api: "/api/proompter/chat",
+    ...config?.chatOptions,
+  });
+
+  useEffect(() => {
+    onChatflowSelected?.(chatflow);
+  }, [chatflow]);
 
   return {
     config,

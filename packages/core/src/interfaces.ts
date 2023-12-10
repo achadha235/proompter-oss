@@ -1,5 +1,5 @@
 import { UseChatOptions } from "ai";
-import { UseChatHelpers } from "ai/react";
+import { UseChatHelpers, Message } from "ai/react";
 
 export interface Adapter {
   test(): Promise<string>;
@@ -63,9 +63,10 @@ export interface Config {
 }
 
 export interface User {
+  id?: string;
   email?: string;
   name?: string;
-  imageURL: string;
+  imageURL?: string;
 }
 export interface AppContext {
   user?: User;
@@ -73,4 +74,11 @@ export interface AppContext {
   chatflow: Chat.Chatflow;
   setChatflow: (chatflow: Chat.Chatflow) => any;
   // chat: UseChatHelpers;
+}
+
+export interface PredictArgs {
+  messages: Message[];
+  userId?: User["id"];
+  conversationId?: string;
+  chatflowId: Chat.Chatflow["id"];
 }

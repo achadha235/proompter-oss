@@ -1,5 +1,5 @@
 // import prisma from "./src/database";
-import { type Config } from "@proompter/core";
+import { Adapter, type Config } from "@proompter/core";
 // import ProompterPrismaAdapter from "@proompter/adapter-prisma";
 
 const examples = [
@@ -32,7 +32,7 @@ export const config: Config = {
   description:
     "I'm C-3PO, fluent in over six million languages. Join me to master languages from Earth and across the galaxy!",
   imageURL: "https://robohash.org/c3po",
-  adapter: {},
+  adapter: {} as Adapter,
 
   conversationStarter: {
     examples,
