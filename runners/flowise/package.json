@@ -4,11 +4,12 @@
   "main": "./build/index.js",
   "devDependencies": {
     "bun-types": "latest",
-    "flowise": "workspace:*"
+    "flowise": "workspace:*",
+    "typeorm": "^0.3.17"
   },
   "peerDependencies": {
-    "sqlite3": "^5.1.6",
-    "flowise": "^1.4.2"
+    "flowise": "^1.4.2",
+    "sqlite3": "^5.1.6"
   },
   "peerDependenciesMeta": {
     "sqlite3": {
@@ -20,5 +21,9 @@
   },
   "scripts": {
     "build": "NODE_ENV=production bun build --external flowise ./index.ts --target node --outdir ./build"
+  },
+  "dependencies": {
+    "@proompter/core": "*",
+    "winston": "^3.11.0"
   }
 }

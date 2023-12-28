@@ -1,21 +1,32 @@
 import { Config, PredictArgs } from "@proompter/core";
-import { NextResponse } from "next/server";
 import { getChatflows } from "@proompter/runner-flowise";
-
+import { StreamingTextResponse } from "ai";
+import {} from "./";
 export async function Chat(
   req: Request,
-  context: { params: { endpoint: string[] } },
+  context: { params: { endpoint: string } },
   config: Config
 ): Promise<Response> {
-  console.log(context);
-  // console.log(JSON.stringify(config));
-  console.log(await config.adapter.test());
-  const chatflows = await getChatflows();
+  if (context.params.endpoint === "/predict") {
+    const args = await req.json();
+    const { chatflowId } = args;
+    const flow = config.chatflows.find((f) => f.id === chatflowId);
+    if (!flow) {
+      throw new Error("Chatflow not found");
+    }
+
+    if (flow.runner !== "flowise") {
+      throw new Error("No runner avaliable for chatflow " + flow.runner);
+    }
+  }
+
+  // console.log(await config.adapter.test());
+  // const chatflows = await getChatflows();
   return Response.json({
-    chatflows,
+    // chatflows,
     hello: "world",
     name: config.name,
-    t: typeof config.adapter,
+    // t: typeof config.adapter,
   });
 }
 
@@ -23,6 +34,8 @@ async function predict(
   { messages, userId, conversationId, chatflowId }: PredictArgs,
   config: Config
 ) {
+  console.log("HELLO");
+
   // Look up chatflow if it exists, throw an error if it dosnt
 
   // Look up conversation if it exists. If it dosn't, create it.
@@ -35,5 +48,5 @@ async function predict(
 
   // In case the socket is terminated, stop the runner and save the message error state
 
-  return;
+  // return new StreamingTextResponse();
 }

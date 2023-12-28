@@ -1,6 +1,7 @@
 import { UseChatOptions } from "ai";
 import { UseChatHelpers, Message } from "ai/react";
 
+type RunnableFlow = Object;
 export interface Adapter {
   test(): Promise<string>;
 }
