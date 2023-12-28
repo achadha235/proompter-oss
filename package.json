@@ -4,8 +4,7 @@
   "scripts": {
     "prepare": "./scripts/setup && husky install",
     "build": "turbo run build",
-    "dev": "pnpm run dev:next",
-    "dev:next": "turbo run dev dev:js dev:css storybook --parallel --filter @proomter/demo-next --filter @proompter/adapter-prisma --filter @proompter/server-next --filter @proompter/runner-flowise --filter @proompter/core --filter @proompter/react",
+    "dev": "turbo run storybook --parallel --filter @proomter/demo-next --filter @proompter/adapter-prisma --filter @proompter/server-next --filter @proompter/runner-flowise --filter @proompter/core --filter @proompter/react",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clear-packages": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + ",

@@ -31,12 +31,18 @@
             "persistent": true
         },
         "storybook": {
+            "persistent": true,
+            "cache": false,
             "outputs": []
         },
         "dev:js": {
+            "persistent": true,
+            "cache": false,
             "outputs": []
         },
         "dev:css": {
+            "persistent": true,
+            "cache": false,
             "outputs": []
         }
     }
