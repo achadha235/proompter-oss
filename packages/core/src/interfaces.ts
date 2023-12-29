@@ -1,9 +1,12 @@
 import { UseChatOptions } from "ai";
-import { UseChatHelpers, Message } from "ai/react";
+import { Message } from "ai/react";
 
-type RunnableFlow = Object;
 export interface Adapter {
-  test(): Promise<string>;
+  // test(): Promise<string>;
+}
+
+export interface Runner {
+  run(chatflowId: string, args: Object): Promise<ReadableStream>;
 }
 
 export namespace Chat {

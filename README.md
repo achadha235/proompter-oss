@@ -16,3 +16,19 @@ Proompter - Framework for AI apps
 9. UI - Frontends for Proompter in various libraries
 
 -- Check out Turso
+
+1. Runner's only job is to run a chatflow -
+
+   - input: chatflowId, args
+   - returns event emitter
+
+2. Adapter's job is to offer an interface over a specific database
+
+   - getUser
+   - createConversation
+   - addMessage
+   - getConversation
+
+3. Server's job is to take an adapter + runner and coordinate actions
+   - Accept HTTP requests
+   - Coordinate actions between adapter and runner as per specification

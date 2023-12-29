@@ -20,7 +20,8 @@
     }
   },
   "scripts": {
-    "build": "NODE_ENV=production bun build --external flowise ./index.ts --target node --outdir ./build"
+    "build": "NODE_ENV=production bun build --external flowise ./index.ts --target node --outdir ./build",
+    "test": "bun test"
   },
   "dependencies": {
     "@proompter/core": "*",

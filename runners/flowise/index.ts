@@ -1,16 +1,6 @@
-export * from "flowise/dist/CachePool";
-import { getDataSource } from "flowise/dist/DataSource";
-import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
+import { Runner } from "@proompter/core";
+import { run } from "./src/run";
 
-export async function getChatflows() {
-  const dataSource = getDataSource();
-  if (!dataSource.isInitialized) {
-    await dataSource.initialize();
-  }
-  const chatflows = await dataSource.getRepository(ChatFlow).find();
-  return chatflows;
-}
-
-export async function runChatflow(chatflow: ChatFlow) {
-  return;
-}
+export const runner: Runner = {
+  run,
+};

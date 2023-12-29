@@ -553,11 +553,14 @@ importers:
 
   runners/flowise:
     dependencies:
+      '@proompter/core':
+        specifier: '*'
+        version: link:../../packages/core
       sqlite3:
         specifier: ^5.1.6
         version: 5.1.6
       winston:
-        specifier: ^3.9.0
+        specifier: ^3.11.0
         version: 3.11.0
     devDependencies:
       bun-types:
@@ -686,8 +689,8 @@ importers:
         specifier: ^10.4.16
         version: 10.4.16(postcss@8.4.31)
       bun-types:
-        specifier: ^1.0.15
-        version: 1.0.15
+        specifier: latest
+        version: 1.0.20
       daisyui:
         specifier: ^4.4.14
         version: 4.4.14(postcss@8.4.31)
@@ -10053,8 +10056,12 @@ packages:
     resolution: {integrity: sha512-hLVfM2fk8xSJeobfuPGilfvxM5gLtEy1bn7RJhrtw3u4OaC0kieXKYFFTVHU8jZ3hj8YyPLIFClIUodkFSrMBQ==}
     dev: true
 
-  /bun-types@1.0.15:
-    resolution: {integrity: sha512-XkEvWLV1JIhcVIpf2Lu6FXnZUxRUkQVJmgY+VT7os6Tk5X1nkXx11q4Rtu6txsqpDJZfUeZXblnnD59K+6wsVA==}
+  /bun-types@1.0.20:
+    resolution: {integrity: sha512-MB9OwwwNDdolaPBX9TSEq/9WlexEH1n2d5G/fnre/sz0NAzoxYaOgd3cpxNmNGsExMbgxkccSLNcVPV0rrfunA==}
+    dependencies:
+      '@types/node': 20.10.1
+      '@types/ws': 8.5.10
+      undici-types: 5.26.5
     dev: true
 
   /bundle-name@3.0.0:
