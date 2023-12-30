@@ -1,6 +1,9 @@
 import { Runner } from "@proompter/core";
 import { run } from "./src/run";
+import { FlowiseInput } from "./src/FlowiseRunArgs";
 
-export const runner: Runner = {
+const runner: Runner<FlowiseInput> = {
   run,
 };
+
+export default runner;

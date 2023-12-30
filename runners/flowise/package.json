@@ -3,9 +3,11 @@
   "type": "module",
   "main": "./build/index.js",
   "devDependencies": {
-    "bun-types": "latest",
+    "@types/node": "^20.10.5",
     "flowise": "workspace:*",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
   },
   "peerDependencies": {
     "flowise": "^1.4.2",
@@ -20,8 +22,9 @@
     }
   },
   "scripts": {
-    "build": "NODE_ENV=production bun build --external flowise ./index.ts --target node --outdir ./build",
-    "test": "bun test"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest"
   },
   "dependencies": {
     "@proompter/core": "*",

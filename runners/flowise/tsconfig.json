@@ -2,15 +2,15 @@
   "compilerOptions": {
     "outDir": "build",
     "lib": [
-      "ESNext"
+      "ESNext",
+      "DOM"
     ],
-    "module": "commonjs",
-    "target": "ES2015",
-    "moduleResolution": "node",
-    "moduleDetection": "force",
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "composite": true,
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "auto",
+    "noEmit": false,
+    "composite": false,
     "strict": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
@@ -18,11 +18,14 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "types": [
-      "bun-types" // add Bun global
-    ]
+    "types": []
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
   ]
 }

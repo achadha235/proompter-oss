@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { FlowiseSocketStream } from "./FlowiseSocketStream";
 
 describe("FlowiseSocketStream", () => {
@@ -15,7 +15,7 @@ describe("FlowiseSocketStream", () => {
   test("should emulate a socket and handle start, token and sourceDocuments events", async () => {
     const socketStream = FlowiseSocketStream();
 
-    expect(socketStream.to).toBeFunction();
+    expect(socketStream.to).toBeDefined();
 
     const streamer = socketStream.to("socketId");
 
@@ -41,7 +41,7 @@ describe("FlowiseSocketStream", () => {
   test("should throw an error if stream is not started ", async () => {
     const socketStream = FlowiseSocketStream();
 
-    expect(socketStream.to).toBeFunction();
+    expect(socketStream.to).toBeDefined();
 
     const streamer = socketStream.to("socketId");
 
@@ -59,7 +59,7 @@ describe("FlowiseSocketStream", () => {
   test("should close the stream after end event", async () => {
     const socketStream = FlowiseSocketStream();
 
-    expect(socketStream.to).toBeFunction();
+    expect(socketStream.to).toBeDefined();
 
     const streamer = socketStream.to("socketId");
 

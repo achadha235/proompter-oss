@@ -9,7 +9,8 @@ import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
  */
 export async function getChatflow(chatflowId: string, dataSource: DataSource) {
   if (!dataSource.isInitialized) {
-    throw new Error("Flowise data source is not intialized");
+    await dataSource.initialize();
+    // throw new Error("Flowise data source is not intialized");
   }
   const chatflow = await dataSource
     .getRepository(ChatFlow)

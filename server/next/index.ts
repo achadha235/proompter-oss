@@ -1,16 +1,19 @@
+"use server";
 import { Config, PredictArgs } from "@proompter/core";
-import { getChatflows } from "@proompter/runner-flowise";
+import runner from "@proompter/runner-flowise";
 import { StreamingTextResponse } from "ai";
-import {} from "./";
+import { isEqual } from "lodash";
+
 export async function Chat(
   req: Request,
   context: { params: { endpoint: string } },
   config: Config
 ): Promise<Response> {
-  if (context.params.endpoint === "/predict") {
+  if (isEqual(context.params.endpoint, ["chat"])) {
     const args = await req.json();
-    const { chatflowId } = args;
+    const chatflowId = "translate";
     const flow = config.chatflows.find((f) => f.id === chatflowId);
+
     if (!flow) {
       throw new Error("Chatflow not found");
     }
@@ -18,15 +21,20 @@ export async function Chat(
     if (flow.runner !== "flowise") {
       throw new Error("No runner avaliable for chatflow " + flow.runner);
     }
-  }
 
-  // console.log(await config.adapter.test());
-  // const chatflows = await getChatflows();
+    const stream = await runner.run(flow.options.chatflowId, {
+      message: {
+        id: "1",
+        content: "Hello",
+      } as any,
+      history: [],
+    });
+
+    return new StreamingTextResponse(stream);
+  }
   return Response.json({
-    // chatflows,
     hello: "world",
     name: config.name,
-    // t: typeof config.adapter,
   });
 }
 

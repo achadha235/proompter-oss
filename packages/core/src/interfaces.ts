@@ -5,8 +5,8 @@ export interface Adapter {
   // test(): Promise<string>;
 }
 
-export interface Runner {
-  run(chatflowId: string, args: Object): Promise<ReadableStream>;
+export interface Runner<Input> {
+  run(chatflowId: string, args: Input): Promise<ReadableStream>;
 }
 
 export namespace Chat {

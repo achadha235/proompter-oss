@@ -1,5 +1,5 @@
 import { type DataSource } from "typeorm";
-
+import path from "path";
 import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
 import { NodesPool } from "flowise/dist/NodesPool";
 import {
@@ -38,14 +38,15 @@ export async function prepareFlowiseExecution(
   const parsedFlowData = JSON.parse(flowData) as IReactFlowObject;
 
   const nodes = parsedFlowData.nodes;
+  debugger;
   const edges = parsedFlowData.edges;
   const { graph, nodeDependencies } = constructGraphs(nodes, edges);
+
   const directedGraph = graph;
   const endingNodeId = getEndingNode(nodeDependencies, directedGraph);
   if (!endingNodeId) {
     throw new Error(`Ending node must be either a Chain or Agent`);
   }
-
   const endingNodeData = nodes.find((nd) => nd.id === endingNodeId)?.data;
   if (!endingNodeData) {
     throw new Error(`Ending node must be either a Chain or Agent`);
@@ -62,6 +63,7 @@ export async function prepareFlowiseExecution(
   }
 
   const constructedObj = constructGraphs(nodes, edges, true);
+
   const nonDirectedGraph = constructedObj.graph;
   const { startingNodeIds, depthQueue } = getStartingNodes(
     nonDirectedGraph,
@@ -69,43 +71,59 @@ export async function prepareFlowiseExecution(
   );
 
   const nodesPool = new NodesPool();
+
   await nodesPool.initialize();
+  console.log(nodesPool);
 
-  const question = message.content;
+  // const question = message.content;
 
-  /*** BFS to traverse from Starting Nodes to Ending Node ***/
-  const reactFlowNodes = await buildLangchain(
-    startingNodeIds,
-    nodes,
-    graph,
-    depthQueue,
-    nodesPool.componentNodes,
-    question,
-    history,
-    chatId,
-    chatflow.id,
-    appDataSource
-  );
+  // /*** BFS to traverse from Starting Nodes to Ending Node ***/
+  // const reactFlowNodes = await buildLangchain(
+  //   startingNodeIds,
+  //   nodes,
+  //   graph,
+  //   depthQueue,
+  //   nodesPool.componentNodes,
+  //   question,
+  //   history,
+  //   chatId,
+  //   chatflow.id,
+  //   appDataSource
+  // );
 
-  const nodeToExecute = reactFlowNodes.find(
-    (node: IReactFlowNode) => node.id === endingNodeId
-  );
-  if (!nodeToExecute) {
-    throw new Error(`Node ${endingNodeId} not found`);
-  }
+  // const nodeToExecute = reactFlowNodes.find(
+  //   (node: IReactFlowNode) => node.id === endingNodeId
+  // );
+  // if (!nodeToExecute) {
+  //   throw new Error(`Node ${endingNodeId} not found`);
+  // }
 
-  const reactFlowNodeData: INodeData = resolveVariables(
-    nodeToExecute.data,
-    reactFlowNodes,
-    question,
-    history
-  );
-  nodeToExecuteData = reactFlowNodeData;
+  // const reactFlowNodeData: INodeData = resolveVariables(
+  //   nodeToExecute.data,
+  //   reactFlowNodes,
+  //   question,
+  //   history
+  // );
+  // nodeToExecuteData = reactFlowNodeData;
 
-  const nodeInstanceFilePath = nodesPool.componentNodes[nodeToExecuteData.name]
-    .filePath as string;
-  const nodeModule = await import(nodeInstanceFilePath);
-  const nodeInstance = new nodeModule.nodeClass();
+  // const nodeInstanceFilePath = nodesPool.componentNodes[nodeToExecuteData.name]
+  //   .filePath as string;
+  // console.log("NODE INSTANCE FILE PATH");
+  // console.log(nodeInstanceFilePath);
+  // const nodeModule = await import(nodeInstanceFilePath);
+  // const nodeInstance = new nodeModule.nodeClass();
 
-  return { nodeInstance, nodeData: nodeToExecuteData, question, history };
+  return {
+    nodeInstance: null,
+    nodeData: null,
+    question: "",
+    history: [],
+  };
+
+  // return {
+  //   nodeInstance,
+  //   nodeData: nodeToExecuteData,
+  //   question,
+  //   history,
+  // };
 }
