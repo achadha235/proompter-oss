@@ -84,9 +84,6 @@ importers:
       flowise:
         specifier: workspace:*
         version: link:../../monorepos/flowise/packages/server
-      flowise-components:
-        specifier: workspace:*
-        version: link:../../monorepos/flowise/packages/components
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -559,6 +556,18 @@ importers:
       '@proompter/core':
         specifier: '*'
         version: link:../../packages/core
+      crypto-js:
+        specifier: ^4.2.0
+        version: 4.2.0
+      express:
+        specifier: ^4.18.2
+        version: 4.18.2
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      moment:
+        specifier: ^2.29.4
+        version: 2.29.4
       sqlite3:
         specifier: ^5.1.6
         version: 5.1.6
@@ -566,12 +575,24 @@ importers:
         specifier: ^3.11.0
         version: 3.11.0
     devDependencies:
+      '@types/crypto-js':
+        specifier: ^4.1.1
+        version: 4.2.1
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.21
+      '@types/lodash':
+        specifier: ^4.14.202
+        version: 4.14.202
       '@types/node':
         specifier: ^20.10.5
         version: 20.10.5
       flowise:
         specifier: workspace:*
         version: link:../../monorepos/flowise/packages/server
+      flowise-components:
+        specifier: workspace:*
+        version: link:../../monorepos/flowise/packages/components
       typeorm:
         specifier: ^0.3.17
         version: 0.3.17(pg@8.11.3)(sqlite3@5.1.6)(ts-node@10.9.1)

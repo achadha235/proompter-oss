@@ -2,7 +2,8 @@
 import { Config, PredictArgs } from "@proompter/core";
 import runner from "@proompter/runner-flowise";
 import { StreamingTextResponse } from "ai";
-import { isEqual } from "lodash";
+import { isEqual, last } from "lodash";
+import { IChatMessage } from "../../monorepos/flowise/packages/server/dist/Interface";
 
 export async function Chat(
   req: Request,
@@ -11,6 +12,8 @@ export async function Chat(
 ): Promise<Response> {
   if (isEqual(context.params.endpoint, ["chat"])) {
     const args = await req.json();
+    console.log();
+
     const chatflowId = "translate";
     const flow = config.chatflows.find((f) => f.id === chatflowId);
 
@@ -23,10 +26,7 @@ export async function Chat(
     }
 
     const stream = await runner.run(flow.options.chatflowId, {
-      message: {
-        id: "1",
-        content: "Hello",
-      } as any,
+      message: last(args.messages) as IChatMessage,
       history: [],
     });
 

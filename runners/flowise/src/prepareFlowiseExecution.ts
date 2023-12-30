@@ -1,14 +1,14 @@
 import { type DataSource } from "typeorm";
 import path from "path";
 import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
-import { NodesPool } from "flowise/dist/NodesPool";
+import { NodesPool } from "./NodesPool";
 import {
   buildLangchain,
   constructGraphs,
   getEndingNode,
   getStartingNodes,
   resolveVariables,
-} from "flowise/dist/utils/index";
+} from "./utils";
 import {
   INodeData,
   IReactFlowNode,
@@ -73,57 +73,59 @@ export async function prepareFlowiseExecution(
   const nodesPool = new NodesPool();
 
   await nodesPool.initialize();
-  console.log(nodesPool);
+  // console.log(nodesPool);
 
-  // const question = message.content;
+  console.log("HEY MESSAGE");
+  console.log(message.content);
+  const question = message.content;
 
-  // /*** BFS to traverse from Starting Nodes to Ending Node ***/
-  // const reactFlowNodes = await buildLangchain(
-  //   startingNodeIds,
-  //   nodes,
-  //   graph,
-  //   depthQueue,
-  //   nodesPool.componentNodes,
-  //   question,
-  //   history,
-  //   chatId,
-  //   chatflow.id,
-  //   appDataSource
-  // );
+  /*** BFS to traverse from Starting Nodes to Ending Node ***/
+  const reactFlowNodes = await buildLangchain(
+    startingNodeIds,
+    nodes,
+    graph,
+    depthQueue,
+    nodesPool.componentNodes,
+    question,
+    history,
+    chatId,
+    chatflow.id,
+    appDataSource
+  );
 
-  // const nodeToExecute = reactFlowNodes.find(
-  //   (node: IReactFlowNode) => node.id === endingNodeId
-  // );
-  // if (!nodeToExecute) {
-  //   throw new Error(`Node ${endingNodeId} not found`);
-  // }
+  const nodeToExecute = reactFlowNodes.find(
+    (node: IReactFlowNode) => node.id === endingNodeId
+  );
+  if (!nodeToExecute) {
+    throw new Error(`Node ${endingNodeId} not found`);
+  }
 
-  // const reactFlowNodeData: INodeData = resolveVariables(
-  //   nodeToExecute.data,
-  //   reactFlowNodes,
-  //   question,
-  //   history
-  // );
-  // nodeToExecuteData = reactFlowNodeData;
+  const reactFlowNodeData: INodeData = resolveVariables(
+    nodeToExecute.data,
+    reactFlowNodes,
+    question,
+    history
+  );
+  nodeToExecuteData = reactFlowNodeData;
 
-  // const nodeInstanceFilePath = nodesPool.componentNodes[nodeToExecuteData.name]
-  //   .filePath as string;
-  // console.log("NODE INSTANCE FILE PATH");
-  // console.log(nodeInstanceFilePath);
-  // const nodeModule = await import(nodeInstanceFilePath);
-  // const nodeInstance = new nodeModule.nodeClass();
-
-  return {
-    nodeInstance: null,
-    nodeData: null,
-    question: "",
-    history: [],
-  };
+  const nodeInstanceFilePath = nodesPool.componentNodes[nodeToExecuteData.name]
+    .filePath as string;
+  console.log("NODE INSTANCE FILE PATH");
+  console.log(nodeInstanceFilePath);
+  const nodeModule = require(nodeInstanceFilePath);
+  const nodeInstance = new nodeModule.nodeClass();
 
   // return {
-  //   nodeInstance,
-  //   nodeData: nodeToExecuteData,
-  //   question,
-  //   history,
+  //   nodeInstance: null,
+  //   nodeData: null,
+  //   question: "",
+  //   history: [],
   // };
+
+  return {
+    nodeInstance,
+    nodeData: nodeToExecuteData,
+    question,
+    history,
+  };
 }

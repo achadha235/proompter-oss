@@ -37,7 +37,9 @@ const config: Config = {
   conversationStarter: {
     examples,
   },
-
+  chatOptions: {
+    sendHistory: false,
+  },
   chatflows: [
     {
       id: "translate",

@@ -33,18 +33,18 @@ export async function run(
   const socketMock = FlowiseSocketStream();
   const socketStream = socketMock.stream;
 
-  // const logger = winston.createLogger({
-  //   level: "verbose",
-  //   format: winston.format.simple(),
-  //   transports: [nullTransport],
-  // });
+  const logger = winston.createLogger({
+    level: "verbose",
+    format: winston.format.simple(),
+    transports: [nullTransport],
+  });
 
-  // await nodeInstance.run(nodeData, question, {
-  //   chatHistory: history,
-  //   socketIO: socketMock,
-  //   logger: logger,
-  //   socketIOClientId: args?.conversationId || crypto.randomUUID(),
-  // });
+  await nodeInstance.run(nodeData, question, {
+    chatHistory: history,
+    socketIO: socketMock,
+    logger: logger,
+    socketIOClientId: args?.conversationId || crypto.randomUUID(),
+  });
 
   return socketStream.readable;
 }
