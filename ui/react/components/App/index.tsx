@@ -13,12 +13,14 @@ export interface AppProps {
   proompterConfig: Config;
   user?: User;
   onChatflowSelected?: (chatflowId: Chat.Chatflow) => void;
+  onLogoutPressed?: () => void;
 }
 
 export function App({
   proompterConfig,
   user,
   onChatflowSelected,
+  onLogoutPressed,
 }: AppProps): React.JSX.Element {
   if (!proompterConfig) {
     throw new Error("Please provide a configuration");
@@ -66,7 +68,13 @@ export function App({
               title={proompterConfig.name}
             />
           }
-          footer={<UserMenu user={user} className=" ai-mt-auto" />}
+          footer={
+            <UserMenu
+              user={user}
+              className=" ai-mt-auto"
+              onLogoutPressed={onLogoutPressed}
+            />
+          }
         />
       }
       main={

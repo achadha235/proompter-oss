@@ -1,6 +1,12 @@
-import { type DataSource } from "typeorm";
-import path from "path";
+import {
+  IChatMessage,
+  IMessage,
+  INodeData,
+  IReactFlowNode,
+  IReactFlowObject,
+} from "flowise/dist/Interface";
 import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
+import { type DataSource } from "typeorm";
 import { NodesPool } from "./NodesPool";
 import {
   buildLangchain,
@@ -9,13 +15,6 @@ import {
   getStartingNodes,
   resolveVariables,
 } from "./utils";
-import {
-  INodeData,
-  IReactFlowNode,
-  IReactFlowObject,
-  IChatMessage,
-  IMessage,
-} from "flowise/dist/Interface";
 
 /**
  * Prepares a Flowise Chatflow for execution by building the Langchain and resolving variables
@@ -38,7 +37,6 @@ export async function prepareFlowiseExecution(
   const parsedFlowData = JSON.parse(flowData) as IReactFlowObject;
 
   const nodes = parsedFlowData.nodes;
-  debugger;
   const edges = parsedFlowData.edges;
   const { graph, nodeDependencies } = constructGraphs(nodes, edges);
 
@@ -73,10 +71,7 @@ export async function prepareFlowiseExecution(
   const nodesPool = new NodesPool();
 
   await nodesPool.initialize();
-  // console.log(nodesPool);
 
-  console.log("HEY MESSAGE");
-  console.log(message.content);
   const question = message.content;
 
   /*** BFS to traverse from Starting Nodes to Ending Node ***/
@@ -110,17 +105,9 @@ export async function prepareFlowiseExecution(
 
   const nodeInstanceFilePath = nodesPool.componentNodes[nodeToExecuteData.name]
     .filePath as string;
-  console.log("NODE INSTANCE FILE PATH");
-  console.log(nodeInstanceFilePath);
+
   const nodeModule = require(nodeInstanceFilePath);
   const nodeInstance = new nodeModule.nodeClass();
-
-  // return {
-  //   nodeInstance: null,
-  //   nodeData: null,
-  //   question: "",
-  //   history: [],
-  // };
 
   return {
     nodeInstance,

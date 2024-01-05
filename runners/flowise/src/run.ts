@@ -39,7 +39,7 @@ export async function run(
     transports: [nullTransport],
   });
 
-  await nodeInstance.run(nodeData, question, {
+  nodeInstance.run(nodeData, question, {
     chatHistory: history,
     socketIO: socketMock,
     logger: logger,

@@ -12,8 +12,6 @@ export async function Chat(
 ): Promise<Response> {
   if (isEqual(context.params.endpoint, ["chat"])) {
     const args = await req.json();
-    console.log();
-
     const chatflowId = "translate";
     const flow = config.chatflows.find((f) => f.id === chatflowId);
 
@@ -32,29 +30,5 @@ export async function Chat(
 
     return new StreamingTextResponse(stream);
   }
-  return Response.json({
-    hello: "world",
-    name: config.name,
-  });
-}
-
-async function predict(
-  { messages, userId, conversationId, chatflowId }: PredictArgs,
-  config: Config
-) {
-  console.log("HELLO");
-
-  // Look up chatflow if it exists, throw an error if it dosnt
-
-  // Look up conversation if it exists. If it dosn't, create it.
-
-  // Pull up runner for this chatflow
-
-  // Run the runner with the correct options and return a streaming response
-
-  // Save the tokens to the database as the response is streaming back
-
-  // In case the socket is terminated, stop the runner and save the message error state
-
-  // return new StreamingTextResponse();
+  return new Response("Not found", { status: 404 });
 }

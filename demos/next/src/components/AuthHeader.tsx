@@ -17,8 +17,8 @@ export function AuthHeader({
         </div>
       </div>
 
-      {showLogoText && <h6 className=" font-bold font-nunito">Proompter.ai</h6>}
-      <div className="font-nunito">{subtitle}</div>
+      {showLogoText && <h6 className="font-bold">Proompter.ai</h6>}
+      <div>{subtitle}</div>
     </div>
   );
 }

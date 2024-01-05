@@ -14,11 +14,11 @@ export function useProompter(
   const [config, setConfig] = useState(intialConfig);
   const [chatflow, setChatflow] = useState(first(config.chatflows)!);
   const [conversations, setConversations] = useState([]);
-  console.log("CHATFLOWOPTIONS", config?.chatOptions);
+
   const chat = useChat({
     api: "/api/proompter/chat",
-    ...config?.chatOptions,
     sendHistory: false,
+    ...config?.chatOptions,
   });
 
   useEffect(() => {

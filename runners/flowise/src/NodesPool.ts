@@ -16,17 +16,6 @@ export class NodesPool {
   }
 
   async initializeNodes() {
-    // let location = require.resolve("flowise-components");
-    // location = path.join(location, "..", "..", "nodes");
-    // const modLocation = path.join(
-    //   location,
-    //   "agents/AirtableAgent/AirtableAgent.js"
-    // );
-    // console.log(modLocation);
-    // const mod = require(modLocation);
-
-    // console.log(mod);
-
     let packagePath = require.resolve("flowise-components");
     const nodesPath = path.join(packagePath, "..", "..", "nodes");
     const nodeFiles = await this.getFiles(nodesPath);

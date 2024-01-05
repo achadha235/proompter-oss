@@ -64,6 +64,10 @@ export interface Config {
   chatOptions?: UseChatOptions;
 
   conversationStarter?: Chat.ConversationStarter;
+
+  routes?: {
+    logout?: string;
+  };
 }
 
 export interface User {

@@ -4,9 +4,11 @@ import clsx from "clsx";
 export function UserMenu({
   user,
   className,
+  onLogoutPressed,
 }: {
   user?: User;
   className?: string;
+  onLogoutPressed?: () => void;
 }) {
   return (
     <div className="ai-dropdown ai-dropdown-top">
@@ -56,7 +58,7 @@ export function UserMenu({
         </li>
         <div className="ai-divider ai-m-0" />
         <li>
-          <a>
+          <a onClick={onLogoutPressed}>
             <span className="material-symbols-outlined">logout</span>Logout
           </a>
         </li>
