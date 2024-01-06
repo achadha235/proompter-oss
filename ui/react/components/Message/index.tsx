@@ -7,11 +7,13 @@ export function Message({
   imageURL,
   children,
   name = "You",
+  isLoading = false,
 }: {
   name?: ReactNode;
   text?: string;
   imageURL?: string;
   children?: ReactNode;
+  isLoading?: boolean;
 }) {
   return (
     <div className="ai-max-w-3xl ai-flex ai-flex-col ai-mx-auto ai-w-full ai-justify-start ai-items-start ai-overflow-hidden ai-text-base-content ai-bg-base-100 ai-p-4">
@@ -29,6 +31,7 @@ export function Message({
 
       <div className="ai-w-full ai-pl-10 ai-text-sm ai-whitespace-pre-wrap">
         {text}
+        {isLoading && <span className=" ai-animate-pulse">⬤</span>}
         {/* Fix the reflow problem for markdown */}
         {/* <Markdown
           remarkPlugins={[remarkGfm]}

@@ -46,7 +46,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "dev": "turbo run dev:css --parallel",
+    "dev": "turbo run dev:js dev:css --parallel",
     "build": "bunx rimraf build/* && NODE_ENV=production bun run build:js && bun run build:css",
     "build:css": "postcss styles/globals.css styles/**/*.css --dir build/styles",
     "build:js": "tsc",

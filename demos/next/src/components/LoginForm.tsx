@@ -3,7 +3,7 @@ import { redirect, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SignInResponse, signIn } from "next-auth/react";
 
-export function LoginForm({ session }) {
+export function LoginForm({}) {
   const searchParams = useSearchParams();
   const redirectURL = searchParams.get("redirect") || "/";
   const [isMutating, setIsMutating] = useState(false);
@@ -28,7 +28,7 @@ export function LoginForm({ session }) {
     if (data?.ok && data.status === 200) {
       redirect(redirectURL || "/");
     }
-  }, [data]);
+  }, [data, redirectURL]);
 
   return (
     <div className="w-full flex flex-col gap-2">
@@ -52,6 +52,11 @@ export function LoginForm({ session }) {
         <img alt="gh" src="/github-mark.svg" className="h-5 w-5" />
         Continue with GitHub
       </button>
+      {isMutating && (
+        <div className="flex justify-center items-center gap-2 opacity-50 pt-4">
+          <span className="loading loading-spinner"></span> Logging in...
+        </div>
+      )}
     </div>
   );
 }

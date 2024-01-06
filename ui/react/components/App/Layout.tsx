@@ -1,7 +1,7 @@
 /// <reference lib="dom" />
 
 import clsx from "clsx";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, UIEventHandler, UIEvent } from "react";
 import { motion, useScroll } from "framer-motion";
 import { ArrowButton } from "../ArrowButton";
 import { useLocalStorage } from "usehooks-ts";
@@ -44,28 +44,25 @@ export function DesktopLayout({
   const [drawerOpen, setDrawerOpen] = useLocalStorage("drawerOpen", false);
   const [showScrollDownButton, setShowScrollDownButton] = useState(false);
 
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    container: scrollContainerRef,
-    axis: "y",
-  });
-
-  const handleScroll = () => {
-    const scrollDiv = scrollContainerRef.current;
-
+  const handleScroll = (e: any) => {
+    const scrollDiv = document.getElementById("chatContent");
     const hasVerticalScroll =
       scrollDiv && scrollDiv.scrollHeight > scrollDiv.clientHeight;
-
-    if (hasVerticalScroll && scrollYProgress.get() <= 0.97) {
-      setShowScrollDownButton(true);
+    if (hasVerticalScroll) {
+      const showScrollDownButton =
+        e.target.scrollHeight - e.target.clientHeight - e.target.scrollTop >= 5;
+      if (showScrollDownButton) {
+        setShowScrollDownButton(true);
+      } else {
+        setShowScrollDownButton(false);
+      }
     } else {
       setShowScrollDownButton(false);
     }
   };
 
   const scrollToBottom = (behavior: ScrollBehavior) => {
-    let div = scrollContainerRef.current;
+    let div = document.getElementById("chatContent");
     div?.scrollTo({
       top: div.scrollHeight,
       behavior,
@@ -73,7 +70,7 @@ export function DesktopLayout({
   };
 
   useEffect(() => {
-    const scrollDiv = scrollContainerRef.current;
+    const scrollDiv = document.getElementById("chatContent");
     const hasVerticalScroll =
       scrollDiv && scrollDiv.scrollHeight > scrollDiv.clientHeight;
 
@@ -138,8 +135,8 @@ export function DesktopLayout({
     <>
       {/* Main content */}
       <div
+        id="chatContent"
         onScroll={handleScroll}
-        ref={scrollContainerRef}
         className={clsx(
           "ai-chat-content ai-w-full main ai-bg-base-100 ai-h-full ai-bottom-0 ai-relative ai-flex ai-flex-col ",
           enableScroll ? "ai-overflow-y-auto" : "ai-overflow-y-hidden"

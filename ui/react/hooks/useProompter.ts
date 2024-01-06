@@ -1,6 +1,6 @@
 import { Config, Chat } from "@proompter/core";
 import { useEffect, useState } from "react";
-import { first } from "lodash";
+import { first, last } from "lodash";
 import { useChat } from "ai/react";
 
 export function useProompter(

@@ -1,5 +1,5 @@
 import { Message as VercelAIMessage } from "ai";
-import { isNil } from "lodash";
+import { isNil, last } from "lodash";
 import { ReactNode } from "react";
 import { Examples } from "..";
 import { Message } from "..";
@@ -15,9 +15,11 @@ export function Conversation({
   user,
   appUser,
   examples,
+  isLoading = false,
 }: {
   conversationHeaderProps: ConversationHeaderProps;
   messages: VercelAIMessage[];
+  isLoading?: boolean;
   user?: User;
   appUser?: User;
   examples: Chat.Example[];
@@ -39,9 +41,19 @@ export function Conversation({
     );
   }
 
+  const loadingPlaceholder = isLoading && last(messages)?.role === "user" && (
+    <Message
+      isLoading={true}
+      imageURL={appUser?.imageURL}
+      name={appUser?.name}
+      text=""
+      key="loading-placeholder"
+    />
+  );
+
   content = (
     <>
-      {messages.map((message) => {
+      {messages.map((message, i) => {
         const msgUser = message.role === "user" ? user : appUser;
         return (
           <Message
@@ -49,9 +61,13 @@ export function Conversation({
             name={msgUser?.name}
             key={message.id}
             text={message.content}
+            isLoading={
+              isLoading && i === messages.length - 1 && msgUser === appUser
+            }
           />
         );
       })}
+      {loadingPlaceholder}
     </>
   );
 

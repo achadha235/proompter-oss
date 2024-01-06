@@ -21,28 +21,26 @@ export function MobileLayout({
   const [showScrollDownButton, setShowScrollDownButton] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const mobileScrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress: mobileScrollYProgress } = useScroll({
-    container: mobileScrollContainerRef,
-    axis: "y",
-  });
-
-  const handleMobileScroll = () => {
-    const scrollDiv = mobileScrollContainerRef.current;
-
+  const handleMobileScroll = (e: any) => {
+    const scrollDiv = document.getElementById("chatContent");
     const hasVerticalScroll =
       scrollDiv && scrollDiv.scrollHeight > scrollDiv.clientHeight;
-
-    if (hasVerticalScroll && mobileScrollYProgress.get() <= 0.97) {
-      setShowScrollDownButton(true);
+    if (hasVerticalScroll) {
+      const showScrollDownButton =
+        e.target.scrollHeight - e.target.clientHeight - e.target.scrollTop >= 5;
+      if (showScrollDownButton) {
+        setShowScrollDownButton(true);
+      } else {
+        setShowScrollDownButton(false);
+      }
     } else {
       setShowScrollDownButton(false);
     }
   };
 
   const scrollToBottom = (behavior: ScrollBehavior) => {
-    let div = mobileScrollContainerRef.current;
+    const div = document.getElementById("chatContent");
     div?.scrollTo({
       top: div.scrollHeight,
       behavior,
@@ -88,8 +86,8 @@ export function MobileLayout({
     <>
       {/* Main content */}
       <div
+        id="chatContent"
         onScroll={handleMobileScroll}
-        ref={mobileScrollContainerRef}
         className={clsx(
           "ai-chat-content ai-w-full main ai-h-full ai-bg-base-100ai-bottom-0 ai-relative ai-flex ai-flex-col ",
           enableScroll ? "ai-overflow-y-auto" : "ai-overflow-y-hidden"

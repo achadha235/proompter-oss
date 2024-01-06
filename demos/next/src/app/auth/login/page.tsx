@@ -11,10 +11,10 @@ export default async function LoginPage() {
     redirect("/");
   }
   return (
-    <div className="bg-background-paper w-full max-w-md shadow-lg h-fit min-h-[650px] py-8">
+    <div className="bg-background-paper w-full max-w-md shadow-lg h-fit min-h-[650px] py-8 border border-1 p-4">
       <AuthHeader subtitle="Get started for free" />
       <br />
-      <LoginForm session={session} />
+      <LoginForm />
     </div>
   );
 }

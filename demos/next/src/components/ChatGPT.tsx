@@ -12,12 +12,12 @@ export default function ChatGPT({ session }: { session: Session }) {
     <SessionProvider session={session}>
       <App
         onLogoutPressed={() => router.push("/auth/logout")}
+        proompterConfig={config}
         user={{
           name: session.user?.name!,
           email: session.user?.email!,
           imageURL: session.user?.image!,
         }}
-        proompterConfig={config}
       />
     </SessionProvider>
   );
