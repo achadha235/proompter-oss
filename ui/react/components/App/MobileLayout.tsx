@@ -77,7 +77,10 @@ export function MobileLayout({
   );
 
   const mobileSidebarToggleBtn = (
-    <label htmlFor="my-drawer" className="ai-btn ai-btn-ghost ai-drawer-button">
+    <label
+      htmlFor="my-drawer"
+      className="ai-btn ai-btn-ghost ai-drawer-button ai-mt-1"
+    >
       <span className="material-symbols-outlined">menu</span>
     </label>
   );
@@ -93,7 +96,7 @@ export function MobileLayout({
           enableScroll ? "ai-overflow-y-auto" : "ai-overflow-y-hidden"
         )}
       >
-        <div className=" ai-sticky ai-top-0 ai-z-50 ai-flex  ai-border-b ai-border-opacity-10 ai-border-base-content ai-bg-base-100 ai-bg-opacity-80 ai-p-1">
+        <div className=" ai-sticky ai-top-0 ai-z-50 ai-flex  ai-border-b ai-border-opacity-10 ai-border-base-content ai-bg-base-100 ai-bg-opacity-80 ai-p-1 ai-pt-2">
           {mobileSidebarToggleBtn}
           <div className=" ai-flex-grow">{header}</div>
         </div>
@@ -125,7 +128,7 @@ export function MobileLayout({
           className="ai-drawer-overlay ai-overscroll-none"
         />
         <ul className="ai-bg-base-200 ai-text-base-conten">
-          <div className=" ai-flex-shrink-0 ai-w-[230px] ai-h-[100dvh] ai-overflow-hidden ai-border-r ai-border-x-base-200 ai-bg-base-300 ">
+          <div className=" ai-flex-shrink-0 ai-w-[250px] ai-h-[100dvh] ai-overflow-hidden ai-border-r ai-border-x-base-200 ai-bg-base-300 ">
             {drawer}
           </div>
         </ul>

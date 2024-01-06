@@ -4,9 +4,14 @@ import clsx from "clsx";
 import { useState, useRef, useEffect, UIEventHandler, UIEvent } from "react";
 import { motion, useScroll } from "framer-motion";
 import { ArrowButton } from "../ArrowButton";
-import { useLocalStorage, useMediaQuery, useScreen } from "usehooks-ts";
+import {
+  useIsClient,
+  useLocalStorage,
+  useMediaQuery,
+  useScreen,
+} from "usehooks-ts";
 import { MobileLayout } from "./MobileLayout";
-import tailwindConfig from "@/tailwind.config";
+import tailwindConfig from "../../tailwind.config";
 import resolveConfig from "tailwindcss/resolveConfig";
 
 export interface LayoutProps {
@@ -20,9 +25,17 @@ export interface LayoutProps {
 }
 
 export function Layout(props: LayoutProps): React.JSX.Element {
+  const isClient = useIsClient();
   const tw: any = resolveConfig(tailwindConfig);
   const breakpoint: string = tw.theme.screens.lg;
   const matches = useMediaQuery(`(min-width: ${breakpoint})`);
+  if (!isClient) {
+    return (
+      <div className="ai-h-screen ai-w-screen ai-flex ai-justify-center ai-items-center">
+        <span className="loading loading-spinner" />
+      </div>
+    );
+  }
   return matches ? <DesktopLayout {...props} /> : <MobileLayout {...props} />;
 }
 

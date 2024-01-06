@@ -30,15 +30,16 @@ export function Message({
       </div>
 
       <div className="ai-w-full ai-pl-10 ai-text-sm ai-whitespace-pre-wrap">
-        {text}
-        {isLoading && <span className=" ai-animate-pulse">⬤</span>}
+        {/* {text} */}
+
         {/* Fix the reflow problem for markdown */}
-        {/* <Markdown
+        <Markdown
           remarkPlugins={[remarkGfm]}
           className="ai-flex ai-flex-col ai-gap-0 ai-prose prose-headings:ai-mb-1 prose-headings:ai-mt-0 ai-leading-relaxed prose-ol:ai-leading-none prose-ul:ai-leading-none"
         >
           {text}
-        </Markdown> */}
+        </Markdown>
+        {isLoading && <span className=" ai-animate-pulse">⬤</span>}
       </div>
       {children}
     </div>
