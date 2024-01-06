@@ -22,7 +22,7 @@ export function MobileLayout({
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleMobileScroll = (e: any) => {
+  const handleScroll = (e: any) => {
     const scrollDiv = document.getElementById("chatContent");
     const hasVerticalScroll =
       scrollDiv && scrollDiv.scrollHeight > scrollDiv.clientHeight;
@@ -63,7 +63,7 @@ export function MobileLayout({
   const scrollDownButton = (
     <div className="ai-relative ai-h-0 ai-w-full " id="scrollDownButton">
       <motion.div
-        initial={{ opacity: 0 }}
+        // initial={{ opacity: 0 }}
         animate={{ opacity: showScrollDownButton ? 1 : 0 }}
         style={{ pointerEvents: showScrollDownButton ? "auto" : "none" }}
         className="ai-w-10 -ai-translate-y-14 ai-h-10 ai-mx-auto ai-border ai-border-base-content   ai-cursor-pointer ai-rounded-full ai-flex ai-items-center ai-justify-center ai-bg-base-200 ai-bg-opacity-30 ai-shadow-lg ai-select-none"
@@ -87,17 +87,17 @@ export function MobileLayout({
       {/* Main content */}
       <div
         id="chatContent"
-        onScroll={handleMobileScroll}
+        onScroll={handleScroll}
         className={clsx(
           "ai-chat-content ai-w-full main ai-h-full ai-bg-base-100ai-bottom-0 ai-relative ai-flex ai-flex-col ",
           enableScroll ? "ai-overflow-y-auto" : "ai-overflow-y-hidden"
         )}
       >
-        <div className="ai-sticky ai-top-0 ai-z-50 ai-flex  ai-border-b ai-border-opacity-10 ai-border-base-content ai-bg-base-100 ai-bg-opacity-20 ai-p-1">
+        <div className=" ai-sticky ai-top-0 ai-z-50 ai-flex  ai-border-b ai-border-opacity-10 ai-border-base-content ai-bg-base-100 ai-bg-opacity-80 ai-p-1">
           {mobileSidebarToggleBtn}
           <div className=" ai-flex-grow">{header}</div>
         </div>
-        <div className="ai-flex-grow ai-w-full ai-p-2">{main}</div>
+        <div className=" ai-z-40 ai-flex-grow ai-w-full ai-p-2">{main}</div>
         {children}
         <div
           className={

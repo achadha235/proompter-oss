@@ -48,9 +48,15 @@ export function Composer({
       />
       <button
         type="submit"
-        className="ai-btn ai-aspect-square ai-mt-auto ai-btn-sm ai-btn-primary  small"
+        className={clsx(
+          chat?.isLoading ? "" : "ai-btn-primary",
+          "ai-btn ai-aspect-square ai-mt-auto ai-btn-sm"
+        )}
       >
-        <span className="material-symbols-outlined">
+        <span
+          className="material-symbols-outlined ai-text-primary-content"
+          style={{ fontSize: "1.8rem" }}
+        >
           {chat?.isLoading ? "stop_circle" : "arrow_upward"}
         </span>
       </button>

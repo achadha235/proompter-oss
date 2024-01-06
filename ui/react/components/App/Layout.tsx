@@ -4,8 +4,11 @@ import clsx from "clsx";
 import { useState, useRef, useEffect, UIEventHandler, UIEvent } from "react";
 import { motion, useScroll } from "framer-motion";
 import { ArrowButton } from "../ArrowButton";
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useMediaQuery, useScreen } from "usehooks-ts";
 import { MobileLayout } from "./MobileLayout";
+import tailwindConfig from "@/tailwind.config";
+import resolveConfig from "tailwindcss/resolveConfig";
+
 export interface LayoutProps {
   className?: string;
   drawer?: React.ReactNode;
@@ -17,12 +20,10 @@ export interface LayoutProps {
 }
 
 export function Layout(props: LayoutProps): React.JSX.Element {
-  return (
-    <>
-      <DesktopLayout {...props} />
-      <MobileLayout {...props} />
-    </>
-  );
+  const tw: any = resolveConfig(tailwindConfig);
+  const breakpoint: string = tw.theme.screens.lg;
+  const matches = useMediaQuery(`(min-width: ${breakpoint})`);
+  return matches ? <DesktopLayout {...props} /> : <MobileLayout {...props} />;
 }
 
 /**
