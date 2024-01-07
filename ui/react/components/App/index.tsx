@@ -1,20 +1,21 @@
 "use client";
-import { Layout } from "./Layout";
+
+import { Chat, Config, User } from "@proompter/core";
+import { last } from "lodash";
+import { useEffect } from "react";
 import { Header } from "..";
-import { Footer } from "../Footer";
-import { Config, User, Chat } from "@proompter/core";
 import { useProompter } from "../../hooks/useProompter";
 import { Conversation } from "../Conversation";
-import { Sidebar } from "../Sidebar";
 import ConversationManager from "../ConversationManager";
+import { Footer } from "../Footer";
+import { Sidebar } from "../Sidebar";
 import { UserMenu } from "../UserMenu";
+import { Layout } from "./Layout";
 import { StartConversationButton } from "./StartConversationButton";
-import { useCallback, useEffect, useRef } from "react";
-import { last } from "lodash";
-import { useScroll } from "framer-motion";
 export interface AppProps {
   proompterConfig: Config;
   user?: User;
+  initialChatflowId: string | null;
   onChatflowSelected?: (chatflowId: Chat.Chatflow) => void;
   onLogoutPressed?: () => void;
 }
@@ -22,6 +23,7 @@ export interface AppProps {
 export function App({
   proompterConfig,
   user,
+  initialChatflowId,
   onChatflowSelected,
   onLogoutPressed,
 }: AppProps): React.JSX.Element {
@@ -32,6 +34,7 @@ export function App({
     proompterConfig,
     {
       onChatflowSelected,
+      initialChatflowId,
     }
   );
 
@@ -87,7 +90,7 @@ export function App({
           }}
           selectChatflowProps={{
             chatflows: config.chatflows,
-            chatflow,
+            chatflow: chatflow!,
             onChatflowClicked: (newChatflow) => {
               setChatflow(newChatflow);
             },

@@ -32,7 +32,7 @@ export function Composer({
     <form
       onSubmit={chat?.handleSubmit}
       className={clsx(
-        "ai-rounded-btn ai-border ai-border-base-content ai-pl-4 ai-p-2 ai-flex ai-gap-2 ai-bg-base-100",
+        "ai-rounded-btn ai-border-opacity-30 ai-border ai-border-base-content ai-pl-4 ai-p-2 ai-flex ai-gap-2 ai-bg-base-100 ai-shadow-sm",
         className
       )}
     >
@@ -47,6 +47,7 @@ export function Composer({
         className=" ai-text-lg ai-flex-grow ai-w-auto ai-my-auto ai-resize-none ai-bg-transparent ai-outline-none"
       />
       <button
+        disabled={chat?.input.length === 0}
         type="submit"
         className={clsx(
           chat?.isLoading ? "" : "ai-btn-primary",

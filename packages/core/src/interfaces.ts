@@ -1,8 +1,26 @@
 import { UseChatOptions } from "ai";
-import { Message } from "ai/react";
+export interface Message {
+  id: string;
+  role: string;
+  type: string | null;
+  content: string;
+}
+export interface Conversation {
+  id: string;
+  messages: Message[];
+}
 
 export interface Adapter {
-  // test(): Promise<string>;
+  startConversation(userId: string): Promise<Conversation>;
+  getConversation(conversationId: string): Promise<Conversation | null>;
+  getConversations(
+    userId: string,
+    cursor: string | null,
+    limit: number
+  ): Promise<Omit<Conversation, "messages">[]>;
+  getChatUser(user: { id: string }): Promise<{ id: string }>;
+
+  saveMessage(conversationId: string, message: Message): Promise<void>;
 }
 
 export interface Runner<Input> {
@@ -68,6 +86,8 @@ export interface Config {
   routes?: {
     logout?: string;
   };
+
+  getRequestUser: (req: Request) => Promise<{ id: string } | null>;
 }
 
 export interface User {
@@ -82,11 +102,4 @@ export interface AppContext {
   chatflow: Chat.Chatflow;
   setChatflow: (chatflow: Chat.Chatflow) => any;
   // chat: UseChatHelpers;
-}
-
-export interface PredictArgs {
-  messages: Message[];
-  userId?: User["id"];
-  conversationId?: string;
-  chatflowId: Chat.Chatflow["id"];
 }

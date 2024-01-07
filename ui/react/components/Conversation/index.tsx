@@ -57,6 +57,7 @@ export function Conversation({
         const msgUser = message.role === "user" ? user : appUser;
         return (
           <Message
+            enableMarkdown={message.role !== "user"}
             imageURL={msgUser?.imageURL}
             name={msgUser?.name}
             key={message.id}

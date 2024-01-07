@@ -37,6 +37,15 @@ export const authOptions: AuthOptions = {
     signIn: "/auth/login",
     signOut: "/auth/logout",
   },
+  callbacks: {
+    async session({ session, user }) {
+      if (!session || !session.user) {
+        return session;
+      }
+      session.user["id"] = user.id;
+      return session;
+    },
+  },
 };
 
 export const config = NextAuth(authOptions);

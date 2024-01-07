@@ -13,6 +13,7 @@ import {
   constructGraphs,
   getEndingNode,
   getStartingNodes,
+  replaceInputsWithConfig,
   resolveVariables,
 } from "./utils";
 
@@ -27,12 +28,13 @@ import {
 export async function prepareFlowiseExecution(
   chatflow: ChatFlow,
   appDataSource: DataSource,
+  conversationId: string,
   message: IChatMessage,
   history: IMessage[]
 ) {
   let nodeToExecuteData: INodeData;
 
-  const chatId = Date.now().toString();
+  const chatId = conversationId;
   const flowData = chatflow.flowData;
   const parsedFlowData = JSON.parse(flowData) as IReactFlowObject;
 
@@ -74,6 +76,9 @@ export async function prepareFlowiseExecution(
 
   const question = message.content;
 
+  const overrideConfig = {
+    sessionId: conversationId,
+  };
   /*** BFS to traverse from Starting Nodes to Ending Node ***/
   const reactFlowNodes = await buildLangchain(
     startingNodeIds,
@@ -85,7 +90,8 @@ export async function prepareFlowiseExecution(
     history,
     chatId,
     chatflow.id,
-    appDataSource
+    appDataSource,
+    overrideConfig
   );
 
   const nodeToExecute = reactFlowNodes.find(
@@ -93,6 +99,13 @@ export async function prepareFlowiseExecution(
   );
   if (!nodeToExecute) {
     throw new Error(`Node ${endingNodeId} not found`);
+  }
+
+  if (overrideConfig) {
+    nodeToExecute.data = replaceInputsWithConfig(
+      nodeToExecute.data,
+      overrideConfig
+    );
   }
 
   const reactFlowNodeData: INodeData = resolveVariables(
@@ -114,5 +127,6 @@ export async function prepareFlowiseExecution(
     nodeData: nodeToExecuteData,
     question,
     history,
+    overrideConfig,
   };
 }

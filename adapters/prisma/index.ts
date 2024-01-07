@@ -1,12 +1,82 @@
-import { Adapter } from "@proompter/core";
+import { Adapter, Conversation, Message } from "@proompter/core";
 import { type PrismaClient } from "./client";
+import crypto from "crypto";
 export default class ProompterPrismaAdapter implements Adapter {
   prisma: PrismaClient;
+
   constructor(prisma: PrismaClient) {
     this.prisma = prisma;
   }
 
-  public async test() {
-    return "hello world";
+  async startConversation(userId: string) {
+    const convo = await this.prisma.conversation.create({
+      data: {
+        userId,
+        id: crypto.randomUUID().toString(),
+      },
+      include: {
+        messages: true,
+      },
+    });
+    return convo;
+  }
+
+  async getConversation(conversationId: string) {
+    const convo = await this.prisma.conversation.findUnique({
+      where: {
+        id: conversationId,
+      },
+      include: {
+        messages: true,
+      },
+    });
+    return convo;
+  }
+
+  async getConversations(
+    userId: string,
+    cursor: string | null,
+    limit: number
+  ): Promise<Omit<Conversation, "messages">[]> {
+    const conversations = await this.prisma.conversation.findMany({
+      where: {
+        userId,
+      },
+      take: limit || 25,
+      ...(cursor ? { cursor: { id: cursor } } : {}),
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return conversations;
+  }
+
+  async getChatUser(user: { id: string }): Promise<{ id: string }> {
+    const chatUser = await this.prisma.chatUser.upsert({
+      where: {
+        id: user.id,
+      },
+      update: {},
+      create: {
+        id: user.id,
+      },
+    });
+    return chatUser;
+  }
+
+  async saveMessage(conversationId: string, message: Message): Promise<void> {
+    await this.prisma.message.create({
+      data: {
+        id: message.id,
+        conversation: {
+          connect: {
+            id: conversationId,
+          },
+        },
+        content: message.content,
+        type: message.type,
+        role: message.role,
+      },
+    });
   }
 }

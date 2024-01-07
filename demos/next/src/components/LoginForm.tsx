@@ -34,7 +34,7 @@ export function LoginForm({}) {
     <div className="w-full flex flex-col gap-2">
       <button
         onClick={() => {
-          void signInWithProvider("github");
+          void signInWithProvider("google");
         }}
         disabled={isMutating}
         className="btn btn-lg"
@@ -44,7 +44,7 @@ export function LoginForm({}) {
       </button>
       <button
         onClick={() => {
-          signInWithProvider("google");
+          signInWithProvider("github");
         }}
         disabled={isMutating}
         className="btn btn-lg"

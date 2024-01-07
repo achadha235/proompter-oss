@@ -1,6 +1,9 @@
-import prisma from "./src/database";
+import { getServerSession } from "next-auth";
 import { type Config } from "@proompter/core";
 import ProompterPrismaAdapter from "@proompter/adapter-prisma";
+
+import prisma from "./src/database";
+import { authOptions } from "@/auth.config";
 
 const examples = [
   {
@@ -33,6 +36,10 @@ const config: Config = {
     "I'm C-3PO, fluent in over six million languages. Join me to master languages from Earth and across the galaxy!",
   imageURL: "/c3po.png",
   adapter: new ProompterPrismaAdapter(prisma as any),
+  getRequestUser: async (_req) => {
+    const session = await getServerSession(authOptions);
+    return session?.user as { id: string };
+  },
   conversationStarter: {
     examples,
   },

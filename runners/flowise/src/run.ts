@@ -22,10 +22,11 @@ export async function run(
   const dataSource = getDataSource();
   const chatflow = await getChatflow(chatflowId, dataSource);
 
-  const { nodeInstance, nodeData, question, history } =
+  const { nodeInstance, nodeData, question, history, overrideConfig } =
     await prepareFlowiseExecution(
       chatflow,
       dataSource,
+      args.conversationId,
       args.message,
       args.history
     );
@@ -42,8 +43,9 @@ export async function run(
   nodeInstance.run(nodeData, question, {
     chatHistory: history,
     socketIO: socketMock,
+    overrideConfig,
     logger: logger,
-    socketIOClientId: args?.conversationId || crypto.randomUUID(),
+    socketIOClientId: args.conversationId,
   });
 
   return socketStream.readable;
