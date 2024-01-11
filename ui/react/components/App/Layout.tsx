@@ -99,7 +99,7 @@ export function DesktopLayout({
   // Container for the drawer
   const drawerContainer = (
     <motion.div
-      className="ai-flex-shrink-0 ai-h-[100dvh] ai-overflow-hidden ai-border-r ai-border-x-base-200 ai-bg-base-300"
+      className="ai-flex-shrink-0 ai-h-[100dvh]  ai-border-r ai-border-x-base-200 ai-bg-base-300"
       initial={{
         width: drawerOpen ? drawerWidth : 0,
         opacity: drawerOpen ? 1 : 0,
@@ -116,7 +116,7 @@ export function DesktopLayout({
   // Container for the drawer toggle button
   const drawerToggleButton = (
     <div
-      className="ai-tooltip ai-tooltip-right ai-w-fit ai-rounded-md ai-px-1 ai-py-2 ai-z-[100] ai-absolute ai-top-[calc(50%_-_23px)] -ai-right-8"
+      className="ai-tooltip ai-tooltip-right ai-w-fit ai-rounded-md ai-px-1 ai-py-2 ai-z-40 ai-absolute ai-top-[calc(50%_-_23px)] -ai-right-8"
       data-tip={drawerOpen ? "Close sidebar" : "Open sidebar"}
     >
       <ArrowButton
@@ -162,7 +162,7 @@ export function DesktopLayout({
       </div>
       <div
         className={
-          "ai-z-50 ai-w-full ai-flex ai-flex-col ai-shadow-md ai-bg-base-100 pt-0"
+          "ai-z-40 ai-w-full ai-flex ai-flex-col ai-shadow-md ai-bg-base-100 pt-0"
         }
       >
         {/* Scroll down button */}
@@ -177,7 +177,7 @@ export function DesktopLayout({
     <div
       className={clsx(
         className,
-        "ai-hidden lg:ai-flex ai-w-full ai-h-full ai-min-h-[100dvh] ai-z-40 ai-text-base-content ai-text-xs ai-bg-base-100"
+        "ai-hidden lg:ai-flex ai-w-full ai-h-full ai-min-h-[100dvh] ai-z-40 ai-text-base-content ai-text-xs ai-bg-base-100 ai-overflow-hidden"
       )}
     >
       <div id="sidebar" className="ai-relative ai-flex-shrink-0 ai-h-[100dvh]">

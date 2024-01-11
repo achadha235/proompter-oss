@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
+import { Conversation } from "@proompter/core";
+import { ConversationListItem } from "./ConversationListItem";
 
 export default function ConversationManager({
   conversations,
 }: {
-  conversations: any[];
+  conversations: Conversation[];
 }) {
   let content: ReactNode;
 
@@ -13,7 +15,24 @@ export default function ConversationManager({
         No recent conversations
       </span>
     );
+  } else {
+    content = [...conversations].map((conversation, i) => {
+      return (
+        <ConversationListItem
+          onConversationNameChanged={() => {
+            return new Promise((resolve) => {
+              setTimeout(resolve, 3000);
+            });
+          }}
+          conversation={conversation}
+        />
+      );
+    });
   }
 
-  return <span className="ai-h-full ai-w-full">{content}</span>;
+  return (
+    <span className="ai-block ai-h-[calc(100vh-120px)] ai-w-[290px] ai-overflow-y-auto ai-overflow-x-hidden">
+      {content}
+    </span>
+  );
 }

@@ -58,12 +58,14 @@
   },
   "dependencies": {
     "@proompter/core": "workspace:*",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "ai": "workspace:*",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.9",
     "lodash": "^4.17.21",
     "react-markdown": "^9.0.1",
     "react-textarea-autosize": "^8.5.3",
+    "react-tiny-popover": "^8.0.4",
     "remark-gfm": "^4.0.0",
     "swr": "2.2.0",
     "usehooks-ts": "^2.9.1"

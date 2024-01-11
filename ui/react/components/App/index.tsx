@@ -59,9 +59,10 @@ export function App({
     const oneRem = parseFloat(
       getComputedStyle(document.documentElement).fontSize
     );
+    const minDistance = 3 * oneRem + 5;
     const showScrollDownButton =
       scrollDiv.scrollHeight - scrollDiv.clientHeight - scrollDiv.scrollTop >=
-      3 * oneRem + 5;
+      minDistance;
     const nearBottom = !showScrollDownButton;
     const hasVerticalScroll =
       scrollDiv && scrollDiv.scrollHeight > scrollDiv.clientHeight;

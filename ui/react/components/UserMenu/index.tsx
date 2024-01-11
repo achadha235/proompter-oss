@@ -1,5 +1,6 @@
 import { User } from "@proompter/core";
 import clsx from "clsx";
+import { useState } from "react";
 
 export function UserMenu({
   user,
@@ -10,11 +11,15 @@ export function UserMenu({
   className?: string;
   onLogoutPressed?: () => void;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div className="ai-dropdown ai-dropdown-top">
+    <div
+      className={clsx(" ai-z-20 ai-dropdown ai-dropdown-top", {
+        " ai-menu-open": menuOpen,
+      })}
+    >
       <div
-        tabIndex={0}
-        role="button"
+        onClick={() => setMenuOpen((prev) => !prev)}
         className={clsx(
           className,
           "ai-flex ai-flex-row ai-items-center ai-p-2 ai-gap-2"

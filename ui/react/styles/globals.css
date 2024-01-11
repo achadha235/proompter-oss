@@ -33,10 +33,10 @@
 }
 
 html {
-  font-size: 12px;
+  font-size: 16px;
 
   @media (min-width: theme("screens.sm")) {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   @media (min-width: theme("screens.md")) {

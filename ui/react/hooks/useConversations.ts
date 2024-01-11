@@ -19,7 +19,6 @@ function useConversations() {
       if (!response.ok) {
         throw new Error("An error occurred while fetching the data.");
       }
-      debugger;
       const data = await response.json();
       console.log(data);
       return data;
