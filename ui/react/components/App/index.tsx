@@ -2,7 +2,7 @@
 
 import { Chat, Config, User } from "@proompter/core";
 import { last } from "lodash";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Header } from "..";
 import { useProompter } from "../../hooks/useProompter";
 import { Conversation } from "../Conversation";
@@ -27,16 +27,11 @@ export function App({
   onChatflowSelected,
   onLogoutPressed,
 }: AppProps): React.JSX.Element {
-  if (!proompterConfig) {
-    throw new Error("Please provide a configuration");
-  }
-  const { chatflow, setChatflow, config, chat, conversations } = useProompter(
-    proompterConfig,
-    {
+  const { chatflow, setChatflow, config, chat, conversationData } =
+    useProompter(proompterConfig, {
       onChatflowSelected,
       initialChatflowId,
-    }
-  );
+    });
 
   const messages = chat.messages;
   const enableScroll = messages && messages.length > 0;
@@ -77,6 +72,24 @@ export function App({
     }
   }, [chat.messages, last(chat.messages)?.content]);
 
+  const onScrollToBottom = useCallback(() => {
+    if (
+      conversationData.isLoading ||
+      conversationData.isValidating ||
+      conversationData.isReachingEnd
+    ) {
+      return;
+    }
+    console.log("Loading page " + (conversationData.size + 1));
+    conversationData.setSize(conversationData.size + 1);
+  }, [
+    conversationData.isLoading,
+    conversationData.isValidating,
+    conversationData.isReachingEnd,
+    conversationData.setSize,
+    conversationData.size,
+  ]);
+
   return (
     <Layout
       enableScroll={enableScroll}
@@ -100,9 +113,18 @@ export function App({
       }
       drawer={
         <Sidebar
-          main={<ConversationManager conversations={conversations} />}
+          main={
+            <ConversationManager
+              onScrolledToBottom={onScrollToBottom}
+              isLoading={conversationData.isLoading}
+              isLoadingMore={conversationData.isLoadingMore}
+              isLoadingInitialData={conversationData.isLoadingInitialData}
+              conversations={conversationData.conversations}
+            />
+          }
           header={
             <StartConversationButton
+              className=" ai-m-2 ai-mb-0"
               imageURL={proompterConfig.imageURL}
               title={proompterConfig.name}
             />

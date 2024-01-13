@@ -10,7 +10,7 @@ export function Sidebar({
   footer: ReactNode;
 }) {
   return (
-    <div className=" ai-w-full ai-h-screen ai-flex ai-flex-col ai-p-2 ai-gap-2">
+    <div className=" ai-w-full ai-h-screen ai-flex ai-flex-col ai-p-0">
       {header && <div className="ai-h-fit">{header}</div>}
       <div className="ai-flex-grow">{main}</div>
       {footer && <div className="ai-h-fit">{footer}</div>}

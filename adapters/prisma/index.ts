@@ -21,13 +21,29 @@ export default class ProompterPrismaAdapter implements Adapter {
     return convo;
   }
 
+  async setConversationName(conversationId: string, name: string) {
+    await this.prisma.conversation.update({
+      where: {
+        id: conversationId,
+      },
+      data: {
+        name,
+      },
+    });
+    return;
+  }
+
   async getConversation(conversationId: string) {
     const convo = await this.prisma.conversation.findUnique({
       where: {
         id: conversationId,
       },
       include: {
-        messages: true,
+        messages: {
+          orderBy: {
+            sequenceId: "asc",
+          },
+        },
       },
     });
     return convo;
@@ -41,6 +57,13 @@ export default class ProompterPrismaAdapter implements Adapter {
     const conversations = await this.prisma.conversation.findMany({
       where: {
         userId,
+        ...(cursor && {
+          id: {
+            not: {
+              equals: cursor as string,
+            },
+          },
+        }),
       },
       take: limit || 25,
       ...(cursor ? { cursor: { id: cursor } } : {}),

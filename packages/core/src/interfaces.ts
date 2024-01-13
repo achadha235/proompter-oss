@@ -7,7 +7,7 @@ export interface Message {
 }
 export interface Conversation {
   id: string;
-  name?: string;
+  name: string | null;
   messages: Message[];
 }
 
@@ -19,6 +19,7 @@ export interface Adapter {
     cursor: string | null,
     limit: number
   ): Promise<Omit<Conversation, "messages">[]>;
+  setConversationName(conversationId: string, name: string): Promise<void>;
   getChatUser(user: { id: string }): Promise<{ id: string }>;
 
   saveMessage(conversationId: string, message: Message): Promise<void>;
@@ -89,6 +90,7 @@ export interface Config {
   };
 
   getRequestUser: (req: Request) => Promise<{ id: string } | null>;
+  nameConversation: (firstMessage: string) => Promise<string>;
 }
 
 export interface User {

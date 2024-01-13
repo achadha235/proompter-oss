@@ -1,6 +1,7 @@
 import { User } from "@proompter/core";
 import clsx from "clsx";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useOnClickOutside } from "usehooks-ts";
 
 export function UserMenu({
   user,
@@ -11,12 +12,21 @@ export function UserMenu({
   className?: string;
   onLogoutPressed?: () => void;
 }) {
+  const ref = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useOnClickOutside(ref, () => {
+    setMenuOpen(false);
+  });
   return (
     <div
-      className={clsx(" ai-z-20 ai-dropdown ai-dropdown-top", {
-        " ai-menu-open": menuOpen,
-      })}
+      ref={ref}
+      className={clsx(
+        "ai-z-20 ai-dropdown ai-dropdown-top hover:ai-bg-base-100 ai-cursor-pointer ai-w-full ai-p-2",
+        {
+          "ai-dropdown-open ai-bg-base-100": menuOpen,
+        }
+      )}
     >
       <div
         onClick={() => setMenuOpen((prev) => !prev)}

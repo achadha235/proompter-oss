@@ -4,17 +4,26 @@ import clsx from "clsx";
 import { useOnClickOutside } from "usehooks-ts";
 
 export function ConversationListItem({
+  className,
+  active,
   conversation,
   onConversationNameChanged,
+  onSelected,
   onShareClicked,
-  onArchivedClicked,
-  onDeletedClicked,
+  onArchived,
+  onDeleted,
 }: {
+  className?: string;
+  active?: boolean;
   conversation: Conversation;
-  onConversationNameChanged?: (newName: string) => Promise<void>;
+  onConversationNameChanged?: (
+    conversation: Conversation,
+    newName: string
+  ) => Promise<void>;
+  onSelected?: (conversation: Conversation) => void;
   onShareClicked?: (conversation: Conversation) => void;
-  onArchivedClicked?: (conversation: Conversation) => void;
-  onDeletedClicked?: (conversation: Conversation) => void;
+  onArchived?: (conversation: Conversation) => void;
+  onDeleted?: (conversation: Conversation) => void;
 }) {
   const [editing, setEditing] = useState<boolean>(false);
   const [newName, setNewName] = useState<string>("");
@@ -63,7 +72,10 @@ export function ConversationListItem({
 
   function onNameChanged() {
     if (displayName !== newName) {
-      const nameChangePromise = onConversationNameChanged?.(newName);
+      const nameChangePromise = onConversationNameChanged?.(
+        conversation,
+        newName
+      );
       if (nameChangePromise) {
         setLoading(true);
         nameChangePromise.finally(() => {
@@ -95,9 +107,13 @@ export function ConversationListItem({
   const editingControls = (
     <div className=" ai-absolute ai-bottom-0 ai-right-0 ai-top-0">
       <span
-        onClick={onNameChanged}
-        className="material-symbols-outlined ai-text-xs ai-px-1 ai-py-0 ai-bg-success ai-text-success-content"
-        style={{ fontSize: "1rem" }}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          onNameChanged();
+        }}
+        style={{ fontSize: "140%" }}
+        className="material-symbols-outlined ai-px-1 ai-py-0 ai-bg-success ai-text-success-content ai-h-full ai-flex ai-justify-center ai-items-center"
       >
         done
       </span>
@@ -109,12 +125,14 @@ export function ConversationListItem({
       ref={popoverRef}
       tabIndex={0}
       className={clsx(
-        "ai-translate-x-11 ai-mt-[3px] ai-rounded-none ai-bg-base-200 ai-absolute ai-dropdown-content ai-z-50 ai-menu ai-p-2 ai-shadow ai-g-base-100",
+        "ai-translate-x-11 ai-mt-[3px] ai-rounded-none ai-bg-base-200 ai-absolute ai-dropdown-content ai-z-50 ai-menu ai-p-2 ai-shadow",
         { "ai-hidden": !menuOpen }
       )}
     >
       <li
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
           onShareClicked?.(conversation);
           setMenuOpen(false);
         }}
@@ -130,7 +148,9 @@ export function ConversationListItem({
         </a>
       </li>
       <li
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
           setEditing(true);
           setNewName(displayName);
         }}
@@ -147,8 +167,10 @@ export function ConversationListItem({
       </li>
       <div className="ai-divider ai-my-0"></div>
       <li
-        onClick={() => {
-          onDeletedClicked?.(conversation);
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          onDeleted?.(conversation);
           setMenuOpen(false);
         }}
       >
@@ -165,15 +187,18 @@ export function ConversationListItem({
     </ul>
   );
 
-  const menuButtons = <></>;
-
   useLayoutEffect(() => {
     detectIfPopoverBelowScreen();
   }, [menuOpen]);
 
   return (
     <button
-      className="ai-group ai-relative ai-rounded-lg hover:ai-bg-base-200 ai-w-[230px]"
+      onClick={() => !editing && onSelected?.(conversation)}
+      className={clsx(
+        "ai-group ai-relative ai-rounded-btn hover:ai-bg-base-200 ai-w-full",
+        { "ai-bg-base-200": active, "ai-bg-base-300": !active },
+        className
+      )}
       ref={itemRef}
       key={conversation.id}
       onMouseLeave={() => {
@@ -190,11 +215,13 @@ export function ConversationListItem({
           >
             <input
               disabled={loading}
-              className=" ai-flex-grow ai-pr-8"
+              className=" ai-flex-grow ai-pr-8 ai-bg-base-100"
               onKeyDown={handleInputKeypress}
               ref={inputRef}
               value={newName}
               onChange={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
                 setNewName(e.target.value);
               }}
             />
@@ -211,10 +238,11 @@ export function ConversationListItem({
           {/* Provides the little gradient overlay effect */}
           <div
             className={clsx(
-              "ai-absolute ai-bottom-0 ai-right-0 ai-top-0 ai-bg-gradient-to-l ai-to-transparent ai-w-8 ai-from-base-300 ai-from-0% group-hover:ai-w-20 group-hover:ai-from-base-200 group-hover:ai-from-60%",
+              "ai-absolute ai-bottom-0 ai-right-0 ai-top-0 ai-bg-gradient-to-l ai-to-transparent ai-w-8 ai-from-0% group-hover:ai-w-20 group-hover:ai-from-base-200 group-hover:ai-from-60%",
               {
                 "ai-hidden": editing,
-              }
+              },
+              { "ai-from-base-200": active, "ai-from-base-300": !active }
             )}
           />
         </div>
@@ -242,7 +270,9 @@ export function ConversationListItem({
         >
           <div
             className="ai-btn ai-btn-xs ai-p-0"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
               setMenuOpen(!menuOpen);
             }}
           >
@@ -255,11 +285,13 @@ export function ConversationListItem({
           </div>
 
           <div
-            onClick={() => {
-              onArchivedClicked?.(conversation);
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onArchived?.(conversation);
               setMenuOpen(false);
             }}
-            className="ai-tooltip ai-tooltip-top ai-text-xs"
+            className="ai-tooltip ai-tooltip-left ai-text-xs"
             data-tip="Archive"
           >
             <div className="ai-btn ai-btn-xs ai-p-0">

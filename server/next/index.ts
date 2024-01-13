@@ -1,9 +1,10 @@
 "use server";
 import { Config } from "@proompter/core";
 import runner from "@proompter/runner-flowise";
-import { StreamingTextResponse, nanoid } from "ai";
-import { isEqual, last } from "lodash";
+import { StreamingTextResponse, nanoid, experimental_StreamData } from "ai";
+import { first, isEqual, last, sortBy } from "lodash";
 import { IChatMessage } from "../../monorepos/flowise/packages/server/dist/Interface";
+import { resolve } from "dns";
 
 /**
  * Helper to couple a readable stream with a promise
@@ -44,6 +45,7 @@ export async function Chat(
     if (!user) {
       throw new Error("Not authenticated");
     }
+    // const data = new experimental_StreamData();
 
     const chatUser = await config.adapter.getChatUser(user);
     if (!chatUser) {
@@ -66,11 +68,28 @@ export async function Chat(
     const conversation = !conversationId
       ? await config.adapter.startConversation(user.id)
       : await config.adapter.getConversation(conversationId);
+
     if (!conversation) {
       throw new Error("Conversation not found");
     }
 
     const chatMessage = last(args.messages) as IChatMessage;
+
+    let saveNamePromise: Promise<void> | undefined;
+    if (!conversationId) {
+      saveNamePromise = config
+        .nameConversation(chatMessage.content)
+        .then((conversationName) => {
+          // data.append({ name: conversationName });
+          return config.adapter.setConversationName(
+            conversation.id,
+            conversationName
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
 
     const saveUserChatMessagePromise = config.adapter.saveMessage(
       conversation.id,
@@ -118,7 +137,7 @@ export async function Chat(
 
     return new StreamingTextResponse(finalResponseStream, {
       headers: {
-        ConversationId: conversation.id,
+        "Conversation-Id": conversation.id,
         "AI-Response-Id": replyId,
       },
     });
@@ -153,6 +172,28 @@ export async function Chat(
         "Content-Type": "application/json",
       },
     });
+  } else if (
+    isEqual(context.params.endpoint, ["chat", "conversation", "name"])
+  ) {
+    const user = await config.getRequestUser(req);
+    if (!user) {
+      throw new Error("Not authenticated");
+    }
+    const url = new URL(req.url);
+    const conversationId = url.searchParams.get("conversationId");
+    let name = url.searchParams.get("name");
+    if (!name || !conversationId) {
+      throw new Error("Missing conversationId");
+    }
+
+    const conversation = await config.adapter.getConversation(conversationId);
+    if (!conversation) {
+      return new Response("Not found", { status: 404 });
+    }
+
+    if (conversation.name) {
+      return new Response("Already named", { status: 400 });
+    }
   }
   return new Response("Not found", { status: 404 });
 }

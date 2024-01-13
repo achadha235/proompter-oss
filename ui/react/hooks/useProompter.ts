@@ -11,7 +11,7 @@ export function useProompter(
     initialChatflowId,
   }: {
     onChatflowSelected?: (chatflow: Chat.Chatflow) => void;
-    initialChatflowId: string | null;
+    initialChatflowId?: string | null;
   }
 ) {
   const [config, setConfig] = useState(intialConfig);
@@ -22,12 +22,12 @@ export function useProompter(
 
   const [chatflow, setChatflow] = useState(initialChatflow);
 
-  const { conversations } = useConversations();
+  const conversationData = useConversations();
 
-  // const [conversations, setConversations] = useState([]);
-  const [conversationId, setConversationId] = useState(null);
+  const [conversationId, setConversationId] = useState<string | null>(null);
 
   const chat = useChat({
+    ...(conversationId && { id: conversationId }),
     api: "/api/proompter/chat",
     sendHistory: false,
     credentials: "include",
@@ -36,11 +36,12 @@ export function useProompter(
       chatflowId: chatflow?.id,
     },
     ...config?.chatOptions,
-    onFinish(message) {
-      console.log(message);
+    onFinish(_message) {
+      conversationData.mutate();
     },
     onResponse(response) {
-      console.log(response);
+      const conversationId = response.headers.get("Conversation-ID");
+      setConversationId(conversationId);
     },
   });
 
@@ -57,8 +58,7 @@ export function useProompter(
     chatflow,
     setChatflow,
     chat,
-    conversations,
-    // setConversations,
+    conversationData,
     conversationId,
     setConversationId,
   };
