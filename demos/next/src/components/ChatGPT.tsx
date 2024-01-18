@@ -5,11 +5,12 @@ import { App } from "@proompter/react";
 import { first } from "lodash";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 export default function ChatGPT({ session }: { session: Session }) {
+  const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
   const flowIdSearchParam = "flow";
@@ -31,6 +32,7 @@ export default function ChatGPT({ session }: { session: Session }) {
   return (
     <SessionProvider session={session}>
       <App
+        initialConversationId={params.conversationId as string}
         initialChatflowId={urlParamFlowId || currentChatflowId}
         onChatflowSelected={(chatflow) => {
           if (currentChatflowId !== chatflow.id) {

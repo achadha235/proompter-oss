@@ -9,15 +9,26 @@ export default function ConversationManager({
   isLoadingInitialData,
   isLoadingMore,
   isLoading,
+  activeConversationId,
+  onConversationSelected,
+  onConversationDeleted,
+  onConversationArchived,
+  onConversationShared,
+  onConversationRenamed,
 }: {
   onScrolledToBottom: () => void;
   conversations: Conversation[];
   isLoadingInitialData: boolean;
   isLoadingMore?: boolean;
   isLoading?: boolean;
+  activeConversationId?: string | null;
+  onConversationSelected?: (conversation: Conversation) => any;
+  onConversationDeleted?: (conversation: Conversation) => any;
+  onConversationArchived?: (conversation: Conversation) => any;
+  onConversationShared?: (conversation: Conversation) => any;
+  onConversationRenamed?: (conversation: Conversation, name: string) => any;
 }) {
   const scrollContainerRef = useRef(null);
-
   const { scrollYProgress } = useScroll({ container: scrollContainerRef });
 
   const onScroll = () => {
@@ -27,28 +38,6 @@ export default function ConversationManager({
     }
   };
   scrollYProgress.on("change", onScroll);
-
-  function onConversationSelected(conversation: Conversation) {
-    alert("conversation selected: " + conversation.id);
-  }
-
-  function onConversationDeleted(conversation: Conversation) {
-    alert("conversation deleted: " + conversation.id);
-  }
-
-  function onConversationArchived(conversation: Conversation) {
-    alert("conversation archived: " + conversation.id);
-  }
-
-  function onConversationRenamed(conversation: Conversation) {
-    alert("conversation renamed: " + conversation.id);
-    return new Promise<void>((resolve) => {
-      setTimeout(resolve, 3000);
-    });
-  }
-  function onConversationShared(conversation: Conversation) {
-    alert("conversation shared: " + conversation.id);
-  }
 
   let content: ReactNode;
   if (isLoadingInitialData) {
@@ -67,6 +56,7 @@ export default function ConversationManager({
     content = [...conversations].map((conversation, i) => {
       return (
         <ConversationListItem
+          active={activeConversationId === conversation.id}
           key={conversation.id}
           onSelected={onConversationSelected}
           onArchived={onConversationArchived}

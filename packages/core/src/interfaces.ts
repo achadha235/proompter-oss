@@ -84,7 +84,7 @@ export interface Config {
   chatOptions?: UseChatOptions;
 
   conversationStarter?: Chat.ConversationStarter;
-
+  onConversationSelected?: (conversation: Conversation) => any;
   routes?: {
     logout?: string;
   };

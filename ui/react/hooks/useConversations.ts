@@ -7,7 +7,7 @@ function useConversations() {
     useSWRInfinite(
       (pageIndex, previousPageData) => {
         if (pageIndex === 0) {
-          return `api/proompter/chat/conversations`;
+          return `/api/proompter/chat/conversations`;
         }
         if (previousPageData.length < 1) {
           return null;

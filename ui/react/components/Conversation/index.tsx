@@ -16,15 +16,25 @@ export function Conversation({
   appUser,
   examples,
   isLoading = false,
+  conversationIsLoading = false,
 }: {
   conversationHeaderProps: ConversationHeaderProps;
   messages: VercelAIMessage[];
   isLoading?: boolean;
+  conversationIsLoading?: boolean;
   user?: User;
   appUser?: User;
   examples: Chat.Example[];
 }) {
   let content: ReactNode = null;
+
+  if (conversationIsLoading) {
+    return (
+      <div className="ai-h-full ai-flex ai-flex-col ai-justify-center ai-items-center">
+        <div className="ai-loading-spinner ai-loading" />
+      </div>
+    );
+  }
 
   if (isNil(messages) || messages.length === 0) {
     return (

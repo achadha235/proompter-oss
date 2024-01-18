@@ -38,6 +38,8 @@ export async function Chat(
   context: { params: { endpoint: string } },
   config: Config
 ): Promise<Response> {
+  console.log(context.params.endpoint);
+
   if (isEqual(context.params.endpoint, ["chat"])) {
     const args = await req.json();
     const user = await config.getRequestUser(req);
@@ -193,6 +195,20 @@ export async function Chat(
     if (conversation.name) {
       return new Response("Already named", { status: 400 });
     }
+  } else if (
+    isEqual(context.params.endpoint.slice(0, 2), ["chat", "conversation"]) &&
+    context.params.endpoint.length === 3
+  ) {
+    const id = last(context.params.endpoint);
+    if (!id) {
+      return new Response("Not found", { status: 404 });
+    }
+    const converation = await config.adapter.getConversation(id);
+    return new Response(JSON.stringify(converation), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
   return new Response("Not found", { status: 404 });
 }

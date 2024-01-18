@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth";
-import { type Config } from "@proompter/core";
+import { Conversation, type Config } from "@proompter/core";
 import ProompterPrismaAdapter from "@proompter/adapter-prisma";
 
 import prisma from "./src/database";
 import { authOptions } from "@/auth.config";
 import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
 import { first, trim } from "lodash";
+import Router from "next/navigation";
 
 let openai: OpenAI;
 
@@ -58,6 +58,21 @@ async function getRequestUser(_req) {
   return session?.user as { id: string };
 }
 
+async function onConversationSelected(conversation: Conversation) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  // const router = useRouter();
+  // router.push("/chat/c/" + conversation.id);
+  const route = "/chat/c/" + conversation.id;
+  // debugger;
+  if (!window.location.href.endsWith(route)) {
+    window.history.pushState({}, "", route);
+  }
+
+  // Router.push(route, undefined, { shallow: true });
+  // window.location.href;
+  // window.location.href = "/chat/c/" + conversation.id;
+}
+
 const config: Config = {
   name: "C-3PO",
   description:
@@ -65,9 +80,12 @@ const config: Config = {
   imageURL: "/c3po.png",
   adapter: new ProompterPrismaAdapter(prisma as any),
 
+  // TODO: refactor these defaults into the core
   nameConversation,
 
   getRequestUser,
+
+  onConversationSelected,
 
   conversationStarter: {
     examples,

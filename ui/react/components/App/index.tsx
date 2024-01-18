@@ -1,6 +1,11 @@
 "use client";
 
-import { Chat, Config, User } from "@proompter/core";
+import {
+  Chat,
+  Config,
+  Conversation as ConverationType,
+  User,
+} from "@proompter/core";
 import { last } from "lodash";
 import { useCallback, useEffect } from "react";
 import { Header } from "..";
@@ -15,6 +20,7 @@ import { StartConversationButton } from "./StartConversationButton";
 export interface AppProps {
   proompterConfig: Config;
   user?: User;
+  initialConversationId?: string | null;
   initialChatflowId: string | null;
   onChatflowSelected?: (chatflowId: Chat.Chatflow) => void;
   onLogoutPressed?: () => void;
@@ -24,14 +30,24 @@ export function App({
   proompterConfig,
   user,
   initialChatflowId,
+  initialConversationId,
   onChatflowSelected,
   onLogoutPressed,
 }: AppProps): React.JSX.Element {
-  const { chatflow, setChatflow, config, chat, conversationData } =
-    useProompter(proompterConfig, {
-      onChatflowSelected,
-      initialChatflowId,
-    });
+  const {
+    chatflow,
+    setChatflow,
+    config,
+    chat,
+    conversationData,
+    conversationId,
+    setConversationId,
+    currentConveration,
+  } = useProompter(proompterConfig, {
+    onChatflowSelected,
+    initialChatflowId,
+    initialConversationId,
+  });
 
   const messages = chat.messages;
   const enableScroll = messages && messages.length > 0;
@@ -44,6 +60,10 @@ export function App({
       top: div.scrollHeight,
       behavior,
     });
+  };
+
+  const onConversationSelected = (conversation: ConverationType) => {
+    setConversationId(conversation.id);
   };
 
   useEffect(() => {
@@ -115,11 +135,16 @@ export function App({
         <Sidebar
           main={
             <ConversationManager
+              activeConversationId={conversationId}
               onScrolledToBottom={onScrollToBottom}
               isLoading={conversationData.isLoading}
               isLoadingMore={conversationData.isLoadingMore}
               isLoadingInitialData={conversationData.isLoadingInitialData}
               conversations={conversationData.conversations}
+              onConversationSelected={onConversationSelected}
+              onConversationArchived={onConversationSelected}
+              onConversationShared={onConversationSelected}
+              onConversationRenamed={onConversationSelected}
             />
           }
           header={
@@ -140,6 +165,7 @@ export function App({
       }
       main={
         <Conversation
+          conversationIsLoading={currentConveration.isLoading}
           isLoading={chat.isLoading}
           conversationHeaderProps={{
             title: conversationStarter.title || "How can I help you today?",
