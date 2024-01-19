@@ -4,6 +4,7 @@ import { find, first } from "lodash";
 import { useChat } from "ai/react";
 import useConversations from "./useConversations";
 import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 
 const getHeaders = (authToken?: string) => ({
   "Content-Type": "application/json",
@@ -27,13 +28,27 @@ export const postData =
       headers: getHeaders(authToken),
       credentials: "include",
     });
-    return response.json() as Promise<Result>;
+
+    let result;
+    if (response.headers.get("Content-Type") === "application/json") {
+      result = response.json();
+    } else {
+      result = response.text();
+    }
+    return result as Promise<Result>;
   };
 
 export function useConversation(id: string | null) {
   return useSWR(
     id && "/api/proompter/chat/conversation/" + id,
     getData<Conversation>()
+  );
+}
+
+export function useRenameConversation() {
+  return useSWRMutation(
+    "/api/proompter/chat/conversation/name",
+    postData<{ id: string; name: string }, string>()
   );
 }
 
@@ -63,6 +78,13 @@ export function useProompter(
     initialConversationId || null
   );
   const currentConveration = useConversation(conversationId);
+
+  const renameConversationData = useRenameConversation();
+
+  async function renameConversation(id: string, name: string) {
+    await renameConversationData.trigger({ id, name });
+    await conversationData.mutate();
+  }
 
   useEffect(() => {
     if (!currentConveration.data) {
@@ -114,5 +136,7 @@ export function useProompter(
     conversationId,
     setConversationId,
     currentConveration,
+    renameConversation,
+    renameConversationData,
   };
 }

@@ -43,6 +43,7 @@ export function App({
     conversationId,
     setConversationId,
     currentConveration,
+    renameConversation,
   } = useProompter(proompterConfig, {
     onChatflowSelected,
     initialChatflowId,
@@ -74,6 +75,13 @@ export function App({
   const startNewConversation = () => {
     setConversationId(null);
     focusComposer();
+  };
+
+  const onConversationRenamed = (
+    conversation: ConverationType,
+    name: string
+  ) => {
+    return renameConversation(conversation.id, name);
   };
 
   useEffect(() => {
@@ -160,7 +168,7 @@ export function App({
               onConversationSelected={onConversationSelected}
               onConversationArchived={onConversationSelected}
               onConversationShared={onConversationSelected}
-              onConversationRenamed={onConversationSelected}
+              onConversationRenamed={onConversationRenamed}
             />
           }
           header={
