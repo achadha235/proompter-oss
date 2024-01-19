@@ -34,5 +34,6 @@ export async function Chat(
   ) {
     return getConversation(config, context, req);
   }
+
   return new Response("Not found", { status: 404 });
 }
