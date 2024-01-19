@@ -62,8 +62,18 @@ export function App({
     });
   };
 
+  const focusComposer = () => {
+    document.getElementById("composer-input")?.focus();
+  };
+
   const onConversationSelected = (conversation: ConverationType) => {
     setConversationId(conversation.id);
+    focusComposer();
+  };
+
+  const startNewConversation = () => {
+    setConversationId(null);
+    focusComposer();
   };
 
   useEffect(() => {
@@ -100,7 +110,6 @@ export function App({
     ) {
       return;
     }
-    console.log("Loading page " + (conversationData.size + 1));
     conversationData.setSize(conversationData.size + 1);
   }, [
     conversationData.isLoading,
@@ -109,6 +118,13 @@ export function App({
     conversationData.setSize,
     conversationData.size,
   ]);
+
+  useEffect(() => {
+    if (!conversationId || !chat.messages) {
+      return;
+    }
+    scrollToBottom("instant");
+  }, [conversationId, chat.messages]);
 
   return (
     <Layout
@@ -149,6 +165,7 @@ export function App({
           }
           header={
             <StartConversationButton
+              onClick={startNewConversation}
               className=" ai-m-2 ai-mb-0"
               imageURL={proompterConfig.imageURL}
               title={proompterConfig.name}

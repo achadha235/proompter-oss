@@ -3,7 +3,7 @@ import ReactTextareaAutosize, {
   TextareaAutosizeProps,
 } from "react-textarea-autosize";
 import { UseChatHelpers } from "ai/react";
-import { KeyboardEvent, SyntheticEvent } from "react";
+import { KeyboardEvent, SyntheticEvent, useEffect, useRef } from "react";
 export interface ComposerProps {
   className?: string;
   placeholder?: string;
@@ -37,6 +37,8 @@ export function Composer({
       )}
     >
       <ReactTextareaAutosize
+        id="composer-input"
+        autoFocus={true}
         value={chat?.input}
         onChange={chat?.handleInputChange}
         onKeyDown={onKeyDown}

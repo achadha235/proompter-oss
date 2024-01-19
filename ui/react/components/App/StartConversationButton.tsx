@@ -6,6 +6,7 @@ export interface StartConversationButtonProps {
   title: string;
   className?: string;
   buttonOnly?: boolean;
+  onClick?: () => void;
 }
 
 export function StartConversationButton({
@@ -13,9 +14,11 @@ export function StartConversationButton({
   title,
   className,
   buttonOnly = false,
+  onClick,
 }: StartConversationButtonProps) {
   return (
     <div
+      onClick={onClick}
       className={clsx(
         "ai-flex ai-flex-row ai-items-center ai-p-2 ai-gap-2 hover:ai-bg-base-200 ai-cursor-pointer ai-rounded-btn",
         className

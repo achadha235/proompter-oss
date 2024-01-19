@@ -1,9 +1,7 @@
-import { IComponentNodes, IComponentCredentials } from "flowise/dist/Interface";
-import path from "path";
-import { Dirent } from "fs";
-import { getNodeModulesPackagePath } from "flowise/dist/utils";
-import { promises } from "fs";
 import { ICommonObject } from "flowise-components";
+import { IComponentCredentials, IComponentNodes } from "flowise/dist/Interface";
+import { Dirent, promises } from "fs";
+import path from "path";
 
 export class NodesPool {
   componentNodes: IComponentNodes = {};
@@ -16,6 +14,8 @@ export class NodesPool {
   }
 
   async initializeNodes() {
+    // Note: This is different from the actual NodePools in Flowise
+    // The original uses some kind of relative path browsing system to get the packagePath for flowise
     let packagePath = require.resolve("flowise-components");
     const nodesPath = path.join(packagePath, "..", "..", "nodes");
     const nodeFiles = await this.getFiles(nodesPath);
