@@ -9,8 +9,6 @@ export async function Chat(
   context: { params: { endpoint: string } },
   config: Config
 ): Promise<Response> {
-  console.log(context.params.endpoint);
-
   if (isEqual(context.params.endpoint, ["chat"])) {
     return await processChat(req, config);
   } else if (isEqual(context.params.endpoint, ["chat", "conversations"])) {

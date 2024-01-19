@@ -1,12 +1,11 @@
-import { getServerSession } from "next-auth";
-import { Conversation, type Config } from "@proompter/core";
 import ProompterPrismaAdapter from "@proompter/adapter-prisma";
+import { Conversation, type Config } from "@proompter/core";
+import { getServerSession } from "next-auth";
 
-import prisma from "./src/database";
 import { authOptions } from "@/auth.config";
-import OpenAI from "openai";
 import { first, trim } from "lodash";
-import Router from "next/navigation";
+import OpenAI from "openai";
+import prisma from "./src/database";
 
 let openai: OpenAI;
 
@@ -47,9 +46,7 @@ async function nameConversation(firstMessage: string): Promise<string> {
     prompt: namingPrompt,
   });
 
-  console.log("response: ", first(response.choices)!.text);
   const conversationName = trim(first(response.choices)!.text.trim(), "\"'");
-  console.log("conversationName: ", conversationName);
   return conversationName;
 }
 
@@ -59,18 +56,10 @@ async function getRequestUser(_req) {
 }
 
 async function onConversationSelected(conversation: Conversation) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // const router = useRouter();
-  // router.push("/chat/c/" + conversation.id);
   const route = "/chat/c/" + conversation.id;
-  // debugger;
   if (!window.location.href.endsWith(route)) {
     window.history.pushState({}, "", route);
   }
-
-  // Router.push(route, undefined, { shallow: true });
-  // window.location.href;
-  // window.location.href = "/chat/c/" + conversation.id;
 }
 
 const config: Config = {

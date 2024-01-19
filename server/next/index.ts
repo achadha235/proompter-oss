@@ -14,8 +14,6 @@ export async function Chat(
   context: Context,
   config: Config
 ): Promise<Response> {
-  console.log(context.params.endpoint);
-
   const endpoint = "/" + context.params.endpoint.join("/");
 
   if (endpoint === "/chat") {

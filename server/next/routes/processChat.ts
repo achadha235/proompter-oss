@@ -82,19 +82,14 @@ export async function processChat(req: Request, config: Config) {
   const [responseStream, saveMessageStream] = stream.tee();
   const replyId = nanoid();
 
-  const saveConversationPromise = saveUserChatMessagePromise
-    .then(() => {
-      console.log("Saved user message!");
-      return saveResponseMessage(
-        saveMessageStream,
-        conversation.id,
-        config,
-        replyId
-      );
-    })
-    .then(() => {
-      console.log("Saved response message!");
-    });
+  const saveConversationPromise = saveUserChatMessagePromise.then(() => {
+    return saveResponseMessage(
+      saveMessageStream,
+      conversation.id,
+      config,
+      replyId
+    );
+  });
 
   const streamWithSaveMessages = await streamWithPromise(
     responseStream,
