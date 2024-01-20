@@ -13,7 +13,7 @@ function useConversations() {
           return null;
         }
         const cursor = previousPageData[previousPageData.length - 1].id;
-        return `api/proompter/chat/conversations?cursor=${cursor}`;
+        return `/api/proompter/chat/conversations?cursor=${cursor}`;
       },
       async (url) => {
         const response = await fetch(url, { credentials: "include" });
