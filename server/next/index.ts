@@ -20,7 +20,7 @@ export async function Chat(
     return await processChat(req, config);
   }
 
-  if (endpoint === "/chat/conversations") {
+  if (endpoint.startsWith("/chat/conversations")) {
     return await getConversations(config, req);
   }
 

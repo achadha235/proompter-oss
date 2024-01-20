@@ -28,6 +28,9 @@ model Conversation {
     messages  Message[]
     user      ChatUser  @relation(fields: [userId], references: [id])
     userId    String
+    flowId    String
+    archived  Boolean   @default(false)
+    error     Json?
 }
 
 model ChatUser {

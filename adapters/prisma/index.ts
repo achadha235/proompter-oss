@@ -8,11 +8,12 @@ export default class ProompterPrismaAdapter implements Adapter {
     this.prisma = prisma;
   }
 
-  async startConversation(userId: string) {
+  async startConversation(userId: string, chatflowId: string) {
     const convo = await this.prisma.conversation.create({
       data: {
         userId,
         id: crypto.randomUUID().toString(),
+        flowId: chatflowId,
       },
       include: {
         messages: true,
@@ -28,6 +29,18 @@ export default class ProompterPrismaAdapter implements Adapter {
       },
       data: {
         name,
+      },
+    });
+    return;
+  }
+
+  async setConversationArchived(conversationId: string, archived: boolean) {
+    await this.prisma.conversation.update({
+      where: {
+        id: conversationId,
+      },
+      data: {
+        archived,
       },
     });
     return;

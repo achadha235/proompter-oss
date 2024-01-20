@@ -33,7 +33,7 @@ export async function processChat(req: Request, config: Config) {
   }
 
   const conversation = !conversationId
-    ? await config.adapter.startConversation(user.id)
+    ? await config.adapter.startConversation(user.id, chatflowId)
     : await config.adapter.getConversation(conversationId);
 
   if (!conversation) {

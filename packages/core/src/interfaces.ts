@@ -7,12 +7,13 @@ export interface Message {
 }
 export interface Conversation {
   id: string;
+  flowId: string;
   name: string | null;
   messages: Message[];
 }
 
 export interface Adapter {
-  startConversation(userId: string): Promise<Conversation>;
+  startConversation(userId: string, chatflowId: string): Promise<Conversation>;
   getConversation(conversationId: string): Promise<Conversation | null>;
   getConversations(
     userId: string,
@@ -20,6 +21,10 @@ export interface Adapter {
     limit: number
   ): Promise<Omit<Conversation, "messages">[]>;
   setConversationName(conversationId: string, name: string): Promise<void>;
+  setConversationArchived(
+    conversationId: string,
+    archived: boolean
+  ): Promise<void>;
   getChatUser(user: { id: string }): Promise<{ id: string }>;
 
   saveMessage(conversationId: string, message: Message): Promise<void>;
@@ -85,6 +90,7 @@ export interface Config {
 
   conversationStarter?: Chat.ConversationStarter;
   onConversationSelected?: (conversation: Conversation) => any;
+  onNewConversationStarted?: () => any;
   routes?: {
     logout?: string;
   };
