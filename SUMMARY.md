@@ -1,0 +1,18 @@
+# Table of contents
+
+* [README](README.md)
+* [adapters](adapters/README.md)
+  * [@proompter/adapter-prisma](adapters/prisma/README.md)
+* [Demos](demos/README.md)
+  * [next](demos/next/README.md)
+* [packages](packages/README.md)
+  * [@proompter/adapter](packages/core/README.md)
+* [runners](runners/README.md)
+  * [@proompter/runner-flowise](runners/flowise/README.md)
+    * [DOCS](runners/flowise/DOCS.md)
+* [server](server/README.md)
+  * [@proompter/server/next](server/next/README.md)
+* [ui](ui/README.md)
+  * [@proompter/react](ui/react/README.md)
+    * [stories](ui/react/stories/README.md)
+      * [Configure](ui/react/stories/Configure.mdx)
