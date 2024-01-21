@@ -55,12 +55,19 @@ async function getRequestUser(_req) {
   return session?.user as { id: string };
 }
 
-async function onConversationSelected(conversation: Conversation) {
-  const route = "/chat/c/" + conversation.id;
-  if (!window.location.href.endsWith(route)) {
-    window.history.pushState({}, "", route);
-  }
-}
+// async function onConversationSelected(conversation: Conversation) {
+//   const route = "/chat/c/" + conversation.id;
+//   if (!window.location.href.endsWith(route)) {
+//     window.history.pushState({}, "", route);
+//   }
+// }
+
+// async function onNewConversationStarted() {
+//   const route = "/chat";
+//   if (!window.location.href.endsWith(route)) {
+//     window.history.pushState({}, "", route);
+//   }
+// }
 
 const config: Config = {
   name: "C-3PO",
@@ -74,7 +81,9 @@ const config: Config = {
 
   getRequestUser,
 
-  onConversationSelected,
+  // onConversationSelected,
+
+  // onNewConversationStarted,
 
   conversationStarter: {
     examples,

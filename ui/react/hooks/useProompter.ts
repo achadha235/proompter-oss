@@ -1,6 +1,6 @@
 import { Config, Chat, Conversation } from "@proompter/core";
 import { useEffect, useState } from "react";
-import { find, first } from "lodash";
+import { find, first, initial, isNil } from "lodash";
 import { useChat } from "ai/react";
 import useConversations from "./useConversations";
 import useSWR from "swr";
@@ -56,12 +56,12 @@ export function useProompter(
   intialConfig: Config,
   {
     onChatflowSelected,
-    initialChatflowId,
     initialConversationId,
+    initialChatflowId,
   }: {
     onChatflowSelected?: (chatflow: Chat.Chatflow) => void;
+    initialConversationId?: string;
     initialChatflowId?: string | null;
-    initialConversationId?: string | null;
   }
 ) {
   const [config, setConfig] = useState(intialConfig);
@@ -87,11 +87,23 @@ export function useProompter(
   }
 
   useEffect(() => {
-    if (!currentConveration.data) {
+    if (currentConveration.isLoading || currentConveration.isValidating) {
       return;
     }
+    if (isNil(currentConveration.data)) {
+      if (conversationId) {
+        intialConfig?.onConversationSelected?.(null);
+        setConversationId(null);
+      }
+      return;
+    }
+    intialConfig?.onConversationSelected?.(currentConveration.data);
     chat.setMessages(currentConveration.data.messages as any);
-  }, [currentConveration.data]);
+  }, [
+    currentConveration.data,
+    currentConveration.isLoading,
+    currentConveration.isValidating,
+  ]);
 
   const chat = useChat({
     ...(conversationId && { id: conversationId }),
@@ -116,7 +128,17 @@ export function useProompter(
     if (!currentConveration.data) {
       return;
     }
-    intialConfig?.onConversationSelected?.(currentConveration.data);
+    if (currentConveration.data?.flowId !== chatflow?.id) {
+      setChatflow(
+        find(
+          config.chatflows,
+          (chatflow) => chatflow.id === currentConveration.data?.flowId
+        )
+      );
+    }
+    if (!currentConveration.isLoading && !currentConveration.isValidating) {
+      intialConfig?.onConversationSelected?.(currentConveration.data);
+    }
   }, [currentConveration.data]);
 
   useEffect(() => {
@@ -125,6 +147,17 @@ export function useProompter(
     }
     onChatflowSelected?.(chatflow);
   }, [chatflow]);
+
+  useEffect(() => {
+    if (!conversationId) {
+      chat.setMessages([]);
+
+      if (chat.isLoading) {
+        chat.stop();
+      }
+      config.onNewConversationStarted?.();
+    }
+  }, [conversationId]);
 
   return {
     config,

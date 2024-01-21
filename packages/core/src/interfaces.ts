@@ -89,7 +89,7 @@ export interface Config {
   chatOptions?: UseChatOptions;
 
   conversationStarter?: Chat.ConversationStarter;
-  onConversationSelected?: (conversation: Conversation) => any;
+  onConversationSelected?: (conversation: Conversation | null) => any;
   onNewConversationStarted?: () => any;
   routes?: {
     logout?: string;

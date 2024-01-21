@@ -129,7 +129,8 @@ export function ConversationListItem({
         { "ai-hidden": !menuOpen }
       )}
     >
-      <li
+      {/* TODO: Enable share */}
+      {/* <li
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
@@ -146,7 +147,7 @@ export function ConversationListItem({
           </span>
           Share
         </a>
-      </li>
+      </li> */}
       <li
         onClick={(e) => {
           e.stopPropagation();
@@ -165,7 +166,8 @@ export function ConversationListItem({
           Rename
         </a>
       </li>
-      <div className="ai-divider ai-my-0"></div>
+      {/* TODO: Enable delete */}
+      {/* <div className="ai-divider ai-my-0"></div>
       <li
         onClick={(e) => {
           e.stopPropagation();
@@ -183,7 +185,7 @@ export function ConversationListItem({
           </span>
           Delete
         </a>
-      </li>
+      </li> */}
     </ul>
   );
 

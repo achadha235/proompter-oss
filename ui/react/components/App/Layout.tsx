@@ -25,17 +25,17 @@ export interface LayoutProps {
 }
 
 export function Layout(props: LayoutProps): React.JSX.Element {
-  const isClient = useIsClient();
   const tw: any = resolveConfig(tailwindConfig);
   const breakpoint: string = tw.theme.screens.lg;
   const matches = useMediaQuery(`(min-width: ${breakpoint})`);
-  if (!isClient) {
-    return (
-      <div className="ai-h-screen ai-w-screen ai-flex ai-justify-center ai-items-center">
-        <span className="loading loading-spinner" />
-      </div>
-    );
-  }
+
+  // if (!isClient) {
+  //   return (
+  //     <div className="ai-h-screen ai-w-screen ai-flex ai-justify-center ai-items-center">
+  //       <span className="loading loading-spinner" />
+  //     </div>
+  //   );
+  // }
   return matches ? <DesktopLayout {...props} /> : <MobileLayout {...props} />;
 }
 

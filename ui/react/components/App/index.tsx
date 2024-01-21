@@ -10,18 +10,19 @@ import { last } from "lodash";
 import { useCallback, useEffect } from "react";
 import { Header } from "..";
 import { useProompter } from "../../hooks/useProompter";
-import { Conversation } from "../Conversation";
 import ConversationManager from "../ConversationManager";
 import { Footer } from "../Footer";
 import { Sidebar } from "../Sidebar";
 import { UserMenu } from "../UserMenu";
 import { Layout } from "./Layout";
 import { StartConversationButton } from "./StartConversationButton";
+import { Conversation } from "../Conversation";
 export interface AppProps {
   proompterConfig: Config;
   user?: User;
-  initialConversationId?: string | null;
-  initialChatflowId: string | null;
+  initialChatflowId?: string;
+  initialConversationId?: string;
+  onNewConversationClicked?: () => void;
   onChatflowSelected?: (chatflowId: Chat.Chatflow) => void;
   onLogoutPressed?: () => void;
 }
@@ -29,9 +30,9 @@ export interface AppProps {
 export function App({
   proompterConfig,
   user,
-  initialChatflowId,
-  initialConversationId,
   onChatflowSelected,
+  onNewConversationClicked,
+  initialConversationId,
   onLogoutPressed,
 }: AppProps): React.JSX.Element {
   const {
@@ -46,10 +47,8 @@ export function App({
     renameConversation,
   } = useProompter(proompterConfig, {
     onChatflowSelected,
-    initialChatflowId,
     initialConversationId,
   });
-
   const messages = chat.messages;
   const enableScroll = messages && messages.length > 0;
   const conversationStarter =
@@ -67,12 +66,14 @@ export function App({
     document.getElementById("composer-input")?.focus();
   };
 
-  const onConversationSelected = (conversation: ConverationType) => {
-    setConversationId(conversation.id);
+  const onSidebarConversationSelected = (conversation: ConverationType) => {
+    setConversationId(conversation?.id);
     focusComposer();
   };
 
   const startNewConversation = () => {
+    chat.setMessages([]);
+    onNewConversationClicked?.();
     setConversationId(null);
     focusComposer();
   };
@@ -82,6 +83,13 @@ export function App({
     name: string
   ) => {
     return renameConversation(conversation.id, name);
+  };
+
+  const onExampleClicked = (example: Chat.Example) => {
+    chat.append({
+      content: example.chatMessage,
+      role: "user",
+    });
   };
 
   useEffect(() => {
@@ -150,6 +158,8 @@ export function App({
             chatflows: config.chatflows,
             chatflow: chatflow!,
             onChatflowClicked: (newChatflow) => {
+              setConversationId(null);
+              proompterConfig.onConversationSelected?.(null);
               setChatflow(newChatflow);
             },
           }}
@@ -165,9 +175,9 @@ export function App({
               isLoadingMore={conversationData.isLoadingMore}
               isLoadingInitialData={conversationData.isLoadingInitialData}
               conversations={conversationData.conversations}
-              onConversationSelected={onConversationSelected}
-              onConversationArchived={onConversationSelected}
-              onConversationShared={onConversationSelected}
+              onConversationSelected={onSidebarConversationSelected}
+              onConversationArchived={onSidebarConversationSelected}
+              onConversationShared={onSidebarConversationSelected}
               onConversationRenamed={onConversationRenamed}
             />
           }
@@ -190,6 +200,8 @@ export function App({
       }
       main={
         <Conversation
+          activeConversationId={conversationId}
+          onExampleClicked={onExampleClicked}
           conversationIsLoading={currentConveration.isLoading}
           isLoading={chat.isLoading}
           conversationHeaderProps={{

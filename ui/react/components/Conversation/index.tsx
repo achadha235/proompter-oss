@@ -11,32 +11,36 @@ import {
 
 export function Conversation({
   conversationHeaderProps,
+  activeConversationId,
   messages,
   user,
   appUser,
   examples,
   isLoading = false,
   conversationIsLoading = false,
+  onExampleClicked,
 }: {
   conversationHeaderProps: ConversationHeaderProps;
+  activeConversationId?: string | null;
   messages: VercelAIMessage[];
   isLoading?: boolean;
   conversationIsLoading?: boolean;
   user?: User;
   appUser?: User;
   examples: Chat.Example[];
+  onExampleClicked?: (example: Chat.Example) => void;
 }) {
   let content: ReactNode = null;
 
-  if (conversationIsLoading) {
-    return (
-      <div className="ai-h-full ai-flex ai-flex-col ai-justify-center ai-items-center">
-        <div className="ai-loading-spinner ai-loading" />
-      </div>
-    );
-  }
+  if (!messages || messages.length === 0) {
+    if (conversationIsLoading) {
+      return (
+        <div className="ai-h-full ai-flex ai-flex-col ai-justify-center ai-items-center">
+          <div className="ai-loading-spinner ai-loading" />
+        </div>
+      );
+    }
 
-  if (isNil(messages) || messages.length === 0) {
     return (
       <div className="ai-h-full ai-flex ai-flex-col ai-justify-evenly">
         <ConversationHeader
@@ -44,6 +48,7 @@ export function Conversation({
           className=" ai-my-auto"
         />
         <Examples
+          onExampleClicked={onExampleClicked}
           className=" ai-mx-auto ai-mt-auto ai-mb-10  ai-max-w-3xl"
           examples={examples}
         />
