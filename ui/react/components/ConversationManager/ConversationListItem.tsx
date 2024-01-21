@@ -252,7 +252,7 @@ export function ConversationListItem({
 
       <div
         className={clsx(
-          "ai-absolute ai-z-50  ai-bottom-0 ai-right-0 ai-top-0 ai-items-center ai-gap-2 ai-pr-2",
+          "ai-absolute ai-z-20  ai-bottom-0 ai-right-0 ai-top-0 ai-items-center ai-gap-2 ai-pr-2",
           {
             "group-hover:ai-flex": !editing,
             "ai-hidden": !menuOpen || editing,

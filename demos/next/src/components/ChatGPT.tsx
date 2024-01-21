@@ -22,6 +22,8 @@ export default function ChatGPT({ session }: { session: Session }) {
     (urlParamFlowId || first(config.chatflows)?.id)!
   );
 
+  debugger;
+
   const shouldUpdateURL = useRef(false);
   useEffect(() => {
     if (shouldUpdateURL.current === true && currentChatflowId) {
@@ -63,6 +65,7 @@ export default function ChatGPT({ session }: { session: Session }) {
   return (
     <SessionProvider session={session}>
       <App
+        initialChatflowId={currentChatflowId}
         initialConversationId={last(params.conversationId)}
         onChatflowSelected={onChatflowSelected}
         onLogoutPressed={onLogoutPressed}

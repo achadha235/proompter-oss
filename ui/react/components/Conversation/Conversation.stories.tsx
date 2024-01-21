@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Conversation } from ".";
-import { useState } from "react";
 
 const meta: Meta = {
-  title: "Component/Conversation",
+  title: "Components/Conversation",
   component: Conversation,
   parameters: {
     layout: "centered",
@@ -17,6 +16,23 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    messages: [],
+    messages: [
+      {
+        content: "I am your father",
+        role: "user",
+      },
+      {
+        content: "No. No! That's not true! That's impossible!",
+        role: "assistant",
+      },
+    ],
+    user: {
+      imageURL: "https://robohash.org/1",
+      name: "Dark Vader",
+    },
+    appUser: {
+      imageURL: "https://robohash.org/2",
+      name: "Luke Skywalker",
+    },
   },
 };

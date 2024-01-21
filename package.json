@@ -8,7 +8,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clear-packages": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + ",
-    "test": "echo 'Skip'"
+    "test": "turbo run test"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",

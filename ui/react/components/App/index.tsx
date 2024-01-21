@@ -34,6 +34,7 @@ export function App({
   onNewConversationClicked,
   initialConversationId,
   onLogoutPressed,
+  initialChatflowId,
 }: AppProps): React.JSX.Element {
   const {
     chatflow,
@@ -47,6 +48,7 @@ export function App({
     renameConversation,
   } = useProompter(proompterConfig, {
     onChatflowSelected,
+    initialChatflowId,
     initialConversationId,
   });
   const messages = chat.messages;
@@ -192,7 +194,7 @@ export function App({
           footer={
             <UserMenu
               user={user}
-              className=" ai-mt-auto"
+              className=" ai-mt-auto ai-pb-5"
               onLogoutPressed={onLogoutPressed}
             />
           }

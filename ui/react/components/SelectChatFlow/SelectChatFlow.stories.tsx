@@ -7,6 +7,11 @@ const meta = {
   component: SelectChatFlow,
   parameters: {
     layout: "fullscreen",
+    docs: {
+      story: {
+        height: "400px",
+      },
+    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof SelectChatFlow>;

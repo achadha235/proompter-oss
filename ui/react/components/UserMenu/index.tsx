@@ -51,7 +51,7 @@ export function UserMenu({
 
       <ul
         tabIndex={0}
-        className="ai-dropdown-content ai-z-[1] ai-menu ai-p-2 ai-shadow ai-bg-base-100 ai-rounded-box ai-w-[230px]"
+        className="ai-dropdown-content ai-menu ai-p-2 ai-shadow ai-bg-base-100 ai-rounded-box ai-w-[230px] ai-mb-1"
       >
         <li>
           <a>

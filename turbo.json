@@ -26,9 +26,14 @@
             ]
         },
         "lint": {},
+        "test": {
+            "persistent": false,
+            "cache": false
+        },
         "dev": {
             "cache": false,
-            "persistent": true
+            "persistent": true,
+            "outputs": []
         },
         "storybook": {
             "persistent": true,

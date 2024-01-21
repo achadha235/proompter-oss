@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ConversationListItem } from "./ConversationListItem";
 
-const meta = {
+const meta: Meta = {
   title: "Components/ConversationListItem",
   component: ConversationListItem,
   parameters: {
     layout: "centered",
+    docs: {
+      story: {
+        height: "400px",
+      },
+    },
   },
   tags: ["autodocs"],
   decorators: [

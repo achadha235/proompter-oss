@@ -70,6 +70,7 @@ export function useProompter(
     find(config.chatflows, (chatflow) => chatflow.id === initialChatflowId) ||
     first(config.chatflows);
 
+  debugger;
   const [chatflow, setChatflow] = useState(initialChatflow);
 
   const conversationData = useConversations();
