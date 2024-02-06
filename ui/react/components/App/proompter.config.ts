@@ -28,6 +28,9 @@ const examples = [
 ];
 
 export const config: Config = {
+  nameConversation: async (f) => {
+    return "Test Conversation Name";
+  },
   name: "C-3PO",
   description:
     "I'm C-3PO, fluent in over six million languages. Join me to master languages from Earth and across the galaxy!",
