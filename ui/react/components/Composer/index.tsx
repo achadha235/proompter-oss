@@ -1,9 +1,9 @@
+import { UseChatHelpers } from "ai/react";
 import clsx from "clsx";
+import { KeyboardEvent, SyntheticEvent } from "react";
 import ReactTextareaAutosize, {
   TextareaAutosizeProps,
 } from "react-textarea-autosize";
-import { UseChatHelpers } from "ai/react";
-import { KeyboardEvent, SyntheticEvent, useEffect, useRef } from "react";
 export interface ComposerProps {
   className?: string;
   placeholder?: string;
@@ -49,19 +49,25 @@ export function Composer({
         className=" ai-text-lg ai-flex-grow ai-w-auto ai-my-auto ai-resize-none ai-bg-transparent ai-outline-none"
       />
       <button
+        className={"ai-mt-auto"}
         disabled={chat?.input.length === 0}
         type="submit"
-        className={clsx(
-          chat?.isLoading ? "" : "ai-btn-primary",
-          "ai-btn ai-aspect-square ai-mt-auto ai-btn-sm"
-        )}
       >
-        <span
-          className="material-symbols-outlined ai-text-primary-content"
-          style={{ fontSize: "1.8rem" }}
+        <div
+          className={clsx(
+            "ai-w-full ai-btn-primary ai-btn ai-aspect-square ai-btn-sm",
+            {
+              "ai-btn-disabled": chat?.input.length === 0 && !chat?.isLoading,
+            }
+          )}
         >
-          {chat?.isLoading ? "stop_circle" : "arrow_upward"}
-        </span>
+          <span
+            className="material-symbols-outlined ai-text-primary-content"
+            style={{ fontSize: "1.8rem" }}
+          >
+            {chat?.isLoading ? "stop_circle" : "arrow_upward"}
+          </span>
+        </div>
       </button>
     </form>
   );
