@@ -44,9 +44,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const isClient = useIsClient();
+
   const [themeNumber, setThemeNumber] = useLocalStorage(
     "currentTheme",
-    allThemes.indexOf("dark")
+    allThemes.indexOf("light")
   );
 
   return (
