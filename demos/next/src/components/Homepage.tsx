@@ -16,7 +16,7 @@ export default function Homepage() {
         <div className="text-7xl font-black tracking-tighter">
           {config.name}
         </div>
-        <div className="max-w-lg text-base">{config.description}</div>
+        <div className="max-w-lg text-base px-6">{config.description}</div>
       </div>
       <Link href="/auth/login">
         <button className="btn">Login</button>
