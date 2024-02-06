@@ -125,7 +125,7 @@ export function ConversationListItem({
       ref={popoverRef}
       tabIndex={0}
       className={clsx(
-        "ai-translate-x-11 ai-mt-[3px] ai-rounded-none ai-bg-base-200 ai-absolute ai-dropdown-content ai-z-50 ai-menu ai-p-2 ai-shadow",
+        "ai-translate-x-6  ai-mt-[3px] ai-rounded-none ai-bg-base-200 ai-absolute ai-dropdown-content ai-z-50 ai-menu ai-p-2 ai-shadow",
         { "ai-hidden": !menuOpen }
       )}
     >
@@ -286,7 +286,7 @@ export function ConversationListItem({
             </span>
           </div>
 
-          <div
+          {/* <div
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
@@ -304,7 +304,7 @@ export function ConversationListItem({
                 inventory_2
               </span>
             </div>
-          </div>
+          </div> */}
           {dropdownMenu}
         </div>
       </div>
