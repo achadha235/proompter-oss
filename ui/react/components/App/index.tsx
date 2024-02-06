@@ -7,7 +7,7 @@ import {
   User,
 } from "@proompter/core";
 import { last } from "lodash";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Header } from "..";
 import { useProompter } from "../../hooks/useProompter";
 import ConversationManager from "../ConversationManager";
@@ -17,6 +17,8 @@ import { UserMenu } from "../UserMenu";
 import { Layout } from "./Layout";
 import { StartConversationButton } from "./StartConversationButton";
 import { Conversation } from "../Conversation";
+import SettingsModal from "../SettingsModal";
+import CustomizeModal from "../CustomizeModal";
 export interface AppProps {
   proompterConfig: Config;
   user?: User;
@@ -144,6 +146,9 @@ export function App({
     scrollToBottom("instant");
   }, [conversationId, chat.messages]);
 
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [customizeModalOpen, setCustomizeModalOpen] = useState(false);
+
   return (
     <Layout
       enableScroll={enableScroll}
@@ -194,8 +199,10 @@ export function App({
           footer={
             <UserMenu
               user={user}
-              className=" ai-mt-auto ai-pb-5"
+              className=" ai-mt-auto"
               onLogoutPressed={onLogoutPressed}
+              onSettingsPressed={() => setSettingsModalOpen(true)}
+              onCustomizePressed={() => setSettingsModalOpen(true)}
             />
           }
         />
@@ -220,6 +227,14 @@ export function App({
         />
       }
       footer={<Footer composerProps={{ chat }} />}
-    />
+    >
+      <SettingsModal
+        open={settingsModalOpen}
+        onClosed={() => {
+          setSettingsModalOpen(false);
+        }}
+      />
+      <CustomizeModal open={customizeModalOpen} />
+    </Layout>
   );
 }
