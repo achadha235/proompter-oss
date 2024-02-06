@@ -1,5 +1,11 @@
 # @proompter/react
 
+## 0.0.5
+
+### Patch Changes
+
+- 8f3240d: include custom vercel ai in build
+
 ## 0.0.4
 
 ### Patch Changes

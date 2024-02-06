@@ -1,5 +1,12 @@
 # @proompter/demo-next
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [8f3240d]
+  - @proompter/react@0.0.5
+
 ## 0.0.5
 
 ### Patch Changes
