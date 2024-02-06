@@ -49,9 +49,10 @@
   },
   "scripts": {
     "dev": "turbo run dev:js dev:css --parallel",
-    "build": "bunx rimraf build/* && NODE_ENV=production bun run build:js && bun run build:css",
+    "build": "bunx rimraf build/* && NODE_ENV=production bun run build:js && bun run build:css && bun run copy-dependencies",
     "build:css": "postcss styles/globals.css styles/**/*.css --dir build/styles",
     "build:js": "tsc",
+    "copy-dependencies": "bunx rimraf build/node_modules/* && mkdir -p build/node_modules/ai/react && cp -r ../../monorepos/ai/packages/core/dist ./build/node_modules/ai && cp  ../../monorepos/ai/packages/core/package.json ./build/node_modules/ai && cp  ../../monorepos/ai/packages/core/react/package.json ./build/node_modules/ai/react && cp -r ../../monorepos/ai/packages/core/react/dist ./build/node_modules/ai/react   ",
     "dev:css": "bun run build:css --watch",
     "dev:js": "bun run build:js --watch",
     "test": "bun test",
