@@ -1,5 +1,11 @@
 # @proompter/react
 
+## 0.0.4
+
+### Patch Changes
+
+- 7b63859: fix missing build files
+
 ## 0.0.3
 
 ### Patch Changes
