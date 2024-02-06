@@ -11,8 +11,7 @@ const entities = utils.databaseEntities;
 const {
   postgresMigrations,
 } = require("flowise/dist/database/migrations/postgres");
-const targetUrl =
-  "***REMOVED***";
+const targetUrl = process.env.TARGET_DB_URL;
 
 async function start() {
   serverApp = new App();
