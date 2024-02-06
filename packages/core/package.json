@@ -3,6 +3,7 @@
   "main": "./build/index.js",
   "types": "./index.ts",
   "type": "module",
+  "version": "0.0.1",
   "scripts": {
     "build": "bun build ./index.ts --splitting --target node --sourcemap=external --outdir ./build",
     "dev": "pnpm run build --watch"
