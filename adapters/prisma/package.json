@@ -2,6 +2,7 @@
   "name": "@proompter/adapter-prisma",
   "module": "index.ts",
   "version": "0.0.1",
+  "private": false,
   "type": "module",
   "main": "./build/index.js",
   "types": "./index.ts",
