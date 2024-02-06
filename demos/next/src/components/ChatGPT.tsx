@@ -22,8 +22,6 @@ export default function ChatGPT({ session }: { session: Session }) {
     (urlParamFlowId || first(config.chatflows)?.id)!
   );
 
-  debugger;
-
   const shouldUpdateURL = useRef(false);
   useEffect(() => {
     if (shouldUpdateURL.current === true && currentChatflowId) {
