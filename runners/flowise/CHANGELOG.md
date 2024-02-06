@@ -1,5 +1,11 @@
 # @proompter/runner-flowise
 
+## 0.0.3
+
+### Patch Changes
+
+- include build
+
 ## 0.0.2
 
 ### Patch Changes
