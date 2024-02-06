@@ -1,14 +1,11 @@
-import crypto from "crypto";
 import winston from "winston";
 
 import { FlowiseSocketStream } from "./FlowiseSocketStream";
 import { prepareFlowiseExecution } from "./prepareFlowiseExecution";
 import { getChatflow } from "./getChatflow";
 import { nullTransport } from "./nullTransport";
-
-import { getDataSource } from "flowise/dist/DataSource";
 import { FlowiseInput } from "./FlowiseRunArgs";
-
+import { getDataSource } from "./getDataSource";
 /**
  * Runs a Flowise ChatFlow and returns a readable stream for the result
  * @param chatflowId
@@ -20,6 +17,7 @@ export async function run(
   args: FlowiseInput
 ): Promise<ReadableStream<any>> {
   const dataSource = getDataSource();
+  await dataSource.initialize();
   const chatflow = await getChatflow(chatflowId, dataSource);
 
   const { nodeInstance, nodeData, question, history, overrideConfig } =
