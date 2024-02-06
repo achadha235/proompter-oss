@@ -3,7 +3,7 @@
   "main": "./build/index.js",
   "types": "./index.ts",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "scripts": {
     "build": "bun build ./index.ts --splitting --target node --sourcemap=external --outdir ./build",
