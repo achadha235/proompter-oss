@@ -11,8 +11,7 @@ const {
 } = require("flowise/dist/database/migrations/postgres");
 
 const sourceDataPath = "/Users/abhishekchadha/Desktop/.flowise/database.sqlite";
-const targetUrl =
-  "***REMOVED***";
+const targetUrl = process.env.TARGET_DB_URL;
 
 async function migrate() {
   const sourceDataSource = new DataSource({
