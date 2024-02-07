@@ -173,3 +173,8 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+
+## Force include 
+!build/node_modules/ai/dist
+!build/node_modules/ai/react/dist
