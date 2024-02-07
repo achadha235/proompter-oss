@@ -17,7 +17,10 @@ export async function run(
   args: FlowiseInput
 ): Promise<ReadableStream<any>> {
   const dataSource = getDataSource();
-  await dataSource.initialize();
+  if (!dataSource.isInitialized) {
+    await dataSource.initialize();
+  }
+
   const chatflow = await getChatflow(chatflowId, dataSource);
 
   const { nodeInstance, nodeData, question, history, overrideConfig } =
