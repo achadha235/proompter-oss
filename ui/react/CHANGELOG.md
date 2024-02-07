@@ -1,5 +1,11 @@
 # @proompter/react
 
+## 0.0.6
+
+### Patch Changes
+
+- d9508f3: Unignore dist files
+
 ## 0.0.5
 
 ### Patch Changes
