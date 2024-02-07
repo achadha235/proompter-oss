@@ -46,8 +46,6 @@ export const init = async (): Promise<void> => {
       });
       break;
     case "postgres":
-      debugger;
-      console.log(Object.values(entities));
       appDataSource = new DataSource({
         type: "postgres",
         url: process.env.PROOMPTER_FLOWISE_DATABASE_URL,
