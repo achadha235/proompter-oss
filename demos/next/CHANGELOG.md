@@ -1,5 +1,20 @@
 # @proompter/demo-next
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/adapter-prisma@0.0.3
+
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/runner-flowise@0.0.4
+  - @proompter/server-next@0.0.4
+
 ## 0.0.8
 
 ### Patch Changes

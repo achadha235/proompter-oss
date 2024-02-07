@@ -1,5 +1,11 @@
 # @proompter/runner-flowise
 
+## 0.0.4
+
+### Patch Changes
+
+- fix double init for datasource
+
 ## 0.0.3
 
 ### Patch Changes
