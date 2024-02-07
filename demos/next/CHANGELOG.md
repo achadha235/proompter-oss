@@ -1,5 +1,12 @@
 # @proompter/demo-next
 
+## 0.0.11
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/server-next@0.0.5
+
 ## 0.0.10
 
 ### Patch Changes

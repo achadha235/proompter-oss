@@ -4,7 +4,9 @@ import runner from "@proompter/runner-flowise";
 import { StreamingTextResponse, nanoid } from "ai";
 import { last } from "lodash";
 import { streamWithPromise } from "../utils/streamWithPromise";
-import { IChatMessage } from "../../../monorepos/flowise/packages/server/dist/Interface";
+// Commenting this out for now since this breaks consumer package builds
+// Possible solution is to re-export this from proompter/core
+// import { IChatMessage } from "../../../monorepos/flowise/packages/server/dist/Interface";
 import { saveResponseMessage } from "../utils/saveResponseMessage";
 
 export async function processChat(req: Request, config: Config) {
@@ -40,7 +42,7 @@ export async function processChat(req: Request, config: Config) {
     throw new Error("Conversation not found");
   }
 
-  const chatMessage = last(args.messages) as IChatMessage;
+  const chatMessage = last(args.messages) as any;
 
   let saveNamePromise: Promise<void> | undefined;
   if (!conversationId) {

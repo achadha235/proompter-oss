@@ -1,5 +1,11 @@
 # @proompter/server-next
 
+## 0.0.5
+
+### Patch Changes
+
+- remove relative monorepo import
+
 ## 0.0.4
 
 ### Patch Changes
