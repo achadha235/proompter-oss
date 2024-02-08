@@ -1,7 +1,7 @@
 {
   "name": "@proompter/runner-flowise",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "main": "./build/index.js",
   "devDependencies": {
@@ -16,19 +16,16 @@
     "vitest": "^1.1.0"
   },
   "peerDependencies": {
-    "flowise": "^1.4.2",
     "sqlite3": "^5.1.6"
   },
   "peerDependenciesMeta": {
     "sqlite3": {
       "optional": true
-    },
-    "flowise": {
-      "optional": false
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run bundle-flowise",
+    "bundle-flowise": "mkdir -p ./build/node_modules/flowise && cp ../../monorepos/flowise/packages/server/package.json ./build/node_modules/flowise && cp -r ../../monorepos/flowise/packages/server/dist ./build/node_modules/flowise",
     "dev": "tsc --watch",
     "test": "vitest"
   },
