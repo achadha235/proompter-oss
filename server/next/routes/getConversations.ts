@@ -1,7 +1,10 @@
 "use server";
 import { Config } from "@proompter/core";
 
-export async function getConversations(config: Config, req: Request) {
+export async function getConversations(
+  config: Config,
+  req: Request
+): Promise<Response> {
   const user = await config.getRequestUser(req);
   if (!user) {
     throw new Error("Not authenticated");

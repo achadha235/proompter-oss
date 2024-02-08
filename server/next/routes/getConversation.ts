@@ -7,7 +7,7 @@ export async function getConversation(
   config: Config,
   context: Context,
   req: Request
-) {
+): Promise<Response> {
   const id = last(context.params.endpoint);
   if (!id) {
     return new Response("Not found", { status: 404 });

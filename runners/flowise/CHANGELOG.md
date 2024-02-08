@@ -1,5 +1,11 @@
 # @proompter/runner-flowise
 
+## 0.0.6
+
+### Patch Changes
+
+- disable file logs
+
 ## 0.0.5
 
 ### Patch Changes

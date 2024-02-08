@@ -1,13 +1,16 @@
 "use server";
 import { Config } from "@proompter/core";
 
-export async function setConversationName(config: Config, req: Request) {
+export async function setConversationName(
+  config: Config,
+  req: Request
+): Promise<Response> {
   const user = await config.getRequestUser(req);
   if (!user) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const data = await req.json();
+  const data = (await req.json()) as unknown as { name: string; id: string };
   const name = data.name;
   const id = data.id;
 

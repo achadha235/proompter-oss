@@ -1,5 +1,13 @@
 # @proompter/server-next
 
+## 0.0.7
+
+### Patch Changes
+
+- disable file logs
+- Updated dependencies
+  - @proompter/runner-flowise@0.0.6
+
 ## 0.0.6
 
 ### Patch Changes

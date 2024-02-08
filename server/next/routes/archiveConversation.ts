@@ -1,13 +1,19 @@
 "use server";
 import { Config } from "@proompter/core";
 
-export async function archiveConversation(config: Config, req: Request) {
+export async function archiveConversation(
+  config: Config,
+  req: Request
+): Promise<Response> {
   const user = await config.getRequestUser(req);
   if (!user) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const data = await req.json();
+  const data = (await req.json()) as unknown as {
+    archived: boolean;
+    id: string;
+  };
   const archived = data.archived;
   const id = data.id;
 

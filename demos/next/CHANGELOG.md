@@ -1,5 +1,13 @@
 # @proompter/demo-next
 
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/runner-flowise@0.0.6
+  - @proompter/server-next@0.0.7
+
 ## 0.0.12
 
 ### Patch Changes

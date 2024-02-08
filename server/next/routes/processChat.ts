@@ -10,7 +10,11 @@ import { streamWithPromise } from "../utils/streamWithPromise";
 import { saveResponseMessage } from "../utils/saveResponseMessage";
 
 export async function processChat(req: Request, config: Config) {
-  const args = await req.json();
+  const args = (await req.json()) as unknown as {
+    chatflowId: string;
+    conversationId: string;
+    messages: any[];
+  };
   const user = await config.getRequestUser(req);
   if (!user) {
     throw new Error("Not authenticated");
