@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const TerserPlugin = require("terser-webpack-plugin");
-const { entities } = require("flowise/dist/database/entities");
+const { entities } = require("@proompter/flowise/dist/database/entities");
 const entityNames = Object.values(entities).map((entity) => entity.name);
 
 const nextConfig = {

@@ -1,4 +1,4 @@
-import { IChatMessage, IMessage } from "flowise/dist/Interface";
+import { IChatMessage, IMessage } from "@proompter/flowise/dist/Interface";
 export interface FlowiseInput {
   message: IChatMessage;
   history: IMessage[];

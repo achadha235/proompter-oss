@@ -1,5 +1,13 @@
 # @proompter/runner-flowise
 
+## 0.0.7
+
+### Patch Changes
+
+- use published flowise fork
+- Updated dependencies
+  - @proompter/core@0.0.3
+
 ## 0.0.6
 
 ### Patch Changes

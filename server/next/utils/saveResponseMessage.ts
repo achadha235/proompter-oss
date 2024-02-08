@@ -1,6 +1,6 @@
 "use server";
 import { Config } from "@proompter/core";
-import { nanoid } from "ai";
+import { nanoid } from "@proompter/ai";
 
 export async function saveResponseMessage(
   stream: ReadableStream<any>,

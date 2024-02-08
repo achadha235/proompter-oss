@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
+import { ChatFlow } from "@proompter/flowise/dist/database/entities/ChatFlow";
 
 /**
  * Fetches a specific Flowise Chatflow. If it is not found, an error is thrown

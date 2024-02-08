@@ -4,8 +4,8 @@ import {
   INodeData,
   IReactFlowNode,
   IReactFlowObject,
-} from "flowise/dist/Interface";
-import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
+} from "@proompter/flowise/dist/Interface";
+import { ChatFlow } from "@proompter/flowise/dist/database/entities/ChatFlow";
 import { type DataSource } from "typeorm";
 import { NodesPool } from "./NodesPool";
 import {

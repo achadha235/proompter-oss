@@ -1,7 +1,7 @@
 import { Config, Chat, Conversation } from "@proompter/core";
 import { useEffect, useState } from "react";
 import { find, first, initial, isNil } from "lodash";
-import { useChat } from "ai/react";
+import { useChat } from "@proompter/ai/react";
 import useConversations from "./useConversations";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
@@ -115,10 +115,10 @@ export function useProompter(
       chatflowId: chatflow?.id,
     },
     ...config?.chatOptions,
-    onFinish(_message) {
+    onFinish(_message: unknown) {
       conversationData.mutate();
     },
-    onResponse(response) {
+    onResponse(response: Response) {
       const conversationId = response.headers.get("Conversation-ID");
       setConversationId(conversationId);
     },

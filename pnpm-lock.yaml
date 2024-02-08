@@ -58,9 +58,15 @@ importers:
       '@proompter/adapter-prisma':
         specifier: workspace:*
         version: link:../../adapters/prisma
+      '@proompter/ai':
+        specifier: workspace:*
+        version: link:../../monorepos/ai/packages/core
       '@proompter/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@proompter/flowise':
+        specifier: workspace:*
+        version: link:../../monorepos/flowise/packages/server
       '@proompter/react':
         specifier: workspace:*
         version: link:../../ui/react
@@ -79,15 +85,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@3.3.5)
-      ai:
-        specifier: workspace:*
-        version: link:../../monorepos/ai/packages/core
       daisyui:
         specifier: ^4.4.14
         version: 4.4.14(postcss@8.4.31)
-      flowise:
-        specifier: workspace:*
-        version: link:../../monorepos/flowise/packages/server
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -592,7 +592,7 @@ importers:
 
   packages/core:
     dependencies:
-      ai:
+      '@proompter/ai':
         specifier: workspace:*
         version: link:../../monorepos/ai/packages/core
       typescript:
@@ -627,6 +627,9 @@ importers:
         specifier: ^3.11.0
         version: 3.11.0
     devDependencies:
+      '@proompter/flowise':
+        specifier: workspace:*
+        version: link:../../monorepos/flowise/packages/server
       '@types/crypto-js':
         specifier: ^4.2.1
         version: 4.2.1
@@ -639,9 +642,6 @@ importers:
       '@types/node':
         specifier: ^20.10.5
         version: 20.10.5
-      flowise:
-        specifier: workspace:*
-        version: link:../../monorepos/flowise/packages/server
       flowise-components:
         specifier: workspace:*
         version: link:../../monorepos/flowise/packages/components
@@ -657,15 +657,15 @@ importers:
 
   server/next:
     dependencies:
+      '@proompter/ai':
+        specifier: workspace:*
+        version: link:../../monorepos/ai/packages/core
       '@proompter/core':
         specifier: workspace:*
         version: link:../../packages/core
       '@proompter/runner-flowise':
         specifier: workspace:*
         version: link:../../runners/flowise
-      ai:
-        specifier: workspace:*
-        version: link:../../monorepos/ai/packages/core
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -694,15 +694,15 @@ importers:
 
   ui/react:
     dependencies:
+      '@proompter/ai':
+        specifier: workspace:*
+        version: link:../../monorepos/ai/packages/core
       '@proompter/core':
         specifier: workspace:*
         version: link:../../packages/core
       '@radix-ui/react-dropdown-menu':
         specifier: ^2.0.6
         version: 2.0.6(@types/react-dom@18.2.17)(@types/react@18.2.39)(react-dom@18.2.0)(react@18.2.0)
-      ai:
-        specifier: workspace:*
-        version: link:../../monorepos/ai/packages/core
       clsx:
         specifier: ^2.0.0
         version: 2.0.0

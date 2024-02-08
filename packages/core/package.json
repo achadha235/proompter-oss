@@ -3,14 +3,14 @@
   "main": "./build/index.js",
   "types": "./index.ts",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "private": false,
   "scripts": {
     "build": "bun build ./index.ts --splitting --target node --sourcemap=external --outdir ./build",
     "dev": "pnpm run build --watch"
   },
   "dependencies": {
-    "ai": "workspace:*"
+    "@proompter/ai": "workspace:*"
   },
   "devDependencies": {
     "bun-types": "latest"

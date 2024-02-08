@@ -1,4 +1,6 @@
-import { UseChatOptions } from "ai";
+import { UseChatOptions } from "@proompter/ai";
+
+export { type Message as VercelAiSdkMessage } from "@proompter/ai";
 export interface Message {
   id: string;
   role: string;

@@ -1,4 +1,4 @@
-import { UseChatHelpers } from "ai/react";
+import { UseChatHelpers } from "@proompter/ai/react";
 import { createContext } from "react";
 
 export const ChatContext = createContext<UseChatHelpers>({} as UseChatHelpers);

@@ -1,5 +1,8 @@
 import { ICommonObject } from "flowise-components";
-import { IComponentCredentials, IComponentNodes } from "flowise/dist/Interface";
+import {
+  IComponentCredentials,
+  IComponentNodes,
+} from "@proompter/flowise/dist/Interface";
 import { Dirent, promises } from "fs";
 import path from "path";
 

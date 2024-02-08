@@ -18,7 +18,7 @@ import {
   ICredentialDataDecrypted,
   IComponentCredentials,
   ICredentialReqBody,
-} from "flowise/src/Interface";
+} from "@proompter/flowise/src/Interface";
 import { cloneDeep, get, isEqual } from "lodash";
 import {
   ICommonObject,
@@ -31,13 +31,13 @@ import {
 import { scryptSync, randomBytes, timingSafeEqual } from "crypto";
 import { AES, enc } from "crypto-js";
 
-import { ChatFlow } from "flowise/dist/database/entities/ChatFlow";
-import { ChatMessage } from "flowise/dist/database/entities/ChatMessage";
-import { Credential } from "flowise/dist/database/entities/Credential";
-import { Tool } from "flowise/dist/database/entities/Tool";
-import { Assistant } from "flowise/dist/database/entities/Assistant";
+import { ChatFlow } from "@proompter/flowise/dist/database/entities/ChatFlow";
+import { ChatMessage } from "@proompter/flowise/dist/database/entities/ChatMessage";
+import { Credential } from "@proompter/flowise/dist/database/entities/Credential";
+import { Tool } from "@proompter/flowise/dist/database/entities/Tool";
+import { Assistant } from "@proompter/flowise/dist/database/entities/Assistant";
 import { DataSource } from "typeorm";
-import { CachePool } from "flowise/dist/CachePool";
+import { CachePool } from "@proompter/flowise/dist/CachePool";
 
 const QUESTION_VAR_PREFIX = "question";
 const CHAT_HISTORY_VAR_PREFIX = "chat_history";

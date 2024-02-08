@@ -1,5 +1,29 @@
 # @proompter/demo-next
 
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/core@0.0.4
+  - @proompter/adapter-prisma@0.0.5
+  - @proompter/server-next@0.0.9
+  - @proompter/react@0.0.9
+
+## 0.0.14
+
+### Patch Changes
+
+- use published flowise fork
+- Updated dependencies
+  - @proompter/runner-flowise@0.0.7
+  - @proompter/core@0.0.3
+  - @proompter/server-next@0.0.8
+  - @proompter/react@0.0.8
+  - @proompter/adapter-prisma@0.0.4
+  - @proompter/ai@2.2.18
+  - @proompter/flowise@1.4.13
+
 ## 0.0.13
 
 ### Patch Changes

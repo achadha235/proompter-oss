@@ -1,4 +1,4 @@
-import { Message as VercelAIMessage } from "ai";
+import { Message as VercelAIMessage } from "@proompter/ai";
 import { isNil, last } from "lodash";
 import { ReactNode } from "react";
 import { Examples } from "..";

@@ -1,4 +1,4 @@
-import { UseChatHelpers } from "ai/react";
+import { UseChatHelpers } from "@proompter/ai/react";
 import clsx from "clsx";
 import { KeyboardEvent, SyntheticEvent } from "react";
 import ReactTextareaAutosize, {

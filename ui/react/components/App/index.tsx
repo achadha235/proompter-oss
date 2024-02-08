@@ -5,7 +5,9 @@ import {
   Config,
   Conversation as ConverationType,
   User,
+  VercelAiSdkMessage,
 } from "@proompter/core";
+
 import { last } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 import { Header } from "..";
@@ -19,6 +21,7 @@ import { StartConversationButton } from "./StartConversationButton";
 import { Conversation } from "../Conversation";
 import SettingsModal from "../SettingsModal";
 import CustomizeModal from "../CustomizeModal";
+
 export interface AppProps {
   proompterConfig: Config;
   user?: User;

@@ -5,10 +5,10 @@ import typeorm from "typeorm";
 const DataSource = require("typeorm").DataSource;
 
 import { getUserHome } from "./utils";
-import { sqliteMigrations } from "flowise/dist/database/migrations/sqlite";
-import { mysqlMigrations } from "flowise/dist/database/migrations/mysql";
-import { postgresMigrations } from "flowise/dist/database/migrations/postgres";
-import databaseEntities from "flowise/dist/database/entities";
+import { sqliteMigrations } from "@proompter/flowise/dist/database/migrations/sqlite";
+import { mysqlMigrations } from "@proompter/flowise/dist/database/migrations/mysql";
+import { postgresMigrations } from "@proompter/flowise/dist/database/migrations/postgres";
+import databaseEntities from "@proompter/flowise/dist/database/entities";
 
 const entities = databaseEntities.entities;
 

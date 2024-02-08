@@ -1,7 +1,7 @@
 {
   "name": "@proompter/runner-flowise",
   "type": "module",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "main": "./build/index.js",
   "devDependencies": {
@@ -9,7 +9,7 @@
     "@types/express": "^4.17.21",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.5",
-    "flowise": "workspace:*",
+    "@proompter/flowise": "workspace:*",
     "flowise-components": "workspace:*",
     "typeorm": "^0.3.17",
     "typescript": "^5.3.3",
@@ -24,8 +24,7 @@
     }
   },
   "scripts": {
-    "build": "tsc && npm run bundle-flowise",
-    "bundle-flowise": "mkdir -p ./build/node_modules/flowise && cp ../../monorepos/flowise/packages/server/package.json ./build/node_modules/flowise && cp -r ../../monorepos/flowise/packages/server/dist ./build/node_modules/flowise",
+    "build": "tsc",
     "dev": "tsc --watch",
     "test": "vitest"
   },

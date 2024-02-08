@@ -1,5 +1,3 @@
-import { isNull, last } from "lodash";
-import { useState } from "react";
 import useSWRInfinite from "swr/infinite";
 
 function useConversations() {

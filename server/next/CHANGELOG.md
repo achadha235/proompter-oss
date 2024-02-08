@@ -1,5 +1,22 @@
 # @proompter/server-next
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/core@0.0.4
+
+## 0.0.8
+
+### Patch Changes
+
+- use published flowise fork
+- Updated dependencies
+  - @proompter/runner-flowise@0.0.7
+  - @proompter/core@0.0.3
+  - @proompter/ai@2.2.18
+
 ## 0.0.7
 
 ### Patch Changes

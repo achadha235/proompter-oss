@@ -1,7 +1,7 @@
 "use server";
 import { Config } from "@proompter/core";
 import runner from "@proompter/runner-flowise";
-import { StreamingTextResponse, nanoid } from "ai";
+import { StreamingTextResponse, nanoid } from "@proompter/ai";
 import { last } from "lodash";
 import { streamWithPromise } from "../utils/streamWithPromise";
 // Commenting this out for now since this breaks consumer package builds
