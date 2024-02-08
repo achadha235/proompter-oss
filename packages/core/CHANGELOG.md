@@ -1,5 +1,11 @@
 # @proompter/core
 
+## 0.0.6
+
+### Patch Changes
+
+- fix relative npm alias
+
 ## 0.0.4
 
 ### Patch Changes

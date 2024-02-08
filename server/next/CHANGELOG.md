@@ -1,5 +1,12 @@
 # @proompter/server-next
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/core@0.0.6
+
 ## 0.0.9
 
 ### Patch Changes

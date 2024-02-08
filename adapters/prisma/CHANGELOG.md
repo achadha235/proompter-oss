@@ -1,5 +1,12 @@
 # @proompter/adapter-prisma
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/core@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @proompter/demo-next
 
+## 0.0.16
+
+### Patch Changes
+
+- Updated dependencies
+  - @proompter/core@0.0.6
+  - @proompter/adapter-prisma@0.0.6
+  - @proompter/server-next@0.0.10
+  - @proompter/react@0.0.10
+
 ## 0.0.15
 
 ### Patch Changes
