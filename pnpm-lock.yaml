@@ -593,7 +593,7 @@ importers:
   packages/core:
     dependencies:
       '@proompter/ai':
-        specifier: workspace:*
+        specifier: ^2.2.18
         version: link:../../monorepos/ai/packages/core
       typescript:
         specifier: ^5.0.0

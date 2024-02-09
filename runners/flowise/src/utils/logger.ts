@@ -1,18 +1,7 @@
-import * as path from "path";
-import * as fs from "fs";
-import config from "./config"; // should be replaced by node-config or similar
-import { createLogger, transports, format } from "winston";
 import { NextFunction, Request, Response } from "express";
+import { createLogger, format, transports } from "winston";
 
 const { combine, timestamp, printf, errors } = format;
-
-// expect the log dir be relative to the projects root
-const logDir = config.logging.dir;
-
-// Create the log directory if it doesn't exist
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
-}
 
 const logger = createLogger({
   format: combine(
@@ -27,39 +16,9 @@ const logger = createLogger({
   defaultMeta: {
     package: "server",
   },
-  transports: [
-    new transports.Console(),
-    new transports.File({
-      filename: path.join(
-        logDir,
-        config.logging.server.filename ?? "server.log"
-      ),
-      level: config.logging.server.level ?? "info",
-    }),
-    new transports.File({
-      filename: path.join(
-        logDir,
-        config.logging.server.errorFilename ?? "server-error.log"
-      ),
-      level: "error", // Log only errors to this file
-    }),
-  ],
-  exceptionHandlers: [
-    new transports.File({
-      filename: path.join(
-        logDir,
-        config.logging.server.errorFilename ?? "server-error.log"
-      ),
-    }),
-  ],
-  rejectionHandlers: [
-    new transports.File({
-      filename: path.join(
-        logDir,
-        config.logging.server.errorFilename ?? "server-error.log"
-      ),
-    }),
-  ],
+  transports: [new transports.Console()],
+  exceptionHandlers: [new transports.Console()],
+  rejectionHandlers: [new transports.Console()],
 });
 
 /**
@@ -95,15 +54,7 @@ export function expressRequestLogger(
           headers: req.headers,
         },
       },
-      transports: [
-        new transports.File({
-          filename: path.join(
-            logDir,
-            config.logging.express.filename ?? "server-requests.log.jsonl"
-          ),
-          level: config.logging.express.level ?? "debug",
-        }),
-      ],
+      transports: [new transports.Console()],
     });
 
     const getRequestEmoji = (method: string) => {
